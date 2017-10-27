@@ -1,0 +1,34 @@
+
+  Using the “TransferFunction” Shiny App
+
+The plots show the assumed input as a red line. The
+calculated response uses, for first-order response, a
+simple exponential with time constant tau=1. This response
+in each case is displayed as the blue line described as
+“M1” in the legends. For second-order response for the
+system displayed, which is a damped harmonic oscillator,
+the resulting lines are labeled “M2” and plotted as
+green lines. This second-order sensor is characterized
+by two parameters, taken to be omega and gamma, and they
+can be controlled by two sliders in the sidebar panel.
+The natural undamped oscillation angular frequency is
+specified by omega and the ratio of the amount of damping
+to the critical amount is specified by gamma, so that
+gamma=1 specifies critical damping and smaller values
+can oscillate and overshoot while larger values respond
+slowly. The slider controlling the frequency applies only
+to repetitive waveforms like the sine or square waves. All
+these sliders are set using base-10 logarithms to provide
+a better range than is possible with a linear slider, and
+the values actually used are then included in the titles
+of the plots.
+
+The R code used to generate the response is a very
+simple Euler integration.  The results have been checked
+against analytical solutions in some cases and match those
+solutions well, but the intent of these displays is to
+illustrate general features of the response to various
+input signals. These results are not reliable enough for
+quantitative use. The numerical integrations could easily
+be improved using, e.g., Runge-Kutta methods.
+

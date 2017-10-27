@@ -1,0 +1,11 @@
+name: TransferFunction
+title: TransferFunction
+account: williamcooper
+server: shinyapps.io
+appId: 164898
+bundleId: 1047226
+url: https://williamcooper.shinyapps.io/TransferFunction/
+when: 1509060573.94194
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: RampFunctionResponse.pdf|RampFunctionResponse.png|shinyPlot1.png|shinyPlot2.png|SineFunction1Response.pdf|SineFunction1Response.png|SineFunction2Response.pdf|SineFunction2Response.png|StepFngamma0.7.png|StepFngamma0.7a.png|StepFnomega0.5gamma0.7.png|StepFnomega0.5gamma0.7a.png|StepFunctionResponse.pdf|StepFunctionResponse.png|TransferFunctionInfo.pdf|TransferFunctionInfo.txt

@@ -1,0 +1,1 @@
+This is a simple calculator that provides equilibrium water vapor pressure as a function of dew-point temperature, based on the Murphy-Koop formulas. It also calculates mixing ratio and specific humidity, and it includes an option to include the "enhancement factor" that arises when dry air is also present.

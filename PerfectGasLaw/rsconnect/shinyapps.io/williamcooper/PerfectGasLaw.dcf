@@ -1,0 +1,11 @@
+name: PerfectGasLaw
+title:
+account: williamcooper
+server: shinyapps.io
+appId: 199415
+bundleId: 1047269
+url: https://williamcooper.shinyapps.io/PerfectGasLaw/
+when: 1509062173.82888
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: perfectGas.R|PerfectGasE_html_24893e571f6924e9.jpeg|PerfectGasE_html_24893e571f6924e9.jpg|PerfectGasE.tex

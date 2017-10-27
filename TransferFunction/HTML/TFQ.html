@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title></title>
+	<meta name="generator" content="LibreOffice 5.3.4.2 (Linux)"/>
+	<meta name="author" content="Al Cooper"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changedby" content="Al Cooper"/>
+	<meta name="changed" content="2017-07-30T23:43:18.022265526"/>
+	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+	<meta name="created" content="00:00:00">
+	<meta name="changedby" content="Al Cooper">
+	<meta name="changed" content="2017-07-30T23:35:16.080906529">
+	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+	<meta name="created" content="00:00:00">
+	<meta name="changedby" content="Al Cooper">
+	<meta name="changed" content="2017-07-30T15:44:04.036956820">
+	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+	<meta name="created" content="00:00:00">
+	<meta name="changedby" content="Al Cooper">
+	<meta name="changed" content="2017-07-30T04:54:46.936121245">
+	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+	<meta name="created" content="2017-07-28T16:41:39.667913166">
+	<meta name="changedby" content="Al Cooper">
+	<meta name="changed" content="2017-07-29T03:23:21.078546398">
+</head>
+<body lang="en-US" dir="ltr">
+<p><br/>
+<br/>
+
+</p>
+<p><b>Transfer-function exercises:</b></p>
+<ol>
+	<li/>
+<p style="font-weight: normal">A temperature sensor on an
+	aircraft has first-order dynamic response, and you need to make
+	measurements that respond to abrupt (i.e., step-function) changes by
+	reaching 90% of the final value in 100 m of flight path, while
+	flying 200 m/s. What is the required time constant of the sensor?</p>
+	<li/>
+<p style="font-weight: normal">For a ramp input with slope
+	such that x=t / <font face="Liberation Serif, serif">τ, at long
+	times a first-order system will lag behind that input by τ (in
+	these plots, 1 s), so this is a possible way to find the time
+	constant and to provide corrections for such a system. For a
+	second-order system, the response is more complicated and depends on
+	both the characteristic angular frequency and the damping. However,
+	for critical damping the system (at long time) again lags behind the
+	input signal by a fixed amount, so the lag again can be used to find
+	the characteristic angular frequency ω</font> <font face="Liberation Serif, serif">of
+	this system. What value of ω is needed so that the second-order lag
+	is also 1</font> <font face="Liberation Serif, serif">s?</font></p>
+	<li/>
+<p style="font-weight: normal"><font face="Liberation Serif, serif">To
+	determine the type of response characteristic of an unknown system,
+	it is often revealing to determine the system response to an impulse
+	function. Suppose you have a measuring system with unknown
+	characteristics, and you find it responds to an impulse as shown
+	below:</font></p>
+</ol>
+<img src="TFQ_html_1753fe069c383917.png" name="Image1" align="left" width="528" height="339">
+  <br clear="left"/>
+</img>
+
+<p style="margin-left: 0.98in"><br/>
+<br/>
+
+</p>
+<p style="margin-left: 0.49in; font-weight: normal"><font face="Liberation Serif, serif">s
+it first-order or second order?</font></p>
+<p style="margin-left: 0.49in; font-weight: normal"><font face="Liberation Serif, serif">If
+first order, </font>
+</p>
+<ul>
+	<li/>
+<p><font face="Liberation Serif, serif"><span style="font-weight: normal">what
+	is the approximate time constant?</span></font></p>
+</ul>
+<p style="margin-left: 0.49in; font-weight: normal"><font face="Liberation Serif, serif">If
+second order:</font></p>
+<ul>
+	<li/>
+<p style="font-weight: normal"><font face="Liberation Serif, serif">What
+	is the approximate characteristic angular frequency?</font></p>
+	<li/>
+<p style="font-weight: normal"><font face="Liberation Serif, serif">Is
+	it [overdamped, critically damped, approximately γ =0.7, or more
+	weakly damped?</font></p>
+</ul>
+<p style="font-weight: normal">A1: You reach 90% response in 2.3 time
+constants, as shown by the first-order response to a step function.
+(To see this, select &quot;step&quot; and use the cursor moving over
+the blue line to find the &quot;Time&quot; corresponding to M1=0.9.)
+You need 2.3 <font face="Liberation Serif, serif">τ</font> <font face="Liberation Serif, serif">=
+0.5 s or τ</font> <font face="Liberation Serif, serif">= 0.22 s.</font></p>
+<p style="font-weight: normal"><font face="Liberation Serif, serif">A2:
+Leave the setting of γ</font> <font face="Liberation Serif, serif">=
+1 and adjust the value of ω until the first-order and second-order
+response lines overlap at long time. The required value of ω is
+about 2.1. [Hint: you can make fine adjustments to the sliders by
+left-mouse-clicking the slider button and then using the left-arrow
+or right-arrow keys.]</font> <font face="Liberation Serif, serif">Also
+try some smaller values of γ</font> <font face="Liberation Serif, serif">to
+see how this decreases the lag.</font></p>
+<p style="font-weight: normal"><font face="Liberation Serif, serif">A3:
+It is second order. A first-order system always responds toward the
+current value of the input, so it would not continue upward after the
+impulse function returns to zero. The slight overshoot past zero
+indicates that the system is modestly underdamped, and the magnitude
+of the response at about 0.2 s indicates an angular frequency
+significantly larger than 1 radian/s. You can obtain a reasonable
+reproduction of this response curve by moving the γ slider to give a
+small overshoot and then moving the ω slider to match the amplitude
+of the response. Try interatively adjusting these two controls until
+the response matches the figure in the question.</font></p>
+</body>
+</html>

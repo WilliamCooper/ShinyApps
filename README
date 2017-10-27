@@ -1,0 +1,10 @@
+This repository contains Shiny apps constructed for use with the SEGUE modules, and some others that are related but not used there. At the top level, there are a set of directories, each containing one Shiny app. In that directory, there is another README that describes the purpose of the individual app contained in that directory. These have all been added to shinyapps.io, with addresses that follow this pattern:  https://williamcooper.shinyapps.io/Resolution 
+
+Many (but not all) follow this pattern:
+  * Text segments are included as HTML and reside in the HTML subdirectory. They are included via includeHTML() calls in the ui section.
+  * When the text refers to graphics for equations, those graphics segments are stored under the "www" subdirectory so that browsers running under Shiny servers will find them.
+  * Many were originally constructed using "lyx" but the originating .lyx files are not included here. The .lyx files were exported to HTML format and then edited by libreoffice.
+  * Some of these have commented-out statements or controls for saving the plots to image files. These shouldn't be used as deployed to shinyapps.io, but they are useful when running locally.
+  * Some rely on the "Ranadu" package for R, which is also on GitHub at https://github.com/WilliamCooper/Ranadu . This is in a format that can be installed on the shinyapp.io site when the apps contain library(Ranadu) commands. To install the Ranadu package on a new computer, start with the download statement devtools::install_github(“WilliamCooper/Ranadu”) typed into an R console.
+  
+There are two branches to the archive, the master branch and a SEGUE branch. The latter contains the Shiny apps as deployed for SEGUE, which sometimes are abbreviated versions of the full apps, which may contain additional text and equations and interactive exercises that overlap with information and exercises in the main module.

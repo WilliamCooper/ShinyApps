@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title></title>
+	<meta name="generator" content="LibreOffice 5.3.6.1 (Linux)"/>
+	<meta name="author" content="Al Cooper"/>
+	<meta name="created" content="2017-10-25T03:15:36.808475686"/>
+	<meta name="changedby" content="Al Cooper"/>
+	<meta name="changed" content="2017-10-25T05:39:09.757685302"/>
+</head>
+<body lang="en-US" dir="ltr">
+<h1>Using the Calculator</h1>
+<p>The calculations here are based on the Murphy-Koop formulas for
+equilibrium vapor pressure, provided in <a href="http://onlinelibrary.wiley.com/doi/10.1256/qj.04.94/pdf">this
+publication</a>. Details as implemented in calculations for the
+NSF/NCAR research aircraft are available at .<a href="https://drive.google.com/open?id=0B1kIUH45ca5Aa29JbjJkel82NFU#nameddest=DPXC">this
+URL</a>, page 38.</p>
+<p>Enter the dew-point temperature (in units of <sup>o</sup>C) and
+the atmospheric pressure (in units of hPa), and the calculator will
+display the equilibrium vapor pressure, mixing ratio, and specific
+humidity below the entry slots. Enter the vapor pressure (in units of
+hPa) and the calculator will display the equilibrium dew-point
+temperature below the entry. When a new temperature or pressure is
+entered in the top entry slots, this vapor pressure will be updated
+to match the resulting vapor pressure.</p>
+<p>You can also mouse-click on the plot at the right to set the
+temperature.</p>
+<p>If the &quot;enhancement factor&quot; checkbox is not checked, the
+vapor pressure displayed is that in equilibrium at the supplied
+dew-point temperature. If it is checked, it is assumed that the
+dew-point supplied is a measurement from a chilled-mirror or similar
+instrument operating at the specified atmospheric pressure, for which
+the equilibrium vapor pressure is raised by a small amount by the
+enhancement factor described in the above publication. The &quot;corrected
+dew-point temperature&quot; is then the temperature at which
+equilibrium would be present without the presence of the dry part of
+the atmospheric pressure.</p>
+<p>The mixing ratio is calculated using the standard formula, and the
+specific humidity is then calculated using the relationship q=r/(1+r)
+where r is the mixing ratio.</p>
+</body>
+</html>

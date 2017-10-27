@@ -1,0 +1,376 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title></title>
+	<meta name="generator" content="LibreOffice 5.3.6.1 (Linux)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changedby" content="Al Cooper"/>
+	<meta name="changed" content="2017-10-21T10:16:00.044317214"/>
+	<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"/>
+	<meta name="src" content="WorkingFile.tex"/>
+	<style type="text/css">
+		h3.cjk { font-family: "Source Han Sans CN Regular" }
+		h3.ctl { font-family: "Lohit Devanagari" }
+	</style>
+</head>
+<body lang="en-US" dir="ltr">
+<h3 class="western"><a name="x1-1000"></a>Scope of This Exercise</h3>
+<p class="noindent"><!--l. 137-->The focus of this module is on
+instruments that measure pressure, so this exploration of “pressure
+altitude” and “geopotential height” is a diversion from the
+main theme. The material is included here because measurements of
+pressure often are used to construct weather maps for analysis or to
+provide input to numerical models, and these pressure fields are
+often expressed in geopotential height. Consider, for example, a
+representative “500 mb” map such as that shown at <a href="http://weather.rap.ucar.edu/upper/upaCNTR_500.gif">this
+URL</a> (provided by the NCAR Research Applications Laboratory). The
+solid black lines show the heights (in decameters) where the pressure
+is 500&nbsp;hPa. They are labeled with numbers like “548”, which
+would indicate that at this location the height of the 500&nbsp;hPa
+level is 5480&nbsp;m. These heights are geopotential heights, so
+learning about geopotential height benefits those providing data for
+constructing these maps and those using them. In the course of this
+discussion we will also review the concepts of pressure altitude and
+altimeter setting, as used in aviation, and the International
+Standard Atmosphere.<!--l. 155--> 
+</p>
+<h3 class="western"><a name="x1-2000"></a>Introduction to
+Geopotential Height</h3>
+<p class="noindent" style="margin-bottom: 0in"><!--l. 157-->The
+starting point for this discussion is the hydrostatic equation (4)
+from the main module, repeated here in slightly modified form: 
+</p>
+<center>
+	<table width="257" cellpadding="2" cellspacing="0">
+		<col width="225">
+		<col width="24">
+		<tr>
+			<td width="225" style="border: none; padding: 0in">
+				<p align="center"><a name="x1-2001r1"></a><a>
+  <img src="WorkingFile0x.png" name="Image1" alt="              z2   p2    - 1 ∫ g (z′,λ)Ma (z′)   ′ln(p--) =-R*   ----T-(z′)----dz    1        z1" align="bottom" width="222" height="56" border="0"/>
+</a>
+</p>
+			</td>
+			<td width="24" style="border: none; padding: 0in">
+				<p align="center">(1)</p>
+			</td>
+		</tr>
+	</table>
+</center>
+<p class="nopar"><!--l. 162-->where <i><b>p</b></i><sub><i><b>1</b></i></sub>
+and <i><b>p</b></i><sub><i><b>2</b></i></sub> are the pressures at
+the bottom and top of a column of air, <i><b>z</b></i><sub><i><b>1</b></i></sub>
+and <i><b>z</b></i><sub><i><b>2</b></i></sub> are the corresponding
+altitudes, <i><b>R</b></i><sup><i><b>*</b></i></sup> is the universal
+gas constant with units J Kmol<sup><i><b>-1</b></i></sup>K<sup><i><b>-1</b></i></sup>,
+<i><b>g(z</b></i><sup>′</sup><i><b>) </b></i>is the acceleration of
+gravity at altitude <i><b>z</b></i><sup>′</sup> (which may in
+general depend on position on the Earth, esp.&nbsp;on the latitude
+<i><b>λ</b></i>), <i><b>M</b></i><sub><i><b>a</b></i></sub><i><b>(z</b></i><sup>′</sup><i><b>)
+</b></i>is the molecular weight of the air, which may vary with
+altitude, for example if there are variable amounts of water vapor in
+the air, and <i><b>T (z</b></i><sup>′</sup><i><b>) </b></i>is the
+temperature (in units of K).<!--l. 173--> 
+</p>
+<p class="noindent" style="margin-bottom: 0in">To avoid the need for
+including the variation of gravity with altitude and latitude, the
+equation can be rewritten in terms of geopotential height (Z),
+defined as the height at which, if gravity did not vary, the
+potential energy of a unit mass relative to the potential energy at
+sea level would be the same as the actual parcel. By convention, the
+fixed value for gravity is taken to be <i><b>g</b></i><sub><i><b>0</b></i></sub>
+<i><b>= 9.80665ms</b></i><sup><i><b>-2</b></i></sup>. The defining
+equation for geopotential height is then 
+</p>
+<center>
+	<table width="177" cellpadding="2" cellspacing="0">
+		<col width="145">
+		<col width="24">
+		<tr>
+			<td width="145" style="border: none; padding: 0in">
+				<p align="center"><a name="x1-2002r2"></a><a>
+  <img src="WorkingFile1x.png" name="Image2" alt="       ∫zZ = -1-  g(z′, λ) dz′    g0       0" align="bottom" width="142" height="53" border="0"/>
+</a>
+</p>
+			</td>
+			<td width="24" style="border: none; padding: 0in">
+				<p>(2)</p>
+			</td>
+		</tr>
+	</table>
+</center>
+<p class="noindent" style="margin-bottom: 0in"><!--l. 182--><!--l. 184-->The
+variations in temperature and molecular weight can then be expressed
+in terms of the variable <i><b>Z</b></i>, leading to the following
+form of the hydrostatic equation:</p>
+<center>
+	<table width="229" cellpadding="2" cellspacing="0">
+		<col width="197">
+		<col width="24">
+		<tr>
+			<td width="197" style="border: none; padding: 0in">
+				<p align="center"><a name="x1-2003r3"></a><a>
+  <img src="WorkingFile2x.png" name="Image3" alt="              ∫Z2      ′   p2-    - g0   Ma-(Z-)-   ′ln(p1 ) = R *    T (Z′) dZ              Z1" align="bottom" width="195" height="60" border="0"/>
+</a>
+</p>
+			</td>
+			<td width="24" style="border: none; padding: 0in">
+				<p align="center">(3)</p>
+			</td>
+		</tr>
+	</table>
+</center>
+<h3 class="western"><a name="x1-3000"></a><!--l. 189--><!--l. 191-->The
+International Standard Atmosphere</h3>
+<p class="noindent"><!--l. 193-->Some further simplifications lead to
+the form used for the International Standard Atmosphere (ISA), also
+described as the U. S. Standard Atmosphere, 1976. For a complete
+description, see <a href="http://ntrs.nasa.gov/archive/nasa/casi.ntrs.nasa.gov/19770009539_1977009539.pdf">this
+URL</a>. It is important, and often not appreciated, that the
+standard atmosphere (hereafter denoted the ISA) relates pressure to
+geopotential height and the temperature profile is specified in terms
+of geopotential height. The additional simplifications are:</p>
+<ol>
+	<li/>
+<p style="margin-bottom: 0in"><a name="x1-3002x1"></a>Consider
+	only dry air. In that case, for levels in the atmosphere below 50
+	km, <i><b>M</b></i><sub><i><b>a</b></i></sub><i><b>(</b></i><i><b>Z</b></i><i><b>)
+	</b></i>can be assumed to be a constant that will be taken as <i><b>M</b></i><sub><i><b>d</b></i></sub>
+	<i><b>= 28.9644</b></i><i><b> </b></i>kg Kmol<sup><i><b>-1</b></i></sup>.
+	This exact number is specified in the definition of the ISA, even
+	though the value for the real atmosphere is changing as CO<sub><i><b>2</b></i></sub>
+	increases. 
+	</p>
+	<li/>
+<p><a name="x1-3004x2"></a>Below 50 km, use the following
+	temperature profile. (The ISA is defined for heights above 50 km
+	also, but additional complications arise from the changing molecular
+	weight of dry air and ionization of molecules, so those levels won’t
+	be treated here.) The &quot;lapse rate&quot; (the change in
+	temperature with altitude) is specified by constant values in each
+	of four intervals in geopotential altitude. The lapse rate has units
+	of <sup>∘</sup>C/km <i>in geopotential height</i>. The intervals
+	are:</p>
+</ol>
+<p align="center" style="margin-bottom: 0in"><a name="TBL-2"></a><a name="TBL-2-1g"></a><a name="TBL-2-1"></a><a name="TBL-2-2g"></a><a name="TBL-2-2"></a><a name="TBL-2-3g"></a><a name="TBL-2-3"></a>
+ <!--l. 210--></p>
+<center>
+	<table width="528" cellpadding="0" cellspacing="0">
+		<col width="186">
+		<col width="144">
+		<col width="198">
+		<tr>
+			<td width="186" style="border: none; padding: 0in">
+				<hr/>
+
+			</td>
+			<td width="144" style="border: none; padding: 0in">
+				<hr/>
+
+			</td>
+			<td width="198" style="border: none; padding: 0in">
+				<hr/>
+
+			</td>
+		</tr>
+		<tr>
+			<td width="186" style="border: none; padding: 0in">
+				<p align="center"><a name="TBL-2-1-2"></a><b>geopotential
+				altitude [km]</b></p>
+			</td>
+			<td width="144" style="border: none; padding: 0in">
+				<p align="center"><a name="TBL-2-1-3"></a><b>lapse rate [</b><sup>∘</sup><b>C/km]</b></p>
+			</td>
+			<td width="198" style="border: none; padding: 0in">
+				<p align="center"><b>region of the atmosphere</b></p>
+			</td>
+		</tr>
+		<tr>
+			<td width="186" style="border: none; padding: 0in">
+				<hr/>
+
+			</td>
+			<td width="144" style="border: none; padding: 0in">
+				<hr/>
+
+			</td>
+			<td width="198" style="border: none; padding: 0in">
+				<hr/>
+
+			</td>
+		</tr>
+		<tr>
+			<td width="186" style="border: none; padding: 0in">
+				<hr/>
+
+			</td>
+			<td width="144" style="border: none; padding: 0in">
+				<hr/>
+
+			</td>
+			<td width="198" style="border: none; padding: 0in">
+				<hr/>
+
+			</td>
+		</tr>
+		<tr>
+			<td width="186" style="border: none; padding: 0in">
+				<p align="center"><a name="TBL-2-2-2"></a>0–11 
+				</p>
+			</td>
+			<td width="144" style="border: none; padding: 0in">
+				<p align="center"><a name="TBL-2-2-3"></a>-6.5 
+				</p>
+			</td>
+			<td width="198" style="border: none; padding: 0in">
+				<p align="center">troposphere 
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td width="186" style="border: none; padding: 0in">
+				<hr/>
+
+			</td>
+			<td width="144" style="border: none; padding: 0in">
+				<hr/>
+
+			</td>
+			<td width="198" style="border: none; padding: 0in">
+				<hr/>
+
+			</td>
+		</tr>
+		<tr>
+			<td width="186" style="border: none; padding: 0in">
+				<p align="center"><a name="TBL-2-3-2"></a>11–20 
+				</p>
+			</td>
+			<td width="144" style="border: none; padding: 0in">
+				<p align="center"><a name="TBL-2-3-3"></a>0 
+				</p>
+			</td>
+			<td width="198" style="border: none; padding: 0in">
+				<p align="center">stratosphere 
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td width="186" style="border: none; padding: 0in">
+				<hr/>
+
+			</td>
+			<td width="144" style="border: none; padding: 0in">
+				<hr/>
+
+			</td>
+			<td width="198" style="border: none; padding: 0in">
+				<hr/>
+
+			</td>
+		</tr>
+		<tr>
+			<td width="186" style="border: none; padding: 0in">
+				<p align="center"><a name="TBL-2-4-2"></a>20–32 
+				</p>
+			</td>
+			<td width="144" style="border: none; padding: 0in">
+				<p align="center"><a name="TBL-2-4-3"></a>+1 
+				</p>
+			</td>
+			<td width="198" style="border: none; padding: 0in">
+				<p align="center">“ 
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td width="186" style="border: none; padding: 0in">
+				<hr/>
+
+			</td>
+			<td width="144" style="border: none; padding: 0in">
+				<hr/>
+
+			</td>
+			<td width="198" style="border: none; padding: 0in">
+				<hr/>
+
+			</td>
+		</tr>
+		<tr>
+			<td width="186" style="border: none; padding: 0in">
+				<p align="center"><a name="TBL-2-5-2"></a>32–47 
+				</p>
+			</td>
+			<td width="144" style="border: none; padding: 0in">
+				<p align="center"><a name="TBL-2-5-3"></a>+2.8 
+				</p>
+			</td>
+			<td width="198" style="border: none; padding: 0in">
+				<p align="center">“ 
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td width="186" style="border: none; padding: 0in">
+				<hr/>
+
+			</td>
+			<td width="144" style="border: none; padding: 0in">
+				<hr/>
+
+			</td>
+			<td width="198" style="border: none; padding: 0in">
+				<hr/>
+
+			</td>
+		</tr>
+		<tr>
+			<td width="186" style="border: none; padding: 0in">
+				<p align="center"><a name="TBL-2-6-2"></a>47–50 
+				</p>
+			</td>
+			<td width="144" style="border: none; padding: 0in">
+				<p align="center"><a name="TBL-2-6-3"></a>0 
+				</p>
+			</td>
+			<td width="198" style="border: none; padding: 0in">
+				<p align="center">mesosphere (partial) 
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td width="186" style="border: none; padding: 0in">
+				<hr/>
+
+			</td>
+			<td width="144" style="border: none; padding: 0in">
+				<hr/>
+
+			</td>
+			<td width="198" style="border: none; padding: 0in">
+				<hr/>
+
+			</td>
+		</tr>
+		<tr>
+			<td width="186" style="border: none; padding: 0in"></td>
+			<td colspan="2" width="342" valign="top" style="border: none; padding: 0in"></td>
+		</tr>
+	</table>
+</center>
+<p class="noindent" align="center"><br/>
+<br/>
+
+</p>
+<p class="noindent"><!--l. 241-->For a constant lapse rate, the
+hydrostatic equation specified in the form (<a href="#x1-2003r3">3</a><!--tex4ht:ref: eq:HEwithGPH -->)
+is integrable analytically. The result is shown under the next tab.<!--l. 245-->
+</p>
+<h3 class="western"><br/>
+<br/>
+
+</h3>
+</body>
+</html>
