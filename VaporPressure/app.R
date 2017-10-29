@@ -36,15 +36,16 @@ ui <- fluidPage(
           column (6, textOutput ('MWA')),
           column (6, textOutput ('Ra'))
         ),
-        fluidRow (
-          column(12, tableOutput('composition'))
-        ),
-        includeHTML('HTML/Calculator.html')
+        h3('Mole Fractions for Moist Air:'),
+        tableOutput('composition'),
+        width=3
       ),
       
       # Show a plot of the generated distribution
       mainPanel(
-         plotOutput("ePlot", click=clickOpts(id='plot_click'))
+         plotOutput("ePlot", click=clickOpts(id='plot_click')),
+        includeHTML('HTML/Calculator.html'),
+        width=6
       )
    )
 )
@@ -61,7 +62,7 @@ server <- function(input, output, session) {
     } else {
       e <- MurphyKoop(t)
     }
-    updateNumericInput(session, 'ewx', value=e)
+    updateNumericInput(session, 'ewx', value=round(e,4))
     sprintf ('equilibrium vapor pressure is %.3f hPa', e)
   })
   
@@ -111,7 +112,7 @@ server <- function(input, output, session) {
     }
     eps <- StandardConstant('MWW') / (MWD <- StandardConstant('MWD'))
     Ma <- MWD * (1 + (eps - 1) * e / p)
-    sprintf ('Mw of air %.3f', Ma)
+    sprintf ('molec. weight: Ma=%.3f', Ma)
   })
   
   output$Ra <- renderText ({
@@ -124,8 +125,8 @@ server <- function(input, output, session) {
     }
     eps <- StandardConstant('MWW') / (MWD <- StandardConstant('MWD'))
     Ma <- MWD * (1 + (eps - 1) * e / p)
-    Rd <- StandardConstant('Ru') / Ma
-    sprintf ('Rd of air %.3f', Rd)
+    Ra <- StandardConstant('Ru') / Ma
+    sprintf ('gas constant: Ra=%.3f', Ra)
   })
   
   output$composition <- renderTable ({
@@ -145,7 +146,7 @@ server <- function(input, output, session) {
     Table <- data.frame (gas=c('nitrogen', 'oxygen', 'argon', 'carbon dioxide',
       'water'),
       fraction=f)  ##c(0.78102, 0.20946, 0.00916, 0.00033, 0))
-    XTable <- xtable(Table, digits=c(5, 5, 5))
+    XTable <- xtable(Table, caption='mole fractions for moist air', digits=5)
     options (digits=5)
     XTable
   }, digits=5)
