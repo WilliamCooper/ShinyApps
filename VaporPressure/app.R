@@ -10,6 +10,7 @@
 library(shiny)
 library(scales)
 library(Ranadu)
+library(xtable)
 
 
 ui <- fluidPage(
@@ -21,7 +22,7 @@ ui <- fluidPage(
    sidebarLayout(
       sidebarPanel(
         fluidRow (
-          column (6, numericInput ('temp', 'temperature [C]', value=10)),
+          column (6, numericInput ('temp', 'dew point [C]', value=10)),
           column (6, numericInput ('pressure', 'pressure [hPa]', value=1000))),
         checkboxInput('ef', 'include enhancement factor?'),
         htmlOutput ('e'),
@@ -30,6 +31,13 @@ ui <- fluidPage(
         fluidRow (
           column (6, numericInput ('ewx', 'vapor pressure [hPa]', value=10)),
           column (6, htmlOutput ('dp'))
+        ),
+        fluidRow (
+          column (6, textOutput ('MWA')),
+          column (6, textOutput ('Ra'))
+        ),
+        fluidRow (
+          column(12, tableOutput('composition'))
         ),
         includeHTML('HTML/Calculator.html')
       ),
@@ -93,6 +101,55 @@ server <- function(input, output, session) {
     sprintf ('equilibrium specific humidity is %.3f g/kg', q)
   })
   
+  output$MWA <- renderText ({
+    t <- as.numeric(input$temp)
+    p <- as.numeric(input$pressure)
+    if (input$ef) {
+      e <- MurphyKoop(t, p)
+    } else {
+      e <- MurphyKoop(t)
+    }
+    eps <- StandardConstant('MWW') / (MWD <- StandardConstant('MWD'))
+    Ma <- MWD * (1 + (eps - 1) * e / p)
+    sprintf ('Mw of air %.3f', Ma)
+  })
+  
+  output$Ra <- renderText ({
+    t <- as.numeric(input$temp)
+    p <- as.numeric(input$pressure)
+    if (input$ef) {
+      e <- MurphyKoop(t, p)
+    } else {
+      e <- MurphyKoop(t)
+    }
+    eps <- StandardConstant('MWW') / (MWD <- StandardConstant('MWD'))
+    Ma <- MWD * (1 + (eps - 1) * e / p)
+    Rd <- StandardConstant('Ru') / Ma
+    sprintf ('Rd of air %.3f', Rd)
+  })
+  
+  output$composition <- renderTable ({
+    t <- as.numeric(input$temp)
+    p <- as.numeric(input$pressure)
+    if (input$ef) {
+      e <- MurphyKoop(t, p)
+    } else {
+      e <- MurphyKoop(t)
+    }
+    f <- c(0.78102, 0.20946, 0.00916, 0.00033, 0)
+    f <- f * (1-e/p)
+    f[5] <- e / p
+    # print (sum(f))
+    # Table <- data.frame (gas=c(expression('N'[2]), expression('O'[2]), expression('Ar'), 
+    #   expression('CO'[2]), expression(paste('H'[2],'O',sep=''))), 
+    Table <- data.frame (gas=c('nitrogen', 'oxygen', 'argon', 'carbon dioxide',
+      'water'),
+      fraction=f)  ##c(0.78102, 0.20946, 0.00916, 0.00033, 0))
+    XTable <- xtable(Table, digits=c(5, 5, 5))
+    options (digits=5)
+    XTable
+  }, digits=5)
+  
   observeEvent (input$plot_click, {
     print (input$plot_click)
     ## these coordinates were determined empirically, will change if plot changes
@@ -109,7 +166,7 @@ server <- function(input, output, session) {
      dotE <- MurphyKoop (dotT)
      g <- ggplot (data=data.frame (t, e)) +  geom_path (aes(x=t, y=e), colour='blue') +
        geom_point (data=data.frame(dotT, dotE), aes(x=dotT, y=dotE), colour='forestgreen', size=3) +
-       xlab('temperature [C]') + ylab('water vapor pressure [hPa]') +
+       xlab('dew point [C]') + ylab('water vapor pressure [hPa]') +
        scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x, n=3), #limits = c(xmin, xmax),
        labels = trans_format("log10", math_format(10^.x))) + 
        annotation_logticks(sides='l') + theme_WAC()
