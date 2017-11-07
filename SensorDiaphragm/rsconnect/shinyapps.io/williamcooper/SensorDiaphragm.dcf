@@ -1,0 +1,11 @@
+name: SensorDiaphragm
+title: SensorDiaphragm
+account: williamcooper
+server: shinyapps.io
+appId: 230669
+bundleId: 1052099
+url: https://williamcooper.shinyapps.io/SensorDiaphragm/
+when: 1509384262.16319
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: DiaphragmDemo.R|DiffP.pdf|HTML/.~lock.SensorDiaphragm.html#

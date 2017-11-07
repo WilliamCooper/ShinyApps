@@ -3,9 +3,9 @@ title: VaporPressure
 account: williamcooper
 server: shinyapps.io
 appId: 229046
-bundleId: 1050591
+bundleId: 1053149
 url: https://williamcooper.shinyapps.io/VaporPressure/
-when: 1509285704.09125
+when: 1509449719.86855
 asMultiple: FALSE
 asStatic: FALSE
-ignoredFiles: HTML/.~lock.Calculator.html#
+ignoredFiles: README|VaporPressureScreenshot.png|HTML/.~lock.Calculator.html#

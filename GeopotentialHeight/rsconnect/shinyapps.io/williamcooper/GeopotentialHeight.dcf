@@ -3,9 +3,9 @@ title: GeopotentialHeight
 account: williamcooper
 server: shinyapps.io
 appId: 228012
-bundleId: 1047262
+bundleId: 1063095
 url: https://williamcooper.shinyapps.io/GeopotentialHeight/
-when: 1509062001.54305
+when: 1510069244.53717
 asMultiple: FALSE
 asStatic: FALSE
-ignoredFiles: #WorkingFile.lyx#|AltimeterSetting.R|SessionInfo|WorkingFile-lyxformat-474.lyx~|WorkingFile.lyx|WorkingFile.lyx~|XXX.zip|WorkingFile.html.LyXconv/0_home_cooperw_RStudio_InstrumentModules_GeopotentialHeight_AltimeterSetting.png|WorkingFile.html.LyXconv/WorkingFile.css|WorkingFile.html.LyXconv/WorkingFile.html|WorkingFile.html.LyXconv/WorkingFile0x.png|WorkingFile.html.LyXconv/WorkingFile1x.png|WorkingFile.html.LyXconv/WorkingFile2x.png|WorkingFile.html.LyXconv/WorkingFile3x.png|WorkingFile.html.LyXconv/WorkingFile4x.png|WorkingFile.html.LyXconv/WorkingFile5x.png|WorkingFile.html.LyXconv/WorkingFile6x.png|WorkingFile.html.LyXconv/WorkingFile7x.png|WorkingFile.html.LyXconv/WorkingFile8x.png|WorkingFile.html.LyXconv/WorkingFile9x.png
+ignoredFiles: geoPH.R|README|HTML/.~lock.Altimeter.html#|HTML/.GeopotentialZcalculator.html.swp|HTML/addition.html.LyXconv/newfile4.css|HTML/addition.html.LyXconv/newfile4.html|www/UWsounding201710231272426.Rdata

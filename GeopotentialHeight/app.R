@@ -1,6 +1,6 @@
 #
-# This is a Shiny web application. You can run the application by clicking
-# the 'Run App' button above.
+# This is a Shiny web application that treats geopotential height. 
+# You can run the application by clicking the 'Run App' button above.
 #
 # Find out more about building applications with Shiny here:
 #
@@ -19,10 +19,19 @@ library(nleqslv)
 # source ('PotentialTemperatures.R')
 # source ('Gravity.R')
 # source('PressureAltitude.R')
-source('geoPH.R')
+# source('geoPH.R')
 # source('theme_WAC.R')
 # source ('LagrangeInterpolation.R')
 # source ('MurphyKoop.R')
+
+geomH <- function (geopht, .latitude, .geoid=0) {
+  latitude <- .latitude
+  geoid <- .geoid
+  fng <- function (z) {
+    return (GeoPotHeight(latitude, z, geoid) - geopht)
+  }
+  return(nleqslv(geopht, fng)$x)
+}
 
 lp <- seq(0, 3, 0.005)
 p <- rev(c(10^lp, 1010))
@@ -131,7 +140,6 @@ FetchSounding <- function (year, month, day, ztime, station) {
   return (SND)
 }
 
-# Define UI for application that draws a histogram
 ui <- fluidPage(
    
    # Application title
@@ -157,14 +165,16 @@ ui <- fluidPage(
      tabPanel ('Height Converter',
    sidebarLayout(
       sidebarPanel(
-         numericInput("latitude",
-                     "latitude [degrees]:",
-                     min = 0,
-                     max = 90,
-                     value = 45,
-                     step=5),
-        numericInput('height', 'height [m]', value=15000),
-        radioButtons('which', 'conversion direction', choices=c('to geopotential Z', 'to geometric z')),
+        fluidRow(
+          column (6, numericInput("latitude", "latitude [degrees]:",
+                     min = 0, max = 90, value = 45, step=1)),
+          column (6, numericInput('height', 'height [m]', value=15000))),
+        fluidRow (
+          column (6, h5('geoid height: conventionally, 0. See the reference below.')),
+          column (6, numericInput('geoid', 'geoid height [m]', value=0))
+        ),
+        radioButtons('which', 'conversion direction', 
+          choices=c('geometric to geopotential Z', 'geopotential to geometric z')),
         textOutput('result'),
         includeHTML('HTML/GeopotentialZcalculator.html')
       ),
@@ -197,8 +207,12 @@ ui <- fluidPage(
            mainPanel(
              fluidRow (
                column (3, numericInput ('ps', 'station pressure [hPa]', value=885)),
-               column (3, numericInput ('zs', 'station elevation [m]', value=1350))),
-             sliderInput ('alt', 'altimeter setting [inHg]', min=25, max=35, value=30.72, step=0.01),
+               column (3, numericInput ('zs', 'station elevation [m]', value=1350)),
+               column (3, checkboxInput ('psadj', 'subtract 0.3 hPa?', value=TRUE))),
+             fluidRow(
+               column (5, sliderInput ('alt', 'altimeter setting [inHg]', 
+                                       min=25, max=35, value=30.71, step=0.01)),
+               column (2, textOutput ('altS'))),
              plotOutput ('altPlot', width=600, height=450)
            ))
          # sidebarLayout(
@@ -310,6 +324,10 @@ server <- function(input, output, session) {
     zpp <- PressureAltitude(ps)*0.001
     points(xo+0.01, zpp, pch=20, col='blue')
     text(xo+0.02, zpp, 'ps', pos=4, col='blue')
+    ## now construct another axis with adjustment
+    if (input$psadj) {
+      zpp <- PressureAltitude (ps-0.3) * 0.001
+    }
     xo <- xo + 0.5
     axis(side=2, pos=xo)
     baseP <- input$alt * Cmb2inHg
@@ -326,7 +344,7 @@ server <- function(input, output, session) {
     text(xo-0.02,zs,"zs", pos=2, col='black')
     points(xo+0.01, zpp+dz, pch=20, col='blue')
     text(xo+0.02, zpp+dz, 'ps', pos=4, col='blue')
-    pa <- PA(zs*1000,ps)
+    pa <- PA(zs*1000, ps)
     lines(c(xo,xo+0.05), c(0,0), col='blue', lwd=2)
     text(xo+0.05, 0, labels=sprintf('%.1f', baseP), pos=4, col='blue')
     lines(c(xo,xo+0.05), c(dz,dz))
@@ -338,13 +356,22 @@ server <- function(input, output, session) {
   
   output$result <- renderText ({
     zin <- as.numeric(input$height)
-    if (grepl ('geopotential', input$which)) {
-      zout <- geoPH (zin, input$latitude)
+    if (grepl ('to geopotential', input$which)) {
+      zout <- GeoPotHeight (input$latitude, zin, as.numeric(input$geoid))
       sprintf ('%.2f geometric m = %.2f geopotential m', zin, zout)
     } else {
-      zout <- geomH (zin, input$latitude)
+      zout <- geomH (zin, input$latitude, input$geoid)
       sprintf ('%.2f geopotential m = %.2f geometric m', zin, zout)
     }
+  })
+  
+  output$altS <- renderText ({
+    zs <- as.numeric (input$zs)
+    ps <- as.numeric (input$ps)
+    if (input$psadj) {ps <- ps - 0.3}
+    alpha <- StandardConstant ('Rd') * 0.0065 / StandardConstant ('g_standard')
+    as <- (0.0065 * zs / 288.15 + (ps/1013.25)^alpha)^(1/alpha) * 29.92126
+    sprintf ('alt setting %.3f', as)
   })
    
   output$palt <- renderText({
@@ -371,7 +398,7 @@ server <- function(input, output, session) {
   }, delete=FALSE)
   
    output$cPlot <- renderPlotly({
-     zm <- geomH(z, input$latitude) * 0.001
+     zm <- geomH(z, input$latitude, input$geoid) * 0.001
      DF <- data.frame(zGP=zGP, zGM=zm, difference=1000*(zm-zGP))
      g <- ggplot(data=DF) + geom_path (aes(x=zGP, y=difference, label=zGM))
      g <- g + xlab('geopotential height [km]') + 
