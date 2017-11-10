@@ -24,6 +24,9 @@ library(nleqslv)
 # source ('LagrangeInterpolation.R')
 # source ('MurphyKoop.R')
 
+## Note: a useful altimeter calculater:
+##       http://www.csgnetwork.com/altimetersettingcalc.html
+
 geomH <- function (geopht, .latitude, .geoid=0) {
   latitude <- .latitude
   geoid <- .geoid

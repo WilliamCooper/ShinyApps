@@ -1,6 +1,7 @@
 #
 # This is a Shiny web application. You can run the application by clicking
-# the 'Run App' button above.
+# the 'Run App' button above. This is for the CalibrationExercise, but in this version
+# it is severely truncated with omission of the Discussion, Lessons Learned, and Notes tabs.
 #
 # Find out more about building applications with Shiny here:
 #
@@ -76,17 +77,17 @@ ui <- fluidPage(
                              # includeHTML ("TransferFunctionInfo.html"), width=6
                            )
                          )
-               ),               
-               tabPanel ('Discussion of Results',
-                         includeHTML ('CalibrationExerciseC.html')
-               ),
-               tabPanel ('Lessons Learned',
-                         includeHTML ('CalibrationExerciseD.html'),
-                         column(6, plotOutput('hrplot', width="600px"))
-                         ),
-               tabPanel ('Notes',
-                         includeHTML ('CalibrationExerciseE.html')
-                         )
+               )               
+               # tabPanel ('Discussion of Results',
+               #           includeHTML ('CalibrationExerciseC.html')
+               # ),
+               # tabPanel ('Lessons Learned',
+               #           includeHTML ('CalibrationExerciseD.html'),
+               #           column(6, plotOutput('hrplot', width="600px"))
+               #           ),
+               # tabPanel ('Notes',
+               #           includeHTML ('CalibrationExerciseE.html')
+               #           )
                
   )
 )
