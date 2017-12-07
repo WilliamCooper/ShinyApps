@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title>Spectral Analysis Notes</title>
+	<meta name="generator" content="LibreOffice 5.4.3.2 (Linux)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changedby" content="Al Cooper"/>
+	<meta name="changed" content="2017-11-26T12:37:29.917869332"/>
+	<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"/>
+	<meta name="src" content="SpecAnalysis.tex"/>
+	<style type="text/css">
+		h4.cjk { font-family: "Source Han Sans CN Regular" }
+		h4.ctl { font-family: "Lohit Devanagari" }
+	</style>
+</head>
+<body lang="en-US" dir="ltr">
+<p><br/>
+<br/>
+
+</p>
+<p><!--l. 533-->This reduction refers to the variance in the
+estimates and should not be confused with the variance in the time
+series. A property of the periodogram is that the variance in the
+individual estimates is equal to the magnitude of the estimate
+itself, so the result appears to be very noisy. There are many ways
+to smooth the resulting spectrum and reduce this variance in the
+estimates. They include: 
+</p>
+<ol>
+	<li/>
+<p style="margin-bottom: 0in"><a name="x1-8002x1"></a>Moving
+	smoothing functions. A common choice, implemented in “spectrum()”
+	as discussed below, is the Daniell smoother, which in effect applies
+	a moving-average smoother. This can be introduced into the estimate
+	of spectral variance by including the argument “spans=c(i1,i2,...)”
+	in the call to “spectrum()”, where the arguments {i1,i2,i3} are
+	odd integers determining the span of consecutive moving-average
+	smoothers applied to the resulting spectrum. Large numbers give more
+	smoothing at the expense of loss of frequency resolution. In the
+	plots produced by “spectrum()”, an error bar plotted at the top
+	right indicates the uncertainty in the estimate of the spectral
+	variance. The reduction in variance is often substantial; for a
+	moving average, the reduction would be expected to be inversely
+	proportional to the square root of the number of estimates averaged
+	together. 
+	</p>
+	<li/>
+<p style="margin-bottom: 0in"><a name="x1-8004x2"></a>Segmenting
+	and averaging the resulting spectra. The time series can be
+	subdivided into segments, which may be overlapping, and the
+	estimates of spectral variance obtained from those individual
+	segments can then be averaged to reduce the estimates in the
+	variance. This bears the penalty of reducing the longest period that
+	can be determined, but in a long time series it is often of greater
+	interest to determine the high-frequency component. An R package is
+	available to accomplish this smoothing, which is often called “Welch
+	smoothing”: bspec::welchPSD(). The package “bspec” may need to
+	be downloaded from the standard CRAN repository because it is not
+	part of the standard R routines. The length of the (overlapping)
+	segments to use can be specified in the function call. 
+	</p>
+	<li/>
+<p><a name="x1-8006x3"></a>Binning and averaging. Another
+	option is simply to combine estimates in bins into a single mean
+	estimate that represents that bin. This can be particularly useful
+	in the case of displays with logarithmic abscissas, because bins can
+	be defined in equal logarithmic intervals to span equal abscissa
+	distances on a logarithmic plot.</p>
+</ol>
+<p style="border-top: none; border-bottom: 1.10pt double #808080; border-left: none; border-right: none; padding: 0in">
+<!--l. 572--></p>
+<p style="margin-bottom: 0in"><a name="x1-80075"></a><br/>
+<embed src="smoothOptions-1.pdf" width="620" height="650">
+</p>
+<p>Figure&nbsp;5: Examples of smoothed spectra, all based on the time
+series and periodigram in Fig. 4. (top) Daniell smoothing, length=49;
+(middle) Welch smoothing, segment length=512 days; (bottom) bin
+averaging, 200 logarithmically spaced bins.</p>
+<p style="border-top: none; border-bottom: 1.10pt double #808080; border-left: none; border-right: none; padding: 0in">
+<!--tex4ht:label?: x1-80075 --><!--l. 579--></p>
+<p><!--l. 584-->Examples of each of these methods are shown in
+Fig.&nbsp;<a href="#x1-80075">5</a><!--tex4ht:ref: fig:smoothOptions -->.
+The degree of smoothing has a strong effect on the diurnal peaks
+because they are so limited in frequency, so too much smoothing
+caused spectral resolution to deteriorate.<!--l. 589--> 
+</p>
+<h4 class="western"><br/>
+<br/>
+
+</h4>
+</body>
+</html>

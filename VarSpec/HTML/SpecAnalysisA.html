@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title>Spectral Analysis Notes</title>
+	<meta name="generator" content="LibreOffice 5.4.3.2 (Linux)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changedby" content="Al Cooper"/>
+	<meta name="changed" content="2017-11-26T11:24:44.395477971"/>
+	<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"/>
+	<meta name="src" content="SpecAnalysis.tex"/>
+	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+	<meta name="created" content="00:00:00">
+	<style type="text/css">
+		h2.cjk { font-family: "Source Han Sans CN Regular" }
+		h2.ctl { font-family: "Lohit Devanagari" }
+		h2.titlehead-western { text-align: center }
+		h2.titlehead-cjk { font-family: "Source Han Sans CN Regular"; text-align: center }
+		h2.titlehead-ctl { font-family: "Lohit Devanagari"; text-align: center }
+		h3.cjk { font-family: "Source Han Sans CN Regular" }
+		h3.ctl { font-family: "Lohit Devanagari" }
+	</style>
+</head>
+<body lang="en-US" dir="ltr">
+<h2 class="titlehead-western"><br/>
+<br/>
+
+</h2>
+<p style="margin-bottom: 0in"><br/>
+
+</p>
+<p><!--l. 151-->This is an addition to the “RSessions” tutorial
+that provided guidance on getting started with analyzing aircraft
+data using R and the “Ranadu” package of routines. This is more
+detailed than the other tutorials in those sessions and attempts to
+be reasonably thorough in its review of spectral analysis using R,
+although it (as of yet) does not include discussion of coherence,
+phase, and the cross-spectrum and co-spectrum.<!--l. 159--> 
+</p>
+<p>The R code for the entire app is displayed, either to the right of
+the main display or below it. There is a button to click to toggle 
+between these two positions. That code shows in detail how the
+plots, and in particular the plots generated interactively in the
+right tab, are being generated. 
+</p>
+<p>The focus here is on spatio-temporal data, data sets where the
+variables have associated locations and times. Examples are a time
+series constructed from consecutive measurements at a fixed location
+and a set of simultaneous (or “synoptic”) measurements made at
+various locations. Standard statistical characteristics like the
+mean, variance, and standard deviation represent the data sets, but
+it is also useful to describe their internal character by considering
+two additional characteristics: (i) How are the measurements
+correlated in time or space (respectively), and (ii) Can the measured
+fields be represented in terms of sums of frequency or wavelength
+components? The former leads to the autocovariance and
+autocorrelation functions and the latter to decomposition into a
+variance spectrum. These two ways of characterizing the data turn out
+to be complementary in the sense that knowledge of either one can be
+used to generate the other.<!--l. 174--> 
+</p>
+<p><a name="x1-2f1"></a>These notes focus on the second display,
+often called a “power spectrum,” that shows how the variance in a
+signal is distributed as a function of frequency or wavelength. 
+An example, which will be explained in the course of this note,
+is shown below for the hourly pressure measurements made at Denver, CO.
+The terms “variance spectrum” (for the plot) and “spectral
+variance” (for the plotted variable) are preferred here because the
+display is used frequently where the variance does not represent
+power as it did in early electrical applications.[footnote 1] The key
+concept reflected in the variance spectrum is that such
+spatio-temporal series can be decomposed into independent components
+that vary in frequency and/or wavelength. The Fourier series is often
+used and has valuable associated properties of orthogonality and
+completeness so that individual components can be regarded as
+independent and the set of such components can represent the observed
+series without error. However, the early focus here is on how to
+interpret the resulting variance spectrum rather than on how to
+construct it. Other sources (e.g., <a href="https://drive.google.com/open?id=1I1q8WTBzMKJGJ8ylRGmmQ8NwcCSgjwST">this
+linked URL</a>) can be consulted regarding how to construct such a
+representation and some of that material will be repeated here for
+completeness, but those more interested in using and interpreting the
+variance spectrum can skip the next tab and others marked with an asterisk. 
+</p>
+<br>
+<img src='examplePSD.png'>
+<br>
+<hr>
+<p style="margin-bottom: 0.2in">[footnote 1]: Even for velocity
+components, &quot;power spectrum&quot; seems inappropriate. The
+specific energy, or energy per unit mass, has units of J/kg or m<sup>2</sup>s<sup>-2</sup>
+so the units are the same as the variance in a component of the wind.
+In the case of a time series, the spectral variance P(<font face="Liberation Serif, serif">ν</font><font face="Liberation Serif, serif">)
+</font>can be regarded as the derivative of the cumulative integral
+of variance over frequency contributions (<img src="SpecAnalysisA1.gif" name="Object1" hspace="8" width="146" height="38"/>
+),
+and for a wind component P(<font face="Liberation Serif, serif">ν</font><font face="Liberation Serif, serif">)
+will have units of  m</font><sup><font face="Liberation Serif, serif">2</font></sup><font face="Liberation Serif, serif">s</font><sup><font face="Liberation Serif, serif">-2
+</font></sup><font face="Liberation Serif, serif"> per frequency
+interval or  m</font><sup><font face="Liberation Serif, serif">2</font></sup><font face="Liberation Serif, serif">s</font><sup><font face="Liberation Serif, serif">-1</font></sup><font face="Liberation Serif, serif">.
+ </font>The specific power has units of specific energy per time or
+m<sup>2</sup>s<sup>-3</sup> (watts per kilogram) <sup> </sup>and the
+specific power per frequency interval would have units of m<sup>2</sup>s<sup>-2
+ </sup>which differs from the units of P(<font face="Liberation Serif, serif">ν</font><font face="Liberation Serif, serif">)
+.  </font>In the case of wind, P(<font face="Liberation Serif, serif">ν</font><font face="Liberation Serif, serif">)
+ </font>is better regarded as a spectral energy rather than a
+spectral power.</p>
+<h3 class="western"><br/>
+<br/>
+
+</h3>
+</body>
+</html>

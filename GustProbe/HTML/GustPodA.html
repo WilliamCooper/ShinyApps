@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title></title>
+	<meta name="generator" content="LibreOffice 5.3.7.2.0 (Linux)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changedby" content="Al Cooper"/>
+	<meta name="changed" content="2017-11-12T20:42:52.736372012"/>
+	<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"/>
+	<meta name="src" content="GustPod.tex"/>
+	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+	<meta name="created" content="00:00:00">
+	<meta name="changedby" content="Al Cooper">
+	<meta name="changed" content="2017-11-12T20:06:52.636415772">
+	<style type="text/css">
+		h3.cjk { font-family: "Source Han Sans CN Regular" }
+		h3.ctl { font-family: "Lohit Devanagari" }
+	</style>
+</head>
+<body lang="en-US" dir="ltr">
+<h3 class="western"><a name="x1-1000"></a>Five-Pressure-Port Wind
+Sensors</h3>
+<p><!--l. 122-->To measure the vector wind, multi-port sensors are
+often used. One example is the five-port sensor shown in the figure
+to the right. It is often used on aircraft, but it has other uses as
+well. This Shiny app is a demonstration of how it operates, shown in
+the next tab. First, this tab presents some information regarding its
+performance and helps a reader understand the next tab.<!--l. 129--> 
+</p>
+<p>The five ports are distributed so that one is approximately in the
+forward direction, two are above and below this center line so they
+develop a pressure difference between them determined by the angle of
+attack, and two are similarly oriented on each side to be sensitive
+to the lateral flow at an angle called the sideslip angle. In
+addition, there are a ring of ports surrounding the cylinder that
+provide a source of air at approximately ambient pressure.<!--l. 137-->
+</p>
+<p style="margin-bottom: 0in">The relationship between the angles of
+attack and sideslip and the corresponding pressure difference between
+the ports are usually determined by empirical calibrations because,
+particularly when installed on aircraft, they are subject to flow
+distortion around the aircraft and sensitivity to Mach number so
+theoretical relationships are usually insufficient. However,
+potential-flow theory provides some guidance because the pressure
+distribution around the surface of a sphere is given as follows: 
+</p>
+<p align="center"><img src="GustPod0x.png" name="Image1" alt="           1-  2     9-  2p θ = p∞ + 2ρV  (1 - 4 sin θ )" align="bottom" width="202" height="35" border="0"/>
+
+</p>
+<p><!--l. 148-->where <i><b>p</b></i><sub><i><b>θ</b></i></sub> is
+the pressure at an angle <i><b>θ </b></i>from the forward direction,
+<i><b>p</b></i><sub>∞</sub> is the ambient pressure far from the
+sphere, <i><b>ρ </b></i>is the air density and <i><b>V </b></i>is
+the airspeed. To find the flow angle <i><b>θ </b></i>from the
+measured pressure difference between two ports on the sphere, one
+must also know the dynamic pressure <i><b>q = 0.5ρV</b></i><sup><i><b>2</b></i></sup>.
+When the sensor is oriented directly into the wind, this is the
+difference in pressure between the forward port and the ports on the
+side of the cylinder, but when the flow is directed at an angle to
+the sensor this pressure difference also is decreased by the above
+formula. In the vertical plane, two measurements, <i><b>Δp </b></i>and
+<i><b>Δp</b></i><sub><i><b>a</b></i></sub> constrain the two
+variables 0.5<i><b>ρV</b></i><sup><i><b>2</b></i></sup> and <i><b>θ
+</b></i>and allow a solution in the form <i><b>θ = f(Δp, Δp</b></i><sub><i><b>a</b></i></sub><i><b>)</b></i>.
+This solution is illustrated in the next tab, but practical
+applications usually use equations determined empirically because of
+the weaknesses mentioned above regarding the potential-flow
+solution.<!--l. 165--> 
+</p>
+<h3 class="western"><br/>
+<br/>
+
+</h3>
+</body>
+</html>

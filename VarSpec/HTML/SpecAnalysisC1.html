@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title>Spectral Analysis Notes</title>
+	<meta name="generator" content="LibreOffice 5.4.3.2 (Linux)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changedby" content="Al Cooper"/>
+	<meta name="changed" content="2017-11-27T04:58:53.898685993"/>
+	<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"/>
+	<meta name="src" content="SpecAnalysis.tex"/>
+	<!--l. 456-->
+	<style type="text/css">
+		h4.cjk { font-family: "Source Han Sans CN Regular" }
+		h4.ctl { font-family: "Lohit Devanagari" }
+	</style>
+</head>
+<body lang="en-US" dir="ltr">
+<p class="noindent">The basic tool used most often for spectral
+analysis is the Fourier series. This representation is particularly
+suited to periodic functions and indeed makes the assumption that the
+series is periodic. Consider a function that repeats with period <i><b>T,
+</b></i>such that <i><b>f(t) = f(t + T) = f(t + 2T) = f(t + nT)</b></i>.
+We seek to represent this function by <i><b>f</b></i><sup><i><b>*</b></i></sup><i><b>(t)</b></i>,
+a superposition of sine and cosine waves with various frequencies
+having amplitudes {<i><b>a</b></i><sub><i><b>k</b></i></sub>} and
+{<i><b>b</b></i><sub><i><b>k</b></i></sub>}:<!--l. 464--> 
+</p> 
+<!--l. 464--><p class="noindent" ><div class="eqnarray">
+<center class="math-display" >
+<img
+src="SpecAnalysis7xx.png" alt="                &#x221E;
+f *(t)  =   a0+  &#x2211; (akcos (&#x03C9;kt )+ bksin(&#x03C9;kt))                     (6 )
+               k=1
+             &#x221E;
+       =    &#x2211;   ckei&#x03C9;kt                                          (7 )
+           k=-&#x221E;
+" class="math-display" ><a
+ id="x1-6001r6"></a></center>
+</div>
+<p class="noindent" style="margin-bottom: 0in">where the angular
+frequencies are</p>
+<dl>
+	<dl>
+		<dl>
+			<dl>
+				<dl>
+					<dl>
+						<dl>
+							<dl>
+								<dl>
+									<dl>
+										<dl>
+											<dl>
+												<dl>
+													<dl>
+														<dl>
+															<dl>
+																<dl>
+																	<dl>
+																		<dl>
+																			<dl>
+																				<dl>
+<dl>
+<dd>
+<table align="center" width="210" cellpadding="2" cellspacing="0">
+<col width="132">
+<col width="70">
+<tr>
+<td width="132" style="border: none; padding: 0in">
+<p align="center"><a name="x1-6002r8"></a><img src="SpecAnalysis8xx.png" name="Image8" alt="             2πkVωk =  2πνk = ------               λk" align="bottom" width="129" height="37" border="0"/>
+</p>
+</td>
+<td width="70" style="border: none; padding: 0in">
+<p align="right">(8)</p>
+</td>
+</tr>
+</table>
+</dl>
+																				</dl>
+																			</dl>
+																		</dl>
+																	</dl>
+																</dl>
+															</dl>
+														</dl>
+													</dl>
+												</dl>
+											</dl>
+										</dl>
+									</dl>
+								</dl>
+							</dl>
+						</dl>
+					</dl>
+				</dl>
+			</dl>
+		</dl>
+	</dl>
+</dl>
+<p class="nopar"><!--l. 471-->with the wavelengths <i><b>λ</b></i><sub><i><b>k</b></i></sub>
+obtained from the frequencies <i><b>ν</b></i><sub><i><b>k</b></i></sub>
+for observations over a period T. Where the measurements are made
+during motion through the field with speed <i><b>V </b></i>, the
+wavelengths <i><b>λ</b></i><sub><i><b>k</b></i></sub> are found from
+<i><b>V = ν</b></i><sub><i><b>k</b></i></sub><i><b>λ</b></i><sub><i><b>k</b></i></sub>.
+Alternately, if the field is a spatial field, the wavelength <i><b>λ</b></i><sub><i><b>k</b></i></sub>
+is the natural Fourier component and the representation in terms of
+the spatial coordinate <i><b>s </b></i>is <i><b>f</b></i><sup><i><b>*</b></i></sup><i><b>(s)
+=</b></i> ∑<sub><i><b>k=-∞</b></i></sub><sup>∞</sup><i><b>c</b></i><sub><i><b>k</b></i></sub><i><b>e</b></i><sup><i><b>i2πs∕λ</b></i></sup><sub><i><b>k</b></i></sub>.<!--l. 480-->
+</p>
+<p class="noindent" style="margin-bottom: 0in">The coefficients <i><b>c</b></i><sub><i><b>k</b></i></sub>
+can be determined from</p>
+<dl>
+	<dl>
+		<dl>
+			<dl>
+				<dl>
+					<dl>
+						<dl>
+							<dl>
+								<dl>
+									<dl>
+										<dl>
+											<dl>
+												<dl>
+													<dl>
+														<dl>
+															<dl>
+																<dl>
+																	<dl>
+																		<dl>
+																			<dl>
+																				<dl>
+<dl>
+<dd>
+<table align="center" width="228" cellpadding="2" cellspacing="0">
+<col width="164">
+<col width="56">
+<tr>
+<td width="164" style="border: none; padding: 0in">
+<p align="center"><a name="x1-6003r9"></a><img src="SpecAnalysis9xx.png" name="Image9" alt="        T ∕2     1  ∫ck = --     f(t)e-iωktdt     T -T∕2" align="bottom" width="161" height="63" border="0"/>
+</p>
+</td>
+<td width="56" style="border: none; padding: 0in" sdval="-9" sdnum="1033;">
+<p align="right">(9)</p>
+</td>
+</tr>
+</table>
+</dl>
+																				</dl>
+																			</dl>
+																		</dl>
+																	</dl>
+																</dl>
+															</dl>
+														</dl>
+													</dl>
+												</dl>
+											</dl>
+										</dl>
+									</dl>
+								</dl>
+							</dl>
+						</dl>
+					</dl>
+				</dl>
+			</dl>
+		</dl>
+	</dl>
+</dl>
+<p class="nopar"><!--l. 483-->as can be demonstrated by substituting
+<i><b>f</b></i><sup><i><b>*</b></i></sup><i><b>(t) </b></i>for <i><b>f(t)
+</b></i>in (<a href="#x1-6003r9">9</a><!--tex4ht:ref: eq:coef-ck -->)
+and using the orthogonality relationships for the exponential
+functions (or equivalently for sine and cosine functions). If there
+are <i><b>N</b></i> observations in the time series, <i><b>N
+</b></i>coefficients in the representation (6) or (7) can match
+those observations exactly.<!--l. 491--> 
+</p>
+<h4 class="western"><br/>
+<br/>
+
+</h4>
+</body>
+</html>

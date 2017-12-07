@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title>Spectral Analysis Notes</title>
+	<meta name="generator" content="LibreOffice 5.4.3.2 (Linux)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changedby" content="Al Cooper"/>
+	<meta name="changed" content="2017-11-26T12:35:29.551509256"/>
+	<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"/>
+	<meta name="src" content="SpecAnalysis.tex"/>
+</head>
+<body lang="en-US" dir="ltr">
+<p>The basic tool used most often for spectral analysis is the
+Fourier series. This representation is particularly suited to
+periodic functions and indeed makes the assumption that the series is
+periodic. Consider a function that repeats with period T, such that
+f(t) = f(t + T) = f(t + 2T) = f(t + nT).
+We seek to represent this function by f<sup>*</sup>(t), a
+superposition of sine and cosine waves with various frequencies
+having amplitudes {a<sub>k</sub>} and {b<sub>k</sub>}:<!--l. 465--> 
+</p>
+<!--l. 464--><p class="noindent" ><div class="eqnarray">
+<center class="math-display" >
+<img
+src="SpecAnalysis7xx.png" alt="                &#x221E;
+f *(t)  =   a0+  &#x2211; (akcos (&#x03C9;kt )+ bksin(&#x03C9;kt))                     (6 )
+               k=1
+             &#x221E;
+       =    &#x2211;   ckei&#x03C9;kt                                          (7 )
+           k=-&#x221E;
+" class="math-display" ><a
+ id="x1-6001r6"></a></center>
+</div>
+<p style="margin-bottom: 0in">where the angular frequencies are</p>
+<p class="noindent"><div class="equation">
+<center class="math-display" >
+<img
+src="SpecAnalysis8xx.png" alt="             2&#x03C0;kV
+&#x03C9;k =  2&#x03C0;&#x03BD;k = ------
+               &#x03BB;k
+"class="math-display" ><a
+ id="x1-6002r8"></a></center>
+<!--l. 471--><p class="nopar" >
+<p><!--l. 472-->with the wavelengths λ<sub>k</sub> obtained from the
+frequencies ν<sub>k</sub> for observations over a period T. Where
+the measurements are made during motion through the field with speed
+V , the wavelengths λ<sub>k</sub> are found from V = ν<sub>k</sub>λ<sub>k</sub>.
+Alternately, if the field is a spatial field, the wavelength λ<sub>k</sub>
+is the natural Fourier component and the representation in terms of
+the spatial coordinate s is f<sup>*</sup>(s) = ∑<sub>k=-∞</sub><sup>∞</sup>c<sub>k</sub>e<sup>i2πs∕λ</sup><sub>k</sub>.<!--l. 481-->
+</p>
+<p style="margin-bottom: 0in">The coefficients c<sub>k</sub> can be
+determined from</p>
+<p class="noindent"><div class="equation">
+<center class="math-display" >
+<img
+src="SpecAnalysis9xx.png" alt="        T &#x2215;2
+     1  &#x222B;
+ck = --     f(t)e-i&#x03C9;ktdt
+     T -T&#x2215;2
+" class="math-display" ><a
+ id="x1-6003r9"></a></center>
+<!--l. 483--><p class="nopar" >
+<p><!--l. 484-->as can be demonstrated by substituting f<sup>*</sup>(t)
+for f(t) in (<a href="#x1-6004r9">9</a><!--tex4ht:ref: eq:coef-ck -->)
+and using the orthogonality relationships for the exponential
+functions (or equivalently for sine and cosine functions). If there
+are N observations in the time series, N coefficients in the
+representation (<a href="#x1-6002r7">7</a><!--tex4ht:ref: eq:complex-form -->)
+can match those observations exactly.<!--l. 492--> 
+</p>
+</body>
+</html>
