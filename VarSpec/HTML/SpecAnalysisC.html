@@ -1,0 +1,371 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title>Spectral Analysis Notes</title>
+	<meta name="generator" content="LibreOffice 5.4.3.2 (Linux)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changedby" content="Al Cooper"/>
+	<meta name="changed" content="2017-11-26T09:41:38.487535602"/>
+	<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"/>
+	<meta name="src" content="SpecAnalysis.tex"/>
+	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+	<meta name="created" content="00:00:00">
+	<style type="text/css">
+		h3.cjk { font-family: "Source Han Sans CN Regular" }
+		h3.ctl { font-family: "Lohit Devanagari" }
+		h4.cjk { font-family: "Source Han Sans CN Regular" }
+		h4.ctl { font-family: "Lohit Devanagari" }
+	</style>
+</head>
+<body lang="en-US" dir="ltr">
+<p><br/>
+<br/>
+
+</p>
+<h3 class="western"><a name="x1-50003"></a>3 Generating Plots of the
+Variance Spectrum*</h3>
+<p><!--l. 448-->It is beyond the scope of this note to describe the
+detailed construction of the variance spectrum, although a document
+at <a href="https://drive.google.com/open?id=1I1q8WTBzMKJGJ8ylRGmmQ8NwcCSgjwST">this
+linked URL</a> provides such details. Some of that material is
+presented in this tab, but those wanting to skip
+directly to instructions on how to use “R” to generate the
+variance spectrum can skip to the next tab.<!--l. 455--> 
+</p>
+<h4 class="western"><a name="x1-60003.1"></a>3.1 Theoretical basis
+for the periodogram</h4>
+<p><!--l. 457-->The basic tool used most often for spectral analysis
+is the Fourier series. This representation is particularly suited to
+periodic functions and indeed makes the assumption that the series is
+periodic. Consider a function that repeats with period <i><b>T, </b></i>such
+that <i><b>f(t) = f(t +T ) = f(t +2T ) =</b></i> 
+<img src="SpecAnalysis6x.png" name="Image6" alt="⋅⋅⋅" align="bottom" width="75" height="38" border="0"/>
+
+. We seek to represent this function by <i><b>f</b></i><sup><i><b>*</b></i></sup><i><b>(t)</b></i>,
+a superposition of sine and cosine waves with various frequencies
+having amplitudes {<i><b>a</b></i><sub><i><b>k</b></i></sub>} and
+{<i><b>b</b></i><sub><i><b>k</b></i></sub>}:<!--l. 465--> 
+</p>
+<center>
+	<table width="316" cellpadding="0" cellspacing="0">
+		<col width="35">
+		<col width="248">
+		<col width="33">
+		<tr>
+			<td width="35" style="border: none; padding: 0in">
+				<p><i><b>f</b></i><sup><i><b>*</b></i></sup><i><b>(t)</b></i></p>
+			</td>
+			<td width="248" style="border: none; padding: 0in">
+				<p><i><b>= a</b></i><sub><i><b>0</b></i></sub> <i><b>+</b></i>∑<sub>
+				</sub><sub><i><b>k=1</b></i></sub><sup>∞</sup><i><b>(a</b></i><sub>
+				</sub><sub><i><b>k</b></i></sub><i><b>cos(ω</b></i><sub><i><b>k</b></i></sub><i><b>t)+b</b></i><sub><i><b>k</b></i></sub><i><b>sin(ω</b></i><sub><i><b>k</b></i></sub><i><b>t))</b></i></p>
+			</td>
+			<td width="33" style="border: none; padding: 0in">
+				<p><a name="x1-6001r6"></a>(6) 
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td width="35" style="border: none; padding: 0in">
+				<p><i><b>=</b></i></p>
+			</td>
+			<td width="248" style="border: none; padding: 0in">
+				<p>∑<sub><i><b>k=-∞</b></i></sub><sup>∞</sup><i><b>c</b></i><sub>
+				</sub><sub><i><b>k</b></i></sub><i><b>e</b></i><sup><i><b>iω</b></i></sup><sub><i><b>k</b></i></sub><sup><i><b>t</b></i></sup></p>
+			</td>
+			<td width="33" style="border: none; padding: 0in">
+				<p><a name="x1-6002r7"></a>(7) 
+				</p>
+			</td>
+		</tr>
+	</table>
+</center>
+<p style="margin-bottom: 0in">where the angular frequencies are</p>
+<center>
+	<table width="164" cellpadding="0" cellspacing="0">
+		<col width="137">
+		<col width="28">
+		<tr>
+			<td width="137" style="border: none; padding: 0in">
+				<p align="center"><a name="x1-6003r8"></a><img src="SpecAnalysis7x.png" name="Image7" alt="ω  =  2πν  = 2πkV--  k      k     λk" align="bottom" width="129" height="37" border="0"/>
+
+								</p>
+			</td>
+			<td width="28" style="border: none; padding: 0in">
+				<p>(8)</p>
+			</td>
+		</tr>
+	</table>
+</center>
+<p><!--l. 472-->with the wavelengths <i><b>λ</b></i><sub><i><b>k</b></i></sub>
+obtained from the frequencies <i><b>ν</b></i><sub><i><b>k</b></i></sub>
+for observations over a period T. Where the measurements are made
+during motion through the field with speed <i><b>V </b></i>, the
+wavelengths <i><b>λ</b></i><sub><i><b>k</b></i></sub> are found from
+<i><b>V = ν</b></i><sub><i><b>k</b></i></sub><i><b>λ</b></i><sub><i><b>k</b></i></sub>.
+Alternately, if the field is a spatial field, the wavelength <i><b>λ</b></i><sub><i><b>k</b></i></sub>
+is the natural Fourier component and the representation in terms of
+the spatial coordinate <i><b>s </b></i>is <i><b>f</b></i><sup><i><b>*</b></i></sup><i><b>(s)
+=</b></i> ∑<sub><i><b>k=-∞</b></i></sub><sup>∞</sup><i><b>c</b></i><sub><i><b>k</b></i></sub><i><b>e</b></i><sup><i><b>i2πs∕λ</b></i></sup><sub><i><b>k</b></i></sub>.<!--l. 481-->
+</p>
+<p style="margin-bottom: 0in">The coefficients <i><b>c</b></i><sub><i><b>k</b></i></sub>
+can be determined from</p>
+<center>
+	<table width="196" cellpadding="0" cellspacing="0">
+		<col width="168">
+		<col width="28">
+		<tr>
+			<td width="168" style="border: none; padding: 0in">
+				<p align="center"><a name="x1-6004r9"></a><img src="SpecAnalysis8x.png" name="Image8" alt="        T∫ ∕2c  = 1-     f(t)e-iωktdt k   T       -T∕2" align="bottom" width="161" height="63" border="0"/>
+
+								</p>
+			</td>
+			<td width="28" style="border: none; padding: 0in">
+				<p>(9)</p>
+			</td>
+		</tr>
+	</table>
+</center>
+<p><!--l. 484-->as can be demonstrated by substituting <i><b>f</b></i><sup><i><b>*</b></i></sup><i><b>(t)
+</b></i>for <i><b>f(t) </b></i>in (<a href="#x1-6004r9">9</a><!--tex4ht:ref: eq:coef-ck -->)
+and using the orthogonality relationships for the exponential
+functions (or equivalently for sine and cosine functions). If there
+are <i><b>N</b></i> observations in the time series, <i><b>N
+</b></i>coefficients in the representation (<a href="#x1-6002r7">7</a><!--tex4ht:ref: eq:complex-form -->)
+can match those observations exactly.<!--l. 492--> 
+</p>
+<h4 class="western"><a name="x1-70003.2"></a>3.2 Generating the
+periodogram using “R”</h4>
+<p style="margin-bottom: 0in"><a name="x1-70014"></a><!--l. 495--></p>
+<p>Figure 4: Periodogram for the hourly time series of sea-level
+pressure measurements at Denver, CO, from July 1 2006 to 31 December
+2015.</p>
+<p><!--tex4ht:label?: x1-70014 --><!--l. 502--><!--l. 507-->In the
+approach to spectral analysis that uses the Fourier transform, the
+initial step is to determine the Fourier coefficients that
+reconstruct the observed time series and from that estimate the
+spectral variance at a set of discrete frequencies. The plot of those
+estimates is called a periodogram and an example is shown in Fig. <a href="#x1-70014">4</a><!--tex4ht:ref: fig:periodogram -->.
+This was generated by these R commands: 
+</p>
+<p style="margin-left: 0.39in; margin-bottom: 0.2in"><!--l. 513--><font face="monospace">ts2</font>
+<font face="monospace">&lt;-</font> <font face="monospace">ts(DIA$SLVP,</font>
+<font face="monospace">frequency=24)</font>  <font face="monospace">##</font>
+<font face="monospace">construct</font> <font face="monospace">time-series</font>
+<font face="monospace">object<!--l. 516--></font> 
+</p>
+<p style="margin-left: 0.39in; margin-bottom: 0.2in"><font face="monospace">spectrum(ts2)</font>
+                     <font face="monospace">##</font> <font face="monospace">spectrum</font>
+<font face="monospace">is</font> <font face="monospace">part</font>
+<font face="monospace">of</font> <font face="monospace">stats::</font></p>
+<p><!--l. 518-->In addition to generating the plot, “spectrum()”
+also returns values for the estimates of spectral variance as a
+function of frequency so that further manipulation is possible. This
+is usually necessary because the estimates in the periodogram have
+large associated uncertainty and will benefit from some type of
+averaging that reduces the variance. It is also usually preferable to
+construct logarithmic displays of the variance spectrum.<!--l. 526-->
+</p>
+<p>When using the “spectrum()” function, it is important to
+recognize that the periodogram returned is two-sided, so values of
+the “spec” variable as returned by spectrum() should be
+multiplied by two to match the normalization otherwise used in this
+note. 
+</p>
+<h4 class="western"><a name="x1-80003.3"></a>3.3 Reducing the
+variance in the estimates of spectral variance</h4>
+<p><!--l. 533-->This reduction refers to the variance in the
+estimates and should not be confused with the variance in the time
+series. A property of the periodogram is that the variance in the
+individual estimates is equal to the magnitude of the estimate
+itself, so the result appears to be very noisy. There are many ways
+to smooth the resulting spectrum and reduce this variance in the
+estimates. They include: 
+</p>
+<ol>
+	<li/>
+<p style="margin-bottom: 0in"><a name="x1-8002x1"></a>Moving
+	smoothing functions. A common choice, implemented in “spectrum()”
+	as discussed below, is the Daniell smoother, which in effect applies
+	a moving-average smoother. This can be introduced into the estimate
+	of spectral variance by including the argument “spans=c(i1,i2,...)”
+	in the call to “spectrum()”, where the arguments {i1,i2,i3} are
+	odd integers determining the span of consecutive moving-average
+	smoothers applied to the resulting spectrum. Large numbers give more
+	smoothing at the expense of loss of frequency resolution. In the
+	plots produced by “spectrum()”, an error bar plotted at the top
+	right indicates the uncertainty in the estimate of the spectral
+	variance. The reduction in variance is often substantial; for a
+	moving average, the reduction would be expected to be inversely
+	proportional to the square root of the number of estimates averaged
+	together. 
+	</p>
+	<li/>
+<p style="margin-bottom: 0in"><a name="x1-8004x2"></a>Segmenting
+	and averaging the resulting spectra. The time series can be
+	subdivided into segments, which may be overlapping, and the
+	estimates of spectral variance obtained from those individual
+	segments can then be averaged to reduce the estimates in the
+	variance. This bears the penalty of reducing the longest period that
+	can be determined, but in a long time series it is often of greater
+	interest to determine the high-frequency component. An R package is
+	available to accomplish this smoothing, which is often called “Welch
+	smoothing”: <font face="monospace">bspec::welchPSD(). </font>The
+	package “bspec” may need to be downloaded from the standard CRAN
+	repository because it is not part of the standard R routines. The
+	length of the (overlapping) segments to use can be specified in the
+	function call. 
+	</p>
+	<li/>
+<p><a name="x1-8006x3"></a>Binning and averaging. Another
+	option is simply to combine estimates in bins into a single mean
+	estimate that represents that bin. This can be particularly useful
+	in the case of displays with logarithmic abscissas, because bins can
+	be defined in equal logarithmic intervals to span equal abscissa
+	distances on a logarithmic plot.</p>
+</ol>
+<p style="margin-bottom: 0in"><a name="x1-80075"></a><!--l. 572--></p>
+<p>Figure 5: Examples of smoothed spectra, all based on the time
+series and periodigram in Fig. 4. (top) Daniell smoothing, length=49;
+(middle) Welch smoothing, segment length=512 days; (bottom) bin
+averaging, 200 logarithmically spaced bins.</p>
+<p><!--tex4ht:label?: x1-80075 --><!--l. 579--><!--l. 584-->Examples
+of each of these methods are shown in Fig. <a href="#x1-80075">5</a><!--tex4ht:ref: fig:smoothOptions -->.
+The degree of smoothing has a strong effect on the diurnal peaks
+because they are so limited in frequency, so too much smoothing
+caused spectral resolution to deteriorate.<!--l. 589--> 
+</p>
+<h4 class="western"><a name="x1-90003.4"></a>3.4 The “maximum
+entropy” method of estimating the variance spectrum</h4>
+<p><!--l. 591-->An alternative to the traditional FFT approach is
+provided by the algorithm developed by Burg and sometimes called the
+maximum entropy method (MEM). A numerical approach, described in
+detail in “Numerical Recipes in C”, won’t be discussed here. An
+R routine that calculates the spectral variance is contained in the
+“Ranadu” package in the file “mem.R”. That file contains two
+functions, one for generating the coefficients that represent the
+spectrum and the other for evaluating the spectrum at a specific
+frequency using those coefficients. The following section of R code
+illustrates how these functions are used, and Fig. <a href="#x1-90016">6</a><!--tex4ht:ref: fig:mem -->
+shows an example. 
+</p>
+<p align="left" style="margin-bottom: 0in"><a name="colorbox186"></a><a name="colorbox188"></a><a name="textcolor7"></a><a name="textcolor8"></a><a name="textcolor9"></a><a name="textcolor10"></a><a name="textcolor11"></a><a name="textcolor12"></a><a name="textcolor13"></a><a name="textcolor14"></a><a name="textcolor15"></a><a name="textcolor16"></a><a name="textcolor17"></a><a name="textcolor18"></a><a name="textcolor19"></a><a name="textcolor20"></a><a name="textcolor21"></a><a name="textcolor22"></a><a name="textcolor23"></a><a name="textcolor24"></a><a name="textcolor25"></a><a name="textcolor26"></a><a name="textcolor27"></a><a name="textcolor28"></a><a name="textcolor29"></a><a name="textcolor30"></a><a name="textcolor31"></a><a name="textcolor32"></a><a name="textcolor33"></a><a name="textcolor34"></a><a name="textcolor35"></a><a name="textcolor36"></a><a name="textcolor37"></a><a name="textcolor38"></a><a name="textcolor39"></a><a name="textcolor40"></a><a name="textcolor41"></a><a name="textcolor42"></a><a name="textcolor43"></a><a name="textcolor44"></a><a name="textcolor45"></a><a name="textcolor46"></a><a name="textcolor47"></a><a name="textcolor48"></a><a name="textcolor49"></a><a name="textcolor50"></a><a name="textcolor51"></a><a name="textcolor52"></a><a name="textcolor53"></a><a name="textcolor54"></a><a name="textcolor55"></a><a name="textcolor56"></a><a name="textcolor57"></a><a name="textcolor58"></a><a name="textcolor59"></a><a name="textcolor60"></a><a name="textcolor61"></a><a name="textcolor62"></a><a name="textcolor63"></a><a name="textcolor64"></a><a name="textcolor65"></a><a name="textcolor66"></a><a name="textcolor67"></a><a name="textcolor68"></a><a name="textcolor69"></a><a name="textcolor70"></a><a name="textcolor71"></a><a name="textcolor72"></a><a name="textcolor73"></a><a name="textcolor74"></a><a name="textcolor75"></a><a name="textcolor76"></a><a name="textcolor77"></a><a name="textcolor78"></a><a name="textcolor79"></a><a name="textcolor80"></a><a name="textcolor81"></a><a name="textcolor82"></a><a name="textcolor83"></a><a name="textcolor84"></a><a name="textcolor85"></a><a name="textcolor86"></a><a name="textcolor87"></a><a name="textcolor88"></a><a name="textcolor89"></a><a name="textcolor90"></a><a name="textcolor91"></a><a name="textcolor92"></a><a name="textcolor93"></a><a name="textcolor94"></a><a name="textcolor95"></a><a name="textcolor96"></a><a name="textcolor97"></a><a name="textcolor98"></a><a name="textcolor99"></a><a name="textcolor100"></a><a name="textcolor101"></a><a name="textcolor102"></a><a name="textcolor103"></a><a name="textcolor104"></a><a name="textcolor105"></a><a name="textcolor106"></a><a name="textcolor107"></a><a name="textcolor108"></a><a name="textcolor109"></a><a name="textcolor110"></a><a name="textcolor111"></a><a name="textcolor112"></a><a name="textcolor113"></a><a name="textcolor114"></a><a name="textcolor115"></a><a name="textcolor116"></a><a name="textcolor117"></a><a name="textcolor118"></a><a name="textcolor119"></a><a name="textcolor120"></a><a name="textcolor121"></a><a name="textcolor122"></a><a name="textcolor123"></a><a name="textcolor124"></a><a name="textcolor125"></a><a name="textcolor126"></a><a name="textcolor127"></a><a name="textcolor128"></a><a name="textcolor129"></a><a name="textcolor130"></a><a name="textcolor131"></a><a name="textcolor132"></a><a name="textcolor133"></a><a name="textcolor134"></a><a name="textcolor135"></a><a name="textcolor136"></a><a name="textcolor137"></a><a name="textcolor138"></a><a name="textcolor139"></a><a name="textcolor140"></a><a name="textcolor141"></a><a name="textcolor142"></a><a name="textcolor143"></a><a name="textcolor144"></a><a name="textcolor145"></a><a name="textcolor146"></a><a name="textcolor147"></a><a name="textcolor148"></a><a name="textcolor149"></a><a name="textcolor150"></a><a name="textcolor151"></a><a name="textcolor152"></a><a name="textcolor153"></a><a name="textcolor154"></a><a name="textcolor155"></a><a name="textcolor156"></a><a name="textcolor157"></a><a name="textcolor158"></a><a name="textcolor159"></a><a name="textcolor160"></a><a name="textcolor161"></a><a name="textcolor162"></a><a name="textcolor163"></a><a name="textcolor164"></a><a name="textcolor165"></a><a name="textcolor166"></a><a name="textcolor167"></a><a name="textcolor168"></a><a name="textcolor169"></a><a name="textcolor170"></a><a name="textcolor171"></a><a name="textcolor172"></a><a name="textcolor173"></a><a name="textcolor174"></a><a name="textcolor175"></a><a name="textcolor176"></a><a name="textcolor177"></a><a name="textcolor178"></a><a name="textcolor179"></a><a name="textcolor180"></a><a name="textcolor181"></a><a name="textcolor182"></a><a name="textcolor183"></a>
+<!--l. 604--><font face="monospace"><i>##</i></font> <font face="monospace"><i>This</i></font>
+<font face="monospace"><i>needs</i></font> <font face="monospace"><i>lib(Ranadu),</i></font>
+<font face="monospace"><i>loaded</i></font> <font face="monospace"><i>earlier</i></font>
+<br/>
+<font face="monospace"><i>##</i></font> <font face="monospace"><i>The</i></font>
+<font face="monospace"><i>data.frame</i></font> <font face="monospace"><i>DIA</i></font>
+<font face="monospace"><i>was</i></font> <font face="monospace"><i>generated</i></font>
+<font face="monospace"><i>previously</i></font> <font face="monospace"><i>from</i></font>
+<font face="monospace"><i>the</i></font> <font face="monospace"><i>hourly</i></font>
+<font face="monospace"><i>observations.</i></font> <br/>
+<font face="monospace"><i>##</i></font>
+<font face="monospace"><i>The</i></font> <font face="monospace"><i>sea-level</i></font>
+<font face="monospace"><i>pressure</i></font> <font face="monospace"><i>is</i></font>
+<font face="monospace"><i>saved</i></font> <font face="monospace"><i>in</i></font>
+<font face="monospace"><i>the</i></font> <font face="monospace"><i>variable</i></font>
+<font face="monospace"><i>SLVP.</i></font> <br/>
+<font face="monospace"><i>##</i></font>
+<font face="monospace"><i>Replace</i></font> <font face="monospace"><i>missing</i></font>
+<font face="monospace"><i>values</i></font> <font face="monospace"><i>by</i></font>
+<font face="monospace"><i>interpolation:</i></font> <br/>
+<font face="monospace">SLVP</font>
+<font face="monospace">&lt;-</font> <font face="monospace">SmoothInterp</font>
+<font face="monospace">(DIA$SLVP,</font> <font face="monospace">.Length=0)</font>
+ <font face="monospace"><i>##</i></font> <font face="monospace"><i>.Length=0</i></font>
+<font face="monospace"><i>suppresses</i></font> <font face="monospace"><i>smoothing</i></font>
+<br/>
+<font face="monospace">SLVP[83304]</font> <font face="monospace">&lt;-</font>
+<font face="monospace">SLVP[83303]</font>  <font face="monospace"><i>##</i></font>
+<font face="monospace"><i>the</i></font> <font face="monospace"><i>last</i></font>
+<font face="monospace"><i>value</i></font> <font face="monospace"><i>has</i></font>
+<font face="monospace"><i>a</i></font> <font face="monospace"><i>false</i></font>
+<font face="monospace"><i>0,</i></font> <font face="monospace"><i>so</i></font>
+<font face="monospace"><i>replace</i></font> <font face="monospace"><i>it</i></font>
+<br/>
+<font face="monospace">MEMc50</font> <font face="monospace">&lt;-</font>
+<font face="monospace">memCoef</font> <font face="monospace">(SLVP,</font>
+<font face="monospace">.poles=50)</font> <br/>
+<font face="monospace">MEMc300</font>
+<font face="monospace">&lt;-</font> <font face="monospace">memCoef</font>
+<font face="monospace">(SLVP,</font> <font face="monospace">.poles=300)</font>
+<br/>
+<font face="monospace">lf</font> <font face="monospace">&lt;-</font>
+<font face="monospace">seq(-2,</font> <font face="monospace">1,</font>
+<font face="monospace">by=0.00001)</font> <br/>
+<font face="monospace">freq</font>
+<font face="monospace">&lt;-</font> <font face="monospace">10^lf</font>
+<br/>
+<font face="monospace">Rate</font> <font face="monospace">&lt;-</font>
+<font face="monospace">24</font> <br/>
+<font face="monospace">Pmem</font>
+<font face="monospace">&lt;-</font> <font face="monospace">memEstimate</font>
+<font face="monospace">(freq/Rate,</font> <font face="monospace">MEMc300)</font>
+<font face="monospace">/</font> <font face="monospace">Rate</font>
+<br/>
+<font face="monospace">Pmem50</font> <font face="monospace">&lt;-</font>
+<font face="monospace">memEstimate</font> <font face="monospace">(freq/Rate,</font>
+<font face="monospace">MEMc50)</font> <font face="monospace">/</font>
+<font face="monospace">Rate</font> <br/>
+<font face="monospace">Pmem</font>
+<font face="monospace">&lt;-</font> <font face="monospace">2</font> <font face="monospace">*</font>
+<font face="monospace">Rate</font> <font face="monospace">*</font>
+<font face="monospace">Mod(Pmem)^2</font>         <font face="monospace"><i>##</i></font>
+<font face="monospace"><i>The</i></font> <font face="monospace"><i>returned</i></font>
+<font face="monospace"><i>spectrum</i></font> <font face="monospace"><i>is</i></font>
+<font face="monospace"><i>complex</i></font> <br/>
+<font face="monospace">Pmem50</font>
+<font face="monospace">&lt;-</font> <font face="monospace">2</font> <font face="monospace">*</font>
+<font face="monospace">Rate</font> <font face="monospace">*</font>
+<font face="monospace">Mod(Pmem50)^2</font> <br/>
+<font face="monospace">plot(freq,</font>
+<font face="monospace">Pmem,</font> <font face="monospace">type='l',</font>
+<font face="monospace">log='xy',</font> <font face="monospace">col='blue',</font>
+<font face="monospace">lwd=2,</font> <br/>
+     <font face="monospace">ylim=c(1.e-2,</font>
+<font face="monospace">1.e3),</font> <font face="monospace">xlim=c(1.e-2,10),</font>
+<font face="monospace">xlab='frequency</font> <font face="monospace">[/day]',</font>
+<br/>
+     <font face="monospace">ylab='fP(f)')</font> <br/>
+<font face="monospace">lines(freq,</font>
+<font face="monospace">Pmem50,</font> <font face="monospace">col='forestgreen',</font>
+<font face="monospace">lwd=2)</font> <br/>
+<font face="monospace">legend('topright',</font>
+<font face="monospace">legend=c('50</font> <font face="monospace">poles',</font>
+<font face="monospace">'300</font> <font face="monospace">poles'),</font>
+<br/>
+       <font face="monospace">col=c('forestgreen',</font>
+<font face="monospace">'blue'),</font> <font face="monospace">lwd=c(2,2))</font>
+</p>
+<p>-<!--l. 627--> 
+</p>
+<hr/>
+
+<p style="margin-bottom: 0in"><a name="x1-90016"></a><br/>
+
+</p>
+<p>Figure 6: Variance spectrum generated by the maximum-entropy
+algorithm, for the same time series shown in the previous three
+plots. The blue-line spectrum is that obtained using 300 poles, while
+the green-line spectrum was obtained using 50 poles. Both were
+evaluated at 300,000 frequencies from 0.01 to 10 day<sup><i><b>-1</b></i></sup>.</p>
+<p><!--tex4ht:label?: x1-90016 --><!--l. 634--><!--l. 641-->No
+smoothing has been applied to this variance spectrum, but it still
+appears smooth. Smoothing is accomplished by using a smaller number
+of poles. Sometimes spectral features, like those of the diurnal
+cycle, can be very sharp, so it is necessary to use high resolution
+and a modest number of poles (&gt;100) in searches for such features.
+In this case, using 50 poles for example produces the smoothed
+spectrum shown as the dashed green line that misses the diurnal-cycle
+peak entirely, even with fine-resolution evaluation. Evaluation with
+large numbers of poles (e.g., &gt;400) can require an impractically
+long processing time. 
+</p>
+<p><br/>
+<br/>
+
+</p>
+</body>
+</html>

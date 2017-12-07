@@ -1,0 +1,321 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass report
+\begin_preamble
+\input colordvi
+\usepackage{color}
+\fancyhead{}
+\fancyfoot[CE,CO]{}
+\newtoks{\topicofnote} \global\topicofnote={}
+\newdimen\longindent \longindent=3.5truein
+\fancyhead[L]{Aircraft Algorithm Memo re: \the\topicofnote \\ \datetoday \\ Page \thepage \hfill}
+\renewcommand{\headrulewidth}{0.0pt}
+\newenvironment{lyxlist}[1]
+{\begin{list}{}
+{\settowidth{\labelwidth}{#1}
+\setlength{\leftmargin}{\labelwidth}
+\addtolength{\leftmargin}{\labelsep}
+\renewcommand{\makelabel}[1]{##1\hfil}}}
+{\end{list}}
+\newcommand{\datetoday}{\number\day\space
+     \ifcase\month\or January\or February\or March\or April\or May\or
+     June\or July\or August\or September\or October\or November\or
+     December\fi
+     \space\number\year}
+\newcommand{\RAFAlgorithmMemo}{\null \vskip-1.5truein
+{\raggedright \textsf{\textsc{\large \textcolor{blue}{Research Aviation Facility}}}}\par
+{\raggedright \textsf{\textsl{\textcolor{blue}{Algorithm Memorandum:}}}} \par \vskip6pt
+{\color{blue}{\hrule}}\par
+\vskip0.2truein\leftline{\textcolor{blue}{\textsf{Subject: \the\topicofnote}}}
+\leftline{\textcolor{blue}{\textsf{Al Cooper}}}
+\leftline{\textcolor{blue}{\textsf{\datetoday}}} \vskip0.2truein
+\thispagestyle{empty}}
+\newcommand{\attachm}[1]{\begin{lyxlist}{Attachments:00}
+\item [Attachments:] {#1}
+\end{lyxlist}}
+\newcommand{\cc}[1]{\begin{lyxlist}{Attachments:00}
+\item [cc:] {#1}
+\end{lyxlist}}
+\newcommand{\attach}[1]{\begin{lyxlist}{Attachments:00}
+\item [Attachment:] {#1}
+\end{lyxlist}}
+%usage: \encl{A\\B\\C} or \cc{ma,e1\\name2\\name3}
+\end_preamble
+\use_default_options false
+\begin_modules
+knitr
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding default
+\fontencoding global
+\font_roman "times" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize letterpaper
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 0
+\use_package mathdots 0
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 2.54cm
+\topmargin 3.54cm
+\rightmargin 2.54cm
+\bottommargin 2.54cm
+\headheight 1cm
+\headsep 2cm
+\footskip 0.5cm
+\secnumdepth 2
+\tocdepth 2
+\paragraph_separation skip
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle fancy
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset Note Comment
+status collapsed
+
+\begin_layout Plain Layout
+set topicofnote to topic of note
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+topicofnote={858 gust pod}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+RAFAlgorithmMemo
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Five-Pressure-Port Wind Sensors
+\end_layout
+
+\begin_layout Standard
+To measure the vector wind, multi-port sensors are often used.
+ One example is the five-port sensor shown in the figure to the right.
+ It is often used on aircraft, but it has other uses as well.
+ This Shiny app is a demonstration of how it operates, shown in the next
+ tab.
+ First, this tab presents some information regarding its performance and
+ helps a reader understand the next tab.
+\end_layout
+
+\begin_layout Standard
+The five ports are distributed so that one is approximately in the forward
+ direction, two are above and below this center line so they develop a pressure
+ difference between them determined by the angle of attack, and two are
+ similarly oriented on each side to be sensitive to the lateral flow at
+ an angle called the sideslip angle.
+ In addition, there are a ring of ports surrounding the cylinder that provide
+ a source of air at approximately ambient pressure.
+\end_layout
+
+\begin_layout Standard
+The relationship between the angles of attack and sideslip and the corresponding
+ pressure difference between the ports are usually determined by empirical
+ calibrations because, particularly when installed on aircraft, they are
+ subject to flow distortion around the aircraft and sensitivity to Mach
+ number so theoretical relationships are usually insufficient.
+ However, potential-flow theory provides some guidance because the pressure
+ distribution around the surface of a sphere is given as follows:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+p_{\theta}=p_{\infty}+\frac{1}{2}\rho V^{2}(1-\frac{9}{4}\sin^{2}\theta)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $p_{\theta}$
+\end_inset
+
+ is the pressure at an angle 
+\begin_inset Formula $\theta$
+\end_inset
+
+ from the forward direction, 
+\begin_inset Formula $p_{\infty}$
+\end_inset
+
+ is the ambient pressure far from the sphere, 
+\begin_inset Formula $\rho$
+\end_inset
+
+ is the air density and 
+\begin_inset Formula $V$
+\end_inset
+
+ is the airspeed.
+ To find the flow angle 
+\begin_inset Formula $\theta$
+\end_inset
+
+ from the measured pressure difference between two ports on the sphere,
+ one must also know the dynamic pressure 
+\begin_inset Formula $q=0.5\rho V^{2}$
+\end_inset
+
+.
+ When the sensor is oriented directly into the wind, this is the difference
+ in pressure between the forward port and the ports on the side of the cylinder,
+ but when the flow is directed at an angle to the sensor this pressure differenc
+e also is decreased by the above formula.
+ In the vertical plane, two measurements, 
+\begin_inset Formula $\Delta p$
+\end_inset
+
+ and 
+\begin_inset Formula $\Delta p_{a}$
+\end_inset
+
+ constrain the two variables 
+\begin_inset Formula $\frac{1}{2}\rho V^{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $\theta$
+\end_inset
+
+ and allow a solution in the form 
+\begin_inset Formula $\theta=f(\Delta p,\,\Delta p_{a})$
+\end_inset
+
+.
+ This solution is illustrated in the next tab, but practical applications
+ usually use equations determined empirically because of the weaknesses
+ mentioned above regarding the potential-flow solution.
+\end_layout
+
+\begin_layout Section*
+Using the Demonstration
+\end_layout
+
+\begin_layout Standard
+The plot to the right shows the flow angle represented by a specified angle
+ of attack and the pressure, temperature, and airspeed where the measurement
+ is made.
+ You can adjust either the angle-of-attack slider or the pressure-difference
+ slider (representing the pressure difference between the upward- and downward-o
+riented ports), and you can study how the ambient pressure and temperature
+ and the airspeed affect these results.
+ In addition, the pressure difference between the forward port and the ports
+ on the side of the cylinder is shown at the bottom of the left panel.
+\end_layout
+
+\begin_layout Standard
+Notice these features:
+\end_layout
+
+\begin_layout Enumerate
+Once pressure, temperature, and airspeed are specified, the dynamic pressure
+ 
+\begin_inset Formula $q=\frac{1}{2}\rho V^{2}$
+\end_inset
+
+ is determined.
+ However, the pressure difference displayed at the bottom of the left panel
+ still changes with angle of attack because, when the forward port is not
+ directly forward, the pressure difference is reduced as specified by the
+ equation in the preceding tab.
+\end_layout
+
+\begin_layout Enumerate
+By convention, angle of attack is positive for air moving upward relative
+ to the sensor.
+ Angle of attack and the pressure difference between the top and bottom
+ ports are therefore negatively correlated.
+\end_layout
+
+\begin_layout Enumerate
+The pressure differences increase as the square of the airspeed, making
+ the angle measurements more sensitive to pressure as the airspeed increases.
+ However, reducing ambient pressure reduces the same sensitivity and so
+ leads to larger uncertainties at upper flight levels for a given uncertainty
+ in the measurement of the differential pressure.
+\end_layout
+
+\end_body
+\end_document

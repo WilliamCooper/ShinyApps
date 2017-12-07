@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title>Spectral Analysis Notes</title>
+	<meta name="generator" content="LibreOffice 5.4.3.2 (Linux)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changedby" content="Al Cooper"/>
+	<meta name="changed" content="2017-11-27T07:38:32.112479613"/>
+	<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"/>
+	<meta name="src" content="SpecAnalysis.tex"/>
+	<!--l. 282-->
+	<style type="text/css">
+		h4.cjk { font-family: "Source Han Sans CN Regular" }
+		h4.ctl { font-family: "Lohit Devanagari" }
+	</style>
+</head>
+<body lang="en-US" dir="ltr">
+<p> <!--l. 284-->Some important characteristics of the variance
+spectrum are the following: 
+</p>
+<ol>
+	<li/>
+<p style="margin-bottom: 0in"><a name="x1-3002x1"></a>The
+	Nyquist frequency: For a time series sampled at increments Δt in
+	time and spanning a duration T in time, the first limitation is that
+	the frequency components entering the variance spectrum cannot be
+	determined for frequencies higher than 1∕(2Δt), called the
+	Nyquist frequency, because at least two observations separated by Δt
+	are needed to resolve this highest frequency. 
+	</p>
+	<li/>
+<p style="margin-bottom: 0in"><a name="x1-3004x2"></a>Aliasing:
+	If higher frequencies are present they can contaminate the estimated
+	spectral density at lower frequencies through a process called
+	aliasing. 
+	</p>
+	<li/>
+<p style="margin-bottom: 0in"><a name="x1-3006x3"></a><a name="x1-3007f2"></a>
+	The low-frequency limit: It becomes difficult to resolve frequencies
+	smaller than 1/T . The common way of estimating the variance
+	spectrum uses Fourier transforms and, because that inherently
+	assumes that the function is periodic, this requires no components
+	with frequency lower than 1∕T .<a href="SpecAnalysis3.html#fn2x0">2</a>
+		</p>
+	<li/>
+<p style="margin-bottom: 0in"><a name="x1-3009x4"></a>Trend
+	removal. Another problem that arises from the assumption that the
+	variable is periodic outside the period (0, T ) is that, if there is
+	a linear increase in the variable with time, this becomes resolved
+	as a triangular wave with components that contaminate the spectral
+	density. For this reason, any trend in the data is normally removed
+	before the variance spectrum is estimated. The mean can also be
+	removed, and this is sometimes useful when numerical precision is a
+	problem with the calculation. 
+	</p>
+	<li/>
+<p><a name="x1-3011x5"></a>Normalization: As used in this
+	note, the variance spectrum is normalized so that the integral over
+	positive frequencies gives the variance. Sometimes the normalization
+	is such that the integral over both negative and positive
+	frequencies gives the variance, so determining the normalization
+	used is important when examining a plotted variance spectrum.</p>
+</ol>
+<h4 class="western"><br/>
+<br/>
+
+</h4>
+</body>
+</html>
