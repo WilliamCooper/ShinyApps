@@ -35,7 +35,7 @@ ui <- fluidPage(theme = shinytheme("cerulean"),
                          # Sidebar with a slider for separation between measurands
                          sidebarLayout(
                            sidebarPanel(
-                             checkboxInput ('makePDF', 'save as PDF'),
+                             # checkboxInput ('makePDF', 'save as PDF'),
                              sliderInput("separation",
                                          "d=distance (standard deviations) between measurands:",
                                          min = 0,
@@ -95,7 +95,7 @@ server <- function(input, output) {
     # bins <- seq(min(x), max(x), length.out = input$bins + 1)
     # 
     makePDF <- FALSE
-    makePDF <- input$makePDF
+    # makePDF <- input$makePDF
     if (makePDF) {pdf(file='NewPlots/ResolutionPlot.pdf', width=9, height=6)}
     D <- input$separation
     CL <- as.numeric (input$conf)
