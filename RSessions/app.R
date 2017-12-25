@@ -964,7 +964,7 @@ server <- function(input, output, session) {
   })
   observeEvent (input$XS2a, {
     showModal(modalDialog(
-      includeHTML('~/RStudio/RSessions/RSessions/Session2/Session2c3.html'),
+      includeHTML('Session2/Session2c3.html'),
       title = "Solution: One Example",
       size='l',
       easyClose = TRUE
