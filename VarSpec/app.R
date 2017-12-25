@@ -233,8 +233,13 @@ server <- function(input, output, session) {
       DL <- data.frame(x4=13, y4=fpf[lfpf], y4min=y1, y4max=y2)
       labx <- expression(paste('frequency [day'^"-1",']', sep=''))
       g <- ggplot(data=data.frame(freq, fpf))
-      g <- g + geom_path (aes(x=freq, y=fpf, colour='spectrum')) +
-        xlab(labx) + ylab ('f P(f)') 
+      g <- g + geom_path (aes(x=freq, y=fpf, colour='spectrum')) + xlab(labx)
+      if (input$pvar == 'fP(f)') {
+        g <- g + ylab ('f P(f)') 
+      } else {
+        g <- g + ylab ('P(f)')
+        # g <- g + ylab (expression(paste('P(f) [(m'^"2",'s'^"-2",') day'^"-1",']', sep='')))
+      }
         if (input$errors) {
           g <- g + geom_errorbar(aes(x=x4, ymin=y4min, ymax=y4max), data=DL, width=0.05, 
                                  size=1, colour='blue', inherit.aes=FALSE) +

@@ -6,18 +6,21 @@
 	<meta name="generator" content="LibreOffice 5.4.3.2 (Linux)"/>
 	<meta name="created" content="00:00:00"/>
 	<meta name="changedby" content="Al Cooper"/>
-	<meta name="changed" content="2017-11-27T07:38:32.112479613"/>
+	<meta name="changed" content="2017-12-08T11:07:06.561735966"/>
 	<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"/>
 	<meta name="src" content="SpecAnalysis.tex"/>
+	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+	<meta name="created" content="00:00:00">
 	<!--l. 282-->
+	<!--l. 284-->
 	<style type="text/css">
 		h4.cjk { font-family: "Source Han Sans CN Regular" }
 		h4.ctl { font-family: "Lohit Devanagari" }
 	</style>
 </head>
 <body lang="en-US" dir="ltr">
-<p> <!--l. 284-->Some important characteristics of the variance
-spectrum are the following: 
+<p>Some important characteristics of the variance spectrum are the
+following: 
 </p>
 <ol>
 	<li/>
@@ -33,8 +36,8 @@ spectrum are the following:
 <p style="margin-bottom: 0in"><a name="x1-3004x2"></a>Aliasing:
 	If higher frequencies are present they can contaminate the estimated
 	spectral density at lower frequencies through a process called
-	aliasing. 
-	</p>
+	aliasing. The figure at the bottom of this page illustrates how
+	aliasing arises.</p>
 	<li/>
 <p style="margin-bottom: 0in"><a name="x1-3006x3"></a><a name="x1-3007f2"></a>
 	The low-frequency limit: It becomes difficult to resolve frequencies
@@ -62,9 +65,17 @@ spectrum are the following:
 	frequencies gives the variance, so determining the normalization
 	used is important when examining a plotted variance spectrum.</p>
 </ol>
-<h4 class="western"><br/>
+<p><img src="Aliasing.png" name="Image1" align="right" width="504" height="383" border="0"/>
+<br/>
 <br/>
 
-</h4>
+</p>
+<h4 class="western">Figure caption: <span style="font-weight: normal">This
+figure shows a 15-Hz signal (blue line) that is sampled at 16 Hz, at
+the points indicated by black dots. 16 Hz is well above the Nyquist
+frequency of 7.5 Hz, so any attempt to measure frequencies higher
+than the Nyquist frequency will result in the measurement of an
+incorrect frequency. In this case, the 15-Hz signal will be aliased
+to (i.e., measured at) 1 Hz.</span></h4>
 </body>
 </html>
