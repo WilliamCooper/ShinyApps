@@ -139,7 +139,7 @@ server <- function(input, output, session) {
   output$specPlot <- renderPlot({
     # print(input$method)
     if (input$pvar == 'autocorrelation') {
-      v <- detrend(DIA[, c('Time', input$variable)])
+      sink("/dev/null");v <- detrend(DIA[, c('Time', input$variable)]);sink()
       if (input$Gaussian != 0) {
         v <- v + rnorm (length(v), 0, 1) * input$Gaussian
       }
@@ -161,9 +161,9 @@ server <- function(input, output, session) {
       tau <- taufit$x
       ac0 <- sum(AC$acf[2:5]*exp(-c(2:5)/tau)) / sum(exp(-2*c(2:5)/tau))
       if (ac0 > 1.01) {ac0 <- 1.01}
-      print (sprintf ('ac0=%f, taufit=%f', ac0, taufit$x))
+      # print (sprintf ('ac0=%f, taufit=%f', ac0, taufit$x))
       AC0 <- data.frame(x=0, y=ac0)
-      g <- g + geom_point(data=AC0, aes(x=x, y=y), colour='red')
+      g <- g + geom_point(data=AC0, aes(x=x, y=y), colour='red', na.rm=TRUE)
       plots <- 1
     } else {
     if (length(input$method)) {
@@ -178,7 +178,7 @@ server <- function(input, output, session) {
     xlim <- 10^input$xrange
     if (abs(xlim[2]-12) < 0.01) {xlim[2] <- 16}
     # v <- DIA[, input$variable]
-    v <- detrend(DIA[, c('Time', input$variable)])
+    sink("/dev/null");v <- detrend(DIA[, c('Time', input$variable)]);sink()
     # v <- v + input$Gaussian * rnorm(length(v), 0, 1)
     if (input$method1) {
       spans <- (input$span %/% 2) * 2 + 1
@@ -196,7 +196,7 @@ server <- function(input, output, session) {
       ci <- 1/(qchisq(c(uq, lq), df)/df)
       lower.limit <- qchisq (pnorm(-siglim), df) / df
       upper.limit <- qchisq (pnorm(siglim), df) / df
-      print (sprintf ('ci=%.3f -- %.3f', ci[1], ci[2]))
+      # print (sprintf ('ci=%.3f -- %.3f', ci[1], ci[2]))
       freq <- S$freq
       fpf <- 2 * S$spec + sign(input$Gaussian) * input$Gaussian^2 / 12  ## note factor of 2, required for one-sided normalization
       if (input$pvar == 'fP(f)') {fpf <- fpf * freq}
@@ -214,8 +214,8 @@ server <- function(input, output, session) {
       # plotWAC(freq, fpf, xlab='frequency', log='xy', ylim=ylim, xlim=xlim)
       fpfmin <- (floor  (min(log10(fpf[freq >= 10^input$xrange[1] & freq <= 10^input$xrange[2]]), na.rm=TRUE)))
       fpfmax <- (ceiling(max(log10(fpf[freq >= 10^input$xrange[1] & freq <= 10^input$xrange[2]]), na.rm=TRUE)))
-      print (sprintf ('fpfmin/fpfmax=%.3f,%.3f', fpfmin, fpfmax))
-      print (summary(fpf))
+      # print (sprintf ('fpfmin/fpfmax=%.3f,%.3f', fpfmin, fpfmax))
+      # print (summary(fpf))
       if (fpfmax - fpfmin < 5) {fpfmin <- fpfmin - 1}
       if (fpfmax - fpfmin < 5) {fpfmax <- fpfmax + 1}
       if (fpfmax - fpfmin < 5) {fpfmin <- fpfmin - 1}
@@ -233,17 +233,17 @@ server <- function(input, output, session) {
       DL <- data.frame(x4=13, y4=fpf[lfpf], y4min=y1, y4max=y2)
       labx <- expression(paste('frequency [day'^"-1",']', sep=''))
       g <- ggplot(data=data.frame(freq, fpf))
-      g <- g + geom_path (aes(x=freq, y=fpf, colour='spectrum')) +
-        xlab(labx) + ylab ('f P(f)') 
+      g <- g + geom_path (aes(x=freq, y=fpf, colour='spectrum'), na.rm=TRUE) + 
+               xlab(labx) + ylab (input$pvar)  
         if (input$errors) {
           g <- g + geom_errorbar(aes(x=x4, ymin=y4min, ymax=y4max), data=DL, width=0.05, 
-                                 size=1, colour='blue', inherit.aes=FALSE) +
-                   geom_point(data=DL, aes(x=x4, y=y4), pch=20, colour='blue', size=4)
+                                 size=1, colour='blue', inherit.aes=FALSE, na.rm=TRUE) +
+                   geom_point(data=DL, aes(x=x4, y=y4), pch=20, colour='blue', size=4, na.rm=TRUE)
         }
         # lines(c(13,13), (ci)*fpf[lfpf], lwd=2)
         # lines(c(12.7,13.3), c((ci[1])*fpf[lfpf], (ci[1])*fpf[lfpf]), lwd=2)
         # lines(c(12.7,13.3), c((ci[2])*fpf[lfpf], (ci[2])*fpf[lfpf]), lwd=2)
-        g <- g + scale_colour_manual (name='', values=cLines) +
+        g <- g + (scale_colour_manual (name='', values=cLines)) +
         scale_x_log10(breaks = trans_breaks("log10", function(x) 10^x, n=4), limits = xlim,
           labels = trans_format("log10", math_format(10^.x))) +
         scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x, n=5), limits = ylim,
@@ -284,7 +284,7 @@ server <- function(input, output, session) {
       lower.limit <- qchisq (pnorm(-siglim), df) / df
       upper.limit <- qchisq (pnorm(siglim), df) / df
       # ci <- 0.5 + (ci-0.5) / sqrt(9 * S2$segments / 11)
-      print (sprintf ('ci2=%.3f -- %.3f segments %d', ci[1], ci[2], S2$segments))
+      # print (sprintf ('ci2=%.3f -- %.3f segments %d', ci[1], ci[2], S2$segments))
       freq <- S2$frequency[-1]
       fpf <- S2$power[-1]
       if (input$pvar == 'fP(f)') {fpf <- fpf * freq}
@@ -300,8 +300,8 @@ server <- function(input, output, session) {
       }
       fpfmin <- (floor  (min(log10(fpf[freq >= 10^input$xrange[1] & freq <= 10^input$xrange[2]]), na.rm=TRUE)))
       fpfmax <- (ceiling(max(log10(fpf[freq >= 10^input$xrange[1] & freq <= 10^input$xrange[2]]), na.rm=TRUE)))
-      print (sprintf ('fpfmin/fpfmax=%.3f,%.3f', fpfmin, fpfmax))
-      print (summary(fpf))
+      # print (sprintf ('fpfmin/fpfmax=%.3f,%.3f', fpfmin, fpfmax))
+      # print (summary(fpf))
       if (fpfmax - fpfmin < 5) {fpfmin <- fpfmin - 1}
       if (fpfmax - fpfmin < 5) {fpfmax <- fpfmax + 1}
       if (fpfmax - fpfmin < 5) {fpfmin <- fpfmin - 1}
@@ -321,18 +321,18 @@ server <- function(input, output, session) {
         names(cLines) <- 'Welch'
         labx <- expression(paste('frequency [day'^"-1",']', sep=''))
         g <- ggplot(data=data.frame(freq, fpf))
-        g <- g + geom_path (aes(x=freq, y=fpf, colour='Welch')) +
-          xlab(labx) + ylab ('f P(f)')
+        g <- g + geom_path (aes(x=freq, y=fpf, colour='Welch'), na.rm=TRUE) +
+          xlab(labx) + ylab (input$pvar)
         if (input$errors) {
           g <- g + geom_errorbar(aes(x=x5, ymin=y5min, ymax=y5max), data=DL5, width=0.05, 
-                                 size=1, colour='forestgreen', inherit.aes=FALSE) +
+                                 size=1, colour='forestgreen', inherit.aes=FALSE, na.rm=TRUE) +
                    geom_point(data=DL5, aes(x=x5, y=y5), pch=20, colour='forestgreen', 
-                     size=4, inherit.aes=FALSE)
+                     size=4, inherit.aes=FALSE, na.rm=TRUE)
         }
           # lines(c(13,13), (ci)*fpf[lfpf], lwd=2)
           # lines(c(12.7,13.3), c((ci[1])*fpf[lfpf], (ci[1])*fpf[lfpf]), lwd=2)
           # lines(c(12.7,13.3), c((ci[2])*fpf[lfpf], (ci[2])*fpf[lfpf]), lwd=2)
-          g <- g + scale_colour_manual (name='', values=cLines) +
+          g <- g + (scale_colour_manual (name='', values=cLines)) +
           scale_x_log10(breaks = trans_breaks("log10", function(x) 10^x, n=4), limits = xlim,
             labels = trans_format("log10", math_format(10^.x))) +
           scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x, n=5), limits = ylim,
@@ -348,14 +348,14 @@ server <- function(input, output, session) {
         cLines <- c(cLines, 'forestgreen')
         names(cLines) <- c(ncl, 'Welch')
         DFB <- data.frame(freq, fpf)
-        g <- g + geom_path (aes(x=freq, y=fpf, colour='Welch'), data=DFB)
+        g <- g + geom_path (aes(x=freq, y=fpf, colour='Welch'), data=DFB, na.rm=TRUE)
         if (input$errors) {
           g <- g + geom_errorbar(aes(x=x5, ymin=y5min, ymax=y5max), data=DL5, width=0.05, 
-                                 size=1, colour='forestgreen', inherit.aes=FALSE) +
+                                 size=1, colour='forestgreen', inherit.aes=FALSE, na.rm=TRUE) +
                    geom_point(data=DL5, aes(x=x5, y=y5), pch=20, colour='forestgreen', 
-                              size=4, inherit.aes=FALSE)
+                              size=4, inherit.aes=FALSE, na.rm=TRUE)
         }
-        g <- g + scale_colour_manual (name='', values=cLines)
+        g <- g + (scale_colour_manual (name='', values=cLines))
         if (input$sbins2 > 10 && input$errors) {
           g <- g + geom_ribbon(data=bs2, aes(x=exp(xc), ymin=ybar-sigma, ymax=ybar+sigma), 
             fill='green', alpha=0.25, show.legend=FALSE, inherit.aes=FALSE, na.rm=TRUE)
@@ -391,8 +391,8 @@ server <- function(input, output, session) {
       y2 <- upper.limit * fpf[lfpf]
       DL6 <- data.frame(x6=15, y6=fpf[lfpf], y6min=y1, y6max=y2)
       DL7 <- data.frame(y7=fpf[lfpf]*50, x7min=freq[lfpf]*(10^(-10^input$resl)), x7max=freq[lfpf])
-      print (c('DL6', DL6))
-      print (c('DL7', DL7))
+      # print (c('DL6', DL6))
+      # print (c('DL7', DL7))
       if(input$sbins3 > 0) {
         bs3 <- binStats(data.frame(fpf, log(freq)), bins=input$sbins3)
         bs3 <- rbind (bs3, data.frame(xc=bs3$xc[nrow(bs3)], ybar=bs3$ybar[nrow(bs3)], 
@@ -404,8 +404,8 @@ server <- function(input, output, session) {
       }
       fpfmin <- (floor  (min(log10(fpf[freq >= 10^input$xrange[1] & freq <= 10^input$xrange[2]]), na.rm=TRUE)))
       fpfmax <- (ceiling(max(log10(fpf[freq >= 10^input$xrange[1] & freq <= 10^input$xrange[2]]), na.rm=TRUE)))
-      print (sprintf ('fpfmin/fpfmax=%.3f,%.3f', fpfmin, fpfmax))
-      print (summary(fpf))
+      # print (sprintf ('fpfmin/fpfmax=%.3f,%.3f', fpfmin, fpfmax))
+      # print (summary(fpf))
       if (fpfmax - fpfmin < 5) {fpfmin <- fpfmin - 1}
       if (fpfmax - fpfmin < 5) {fpfmax <- fpfmax + 1}
       if (fpfmax - fpfmin < 5) {fpfmin <- fpfmin - 1}
@@ -424,21 +424,21 @@ server <- function(input, output, session) {
         # DL3 <- data.frame(x3=c(13.7, 14.3), y3=c(y2,y2))
         labx <- expression(paste('frequency [day'^"-1",']', sep=''))
         g <- ggplot(data=data.frame(freq, fpf))
-        g <- g + geom_path (aes(x=freq, y=fpf, colour='MEM')) +
-          xlab(labx) + ylab ('f P(f)')
+        g <- g + geom_path (aes(x=freq, y=fpf, colour='MEM'), na.rm=TRUE) +
+          xlab(labx) + ylab (input$pvar)
         if (input$errors) {
           g <- g + geom_errorbar(aes(x=x6, ymin=y6min, ymax=y6max), data=DL6, width=0.04, 
-                                 size=1, colour='red', inherit.aes=FALSE) +
+                                 size=1, colour='red', inherit.aes=FALSE, na.rm=TRUE) +
                    geom_errorbarh(aes(y=y7, xmin=x7min, xmax=x7max), data=DL7, colour='red',
                                   height=0.4, inherit.aes=FALSE) +
-                   geom_point(data=DL6, aes(x=x6, y=y6), pch=20, colour='red', size=4)
+                   geom_point(data=DL6, aes(x=x6, y=y6), pch=20, colour='red', size=4, na.rm=TRUE)
         }
           # geom_errorbar(aes(x=x5, ymin=y5min, ymax=y5max), data=DL5, width=0.05, 
           #   size=1, colour='forestgreen', inherit.aes=FALSE) +
           # lines(c(13,13), (ci)*fpf[lfpf], lwd=2)
           # lines(c(12.7,13.3), c((ci[1])*fpf[lfpf], (ci[1])*fpf[lfpf]), lwd=2)
           # lines(c(12.7,13.3), c((ci[2])*fpf[lfpf], (ci[2])*fpf[lfpf]), lwd=2)
-         g <- g + scale_colour_manual (name='', values=cLines) +
+         g <- g + (scale_colour_manual (name='', values=cLines)) +
           scale_x_log10(breaks = trans_breaks("log10", function(x) 10^x, n=4), limits = xlim,
             labels = trans_format("log10", math_format(10^.x))) +
           scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x, n=5), limits = ylim,
@@ -455,17 +455,17 @@ server <- function(input, output, session) {
         cLines <- c(cLines, 'red')
         names(cLines) <- c(ncl, 'MEM')
         DFC <- data.frame(freq, fpf)
-        g <- g + geom_path (aes(x=freq, y=fpf, colour='MEM'), data=DFC)
+        g <- g + geom_path (aes(x=freq, y=fpf, colour='MEM'), data=DFC, na.rm=TRUE)
         if (input$errors) {
           # geom_errorbar(aes(x=x5, ymin=y5min, ymax=y5max), data=DL5, width=0.05, 
           #   size=1, colour='forestgreen', inherit.aes=FALSE) + 
           g <- g + geom_errorbar(aes(x=x6, ymin=y6min, ymax=y6max), data=DL6, width=0.04, 
-                                 size=1, colour='red', inherit.aes=FALSE) +
+                                 size=1, colour='red', inherit.aes=FALSE, na.rm=TRUE) +
                    geom_errorbarh(aes(y=y7, xmin=x7min, xmax=x7max), data=DL7, colour='red',
-                                  height=0.4, inherit.aes=FALSE) +
-                   geom_point(data=DL6, aes(x=x6, y=y6), pch=20, colour='red', size=4)
+                                  height=0.4, inherit.aes=FALSE, na.rm=TRUE) +
+                   geom_point(data=DL6, aes(x=x6, y=y6), pch=20, colour='red', size=4, na.rm=TRUE)
         }
-        g <- g + scale_colour_manual (name='', values=cLines)
+        g <- g + (scale_colour_manual (name='', values=cLines))
         if (input$sbins3 > 10 && input$errors) {
           g <- g + geom_ribbon(data=bs3, aes(x=exp(xc), ymin=ybar-sigma, ymax=ybar+sigma), 
             fill='red', alpha=0.25, show.legend=FALSE, inherit.aes=FALSE, na.rm=TRUE)
