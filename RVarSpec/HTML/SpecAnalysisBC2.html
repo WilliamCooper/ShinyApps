@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title>Spectral Analysis Notes</title>
+	<meta name="generator" content="LibreOffice 5.4.3.2 (Linux)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changedby" content="Al Cooper"/>
+	<meta name="changed" content="2017-11-27T07:39:13.690105193"/>
+	<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"/>
+	<meta name="src" content="SpecAnalysis.tex"/>
+	<!--l. 320-->
+</head>
+<body lang="en-US" dir="ltr">
+<p style="margin-bottom: 0in"><a name="x1-40011"></a><br/>
+
+</p>
+<br>
+<embed src="random-time-series-1.pdf" width="620" height="550">
+<br>
+<p>Figure&nbsp;1: Three time series of hourly values spanning one
+week. (top) A sequence of values generated using a Gaussian
+random-number generator producing deviations about a mean of 0 with a
+standard deviation of 1; (middle) Surface pressure measurements from
+Denver CO for one week; (bottom) Temperature measurements from Denver
+CO for one week.</p>
+<p><!--tex4ht:label?: x1-40011 --><!--l. 327--><!--l. 332-->Again for
+simplicity first focus on a time series. The plot shown above (Fig.&nbsp;<a href="#x1-40011">1)</a><!--tex4ht:ref: fig:random-time-series -->
+shows three time series that have very different character: 
+</p>
+<ol>
+	<li/>
+<p style="margin-bottom: 0in"><a name="x1-4003x1"></a>The top
+	series shows a series of values generated from random numbers
+	generated from a normal distribution having mean zero and unit
+	standard deviation. Knowing the preceding value of the variable does
+	not provide any information on the next measurement; sequential
+	measurements are completely uncorrelated. A similar series generated
+	using uniformly distributed random numbers between -1 and 1 looks
+	different because all values remain in the range from -1 to 1, but
+	the randomness of the values still provides no serial correlations
+	in the time series. Both ways of generating a time series produce
+	“white noise”, a term used to describe a signal where the
+	spectral density is a constant function of frequency and successive
+	values in the time series are uncorrelated. 
+	</p>
+	<li/>
+<p style="margin-bottom: 0in"><a name="x1-4005x2"></a>The
+	middle time series shows one week of sea-level pressure
+	measurements. There is strong correlation among the measurements,
+	such that knowledge of preceding measurements can be used to predict
+	the next measurement with less than the sample variance. 
+	</p>
+	<li/>
+<p><a name="x1-4007x3"></a>The bottom time series, temperature
+	measurements, shows evidence of a daily cycle in addition to
+	important serial correlations. The spectral variance should
+	highlight this daily cycle. (It will be present in the pressure
+	measurements also, although with less prominence.)</p>
+</ol>
+<p style="margin-bottom: 0in"><a name="x1-40082"></a><!--l. 358--></p>
+<p><br/>
+<br/>
+
+</p>
+</body>
+</html>

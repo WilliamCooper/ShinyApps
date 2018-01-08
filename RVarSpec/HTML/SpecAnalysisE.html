@@ -1,0 +1,172 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title>Spectral Analysis Notes</title>
+	<meta name="generator" content="LibreOffice 5.4.3.2 (Linux)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changedby" content="Al Cooper"/>
+	<meta name="changed" content="2017-12-05T08:43:46.161108552"/>
+	<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"/>
+	<meta name="src" content="SpecAnalysis.tex"/>
+	<style type="text/css">
+		h5.cjk { font-family: "Source Han Sans CN Regular" }
+		h5.ctl { font-family: "Lohit Devanagari" }
+	</style>
+</head>
+<body lang="en-US" dir="ltr">
+<p class="noindent"><br/>
+<br/>
+
+</p>
+<p class="noindent">The following provides estimates of the
+uncertainty in the spectral estimates that arise from each of the
+methods:<!--l. 703--> 
+</p>
+<h4 class="western"><a name="x1-100003.3"></a>Moving-average
+smoothing in “spectrum()”</h4>
+<p style="border-top: none; border-bottom: 1.10pt double #808080; border-left: none; border-right: none; padding: 0in">
+<!--l. 706--></p>
+<p style="margin-bottom: 0in"><a name="x1-100016"></a><img src="chisqPDF-1.png" name="Image1" align="left" width="432" height="360">
+  <br clear="left"/>
+</img>
+<br/>
+
+</p>
+<p>Figure&nbsp;6: Chisquare probability distribution function
+relative to and normalized by the mean, for various degrees of
+freedom. The red dotted lines denote values of 0.1587 and 0.8413, as
+would be appropriate for one-standard-deviation coverage, and the
+colored dots denote the corresponding limits for the distributions
+with 2 and 50 degrees of freedom (d.o.f.).</p>
+<p style="border-top: none; border-bottom: 1.10pt double #808080; border-left: none; border-right: none; padding: 0in">
+<!--tex4ht:label?: x1-100016 --><!--l. 713--></p>
+<p class="noindent"><a name="x1-10002f6"></a><!--l. 718-->The routine
+“spectrum()” returns an estimate of the degrees of freedom (<i><b>n</b></i><sub><i><b>f</b></i></sub>)
+associated with the individual values of the spectral density. The <i><b>χ</b></i><sup><i><b>2</b></i></sup>
+distribution associated with the individual values has mean value <i><b>n</b></i><sub><i><b>f</b></i></sub>,
+so the probability distribution function can be denoted as <i><b>P</b></i><sub><i><b>χ</b></i></sub><sup><i><b>2</b></i></sup><i><b>(n</b></i><sub><i><b>f</b></i></sub><i><b>.q)</b></i>
+where <i><b>q </b></i>is the value of the cumulative probability.
+<i><b>P</b></i><sub><i><b>χ</b></i></sub><sup><i><b>2</b></i></sup><i><b>(n</b></i><sub><i><b>f</b></i></sub><i><b>.q)
+</b></i>then represents the fraction of the distribution function
+with values smaller than <i><b>q</b></i>. <i><b>P</b></i><sub><i><b>χ</b></i></sub><sup><i><b>2</b></i></sup><i><b>(n</b></i><sub><i><b>f</b></i></sub><i><b>.q)
+</b></i>is provided by the R routine “pchisq()”. Figure&nbsp;<a href="#x1-100016">6</a><!--tex4ht:ref: fig:chisqPDF -->
+shows the calculated limits that correspond to one-standard-deviation
+coverage<a href="../SpecAnalysis.html.LyXconv/SpecAnalysis7.html#fn6x0">6</a>
+for several choices of <i><b>n</b></i><sub><i><b>f</b></i></sub>. To
+find the specified limits as denoted by the dot symbols in this
+figure, the R routine “qchisq()” can be used, as follows: 
+</p>
+<p class="noindent" style="margin-left: 0.39in; margin-bottom: 0in"><!--l. 734--><font face="monospace">##</font>&nbsp;<font face="monospace">df</font>&nbsp;<font face="monospace">denotes</font>&nbsp;<font face="monospace">the</font>&nbsp;<font face="monospace">degrees</font>&nbsp;<font face="monospace">of</font>&nbsp;<font face="monospace">freedom,</font>&nbsp;<font face="monospace">as</font>&nbsp;<font face="monospace">returned</font>&nbsp;<font face="monospace">by</font>&nbsp;“<font face="monospace">spectrum()”<!--l. 737--></font>
+</p>
+<p class="noindent" style="margin-left: 0.39in; margin-bottom: 0in"><font face="monospace">S</font>&nbsp;<font face="monospace">&lt;-</font>&nbsp;<font face="monospace">spectrum</font>&nbsp;<font face="monospace">(time.series,</font>&nbsp;<font face="monospace">span=spans)<!--l. 739--></font>
+</p>
+<p class="noindent" style="margin-left: 0.39in; margin-bottom: 0in"><font face="monospace">df</font>&nbsp;<font face="monospace">&lt;-</font>&nbsp;<font face="monospace">S$df<!--l. 741--></font>
+</p>
+<p class="noindent" style="margin-left: 0.39in; margin-bottom: 0in"><font face="monospace">siglim=1</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face="monospace">##</font>&nbsp;<font face="monospace">one-sigma</font>&nbsp;<font face="monospace">confidence</font>&nbsp;<font face="monospace">interval;</font>&nbsp;<font face="monospace">use</font>&nbsp;<font face="monospace">2</font>&nbsp;<font face="monospace">for</font>&nbsp;<font face="monospace">95%</font>&nbsp;<font face="monospace">instead<!--l. 743--></font>
+</p>
+<p class="noindent" style="margin-left: 0.39in; margin-bottom: 0in"><font face="monospace">##</font>&nbsp;<font face="monospace">Get</font>&nbsp;<font face="monospace">limits</font>&nbsp;<font face="monospace">that,</font>&nbsp;<font face="monospace">when</font>&nbsp;<font face="monospace">multiplied</font>&nbsp;<font face="monospace">by</font>&nbsp;<font face="monospace">estimate</font>&nbsp;<font face="monospace">of</font>&nbsp;<font face="monospace">spectral</font>&nbsp;<font face="monospace">density,<!--l. 745--></font>
+</p>
+<p class="noindent" style="margin-left: 0.39in; margin-bottom: 0in"><font face="monospace">##</font>&nbsp;<font face="monospace">give</font>&nbsp;<font face="monospace">the</font>&nbsp;<font face="monospace">confidence</font>&nbsp;<font face="monospace">interval.</font>&nbsp;<font face="monospace">(Mean</font>&nbsp;<font face="monospace">of</font>&nbsp;<font face="monospace">chisq</font>&nbsp;<font face="monospace">dist</font>&nbsp;<font face="monospace">is</font>&nbsp;<font face="monospace">df.)<!--l. 747--></font>
+</p>
+<p class="noindent" style="margin-left: 0.39in; margin-bottom: 0in"><font face="monospace">lower.limit</font>&nbsp;<font face="monospace">&lt;-</font>&nbsp;<font face="monospace">qchisq</font>&nbsp;<font face="monospace">(pnorm(-siglim),</font>&nbsp;<font face="monospace">df)</font>&nbsp;<font face="monospace">/</font>&nbsp;<font face="monospace">df<!--l. 749--></font>
+</p>
+<p class="noindent" style="margin-left: 0.39in; margin-bottom: 0in"><font face="monospace">upper.limit</font>&nbsp;<font face="monospace">&lt;-</font>&nbsp;<font face="monospace">qchisq</font>&nbsp;<font face="monospace">(pnorm(siglim),</font>&nbsp;<font face="monospace">df)</font>&nbsp;<font face="monospace">/</font>&nbsp;<font face="monospace">df</font></p>
+<p class="noindent" style="margin-left: 0.39in; margin-bottom: 0in"><br/>
+
+</p>
+<p class="noindent"><!--l. 751-->These are the limits used to plot
+the error bars in the preceding plots. Because the upper and lower
+limits are asymmetric relative to the mean, a dot is plotted at the
+mean value. On the logarithmic ordinate axis, this error bar applies
+to all estimates of the spectral variance because it scales
+appropriately with changes in magnitude of the estimates. 
+</p>
+<h4 class="western"><a name="x1-110003.3"></a>Segmenting</h4>
+<p class="noindent" style="margin-bottom: 0in"><!--l. 760-->For the
+case where the variance is reduced by combining the results from many
+segments, the reduction in variance was discussed by Welch in “Modern
+Spectrum Analysis”. The confidence interval discussed for the
+preceding case will apply, but the degrees of freedom applicable to
+the segmented case will be different. Welch shows that the effective
+degrees of freedom will be 
+</p>
+<table width="129" cellpadding="2" cellspacing="0">
+	<col width="89">
+	<col width="32">
+	<tr>
+		<td width="89" style="border: none; padding: 0in">
+			<p align="center"><a name="x1-11001r10"></a><img src="SpecAnalysis14a.png" name="Image17" alt="nf ≈ 2.8N Δf" align="bottom" width="86" height="17" border="0"/>
+</p>
+		</td>
+		<td width="32" style="border: none; padding: 0in">
+			<p>(10)</p>
+		</td>
+	</tr>
+</table>
+<p class="nopar" style="margin-bottom: 0in"><a name="x1-11002f7"></a><!--l. 768-->where
+N is the number of measurements in the time series and <i><b>Δf </b></i>is
+the half-power width of the window used, which for the Parzen window
+is typically about 1.28/(L+1) where L is the length of the individual
+(overlapping) segments.<a href="../SpecAnalysis.html.LyXconv/SpecAnalysis8.html#fn7x0">7</a>
+When overlapped, there are <i><b>k = (2N∕L)-1 </b></i>segments. The
+degrees of freedom then are</p>
+<table width="278" cellpadding="2" cellspacing="0">
+	<col width="237">
+	<col width="32">
+	<tr>
+		<td width="237" style="border: none; padding: 0in">
+			<p align="center"><a name="x1-11003r11"></a><img src="SpecAnalysis15a.png" name="Image18" alt="     2.8(k+ 1 )L1.28nf ≈ --------------- ≈ 1.46(k+ 1)         2(L+ 1)" align="bottom" width="235" height="40" border="0"/>
+</p>
+		</td>
+		<td width="32" style="border: none; padding: 0in">
+			<p>(11)</p>
+		</td>
+	</tr>
+</table>
+<p class="nopar"><!--l. 777-->for L much larger than 1. The variance
+of a chisquare distribution is <i><b>2n</b></i><sub><i><b>f</b></i></sub>
+and the mean is <i><b>n</b></i><sub><i><b>f</b></i></sub>, so the
+estimated standard uncertainty in the estimate of the spectral
+variance is 
+<img src="SpecAnalysis16a.png" name="Image19" alt="∘  -----   2∕nf" align="bottom" width="51" height="21" border="0"/>
+
+≈ <i><b>1.17</b></i>∕<img src="SpecAnalysis17a.png" name="Image20" alt="√ -----  k + 1" align="bottom" width="58" height="18" border="0"/>
+.
+An alternate approximate reduction in the variance of the estimate of
+spectral variance is by a factor of <i><b>11</b></i>∕<i><b>(9k) </b></i>or
+<i><b>1.22</b></i>∕<i><b>k</b></i>; this would correspond to a
+reduction in the estimated standard uncertainty of <i><b>1.11</b></i>∕<img src="SpecAnalysis18a.png" name="Image21" alt="√ --  k" align="bottom" width="37" height="17" border="0"/>
+.
+In the calculations of this note and the associated Shiny app, the
+confidence interval determined using the degrees of freedom in (<a href="#x1-11003r11">11</a><!--tex4ht:ref: eq:dof2 -->)
+is used with the R code in the preceding code segment. 
+</p>
+<h4 class="western"><a name="x1-120003.3"></a>Maximum entropy</h4>
+<p class="noindent"><!--l. 791-->For a reasonably smooth variance
+spectrum, the degrees of freedom for the maximum-entropy estimator
+discussed in Sect.&nbsp;3.4 is estimated as <i><b>n</b></i><sub><i><b>f</b></i></sub>
+<i><b>= N∕n</b></i><sub><i><b>p</b></i></sub> where <i><b>N </b></i>is
+the number of points in the time series and <i><b>n</b></i><sub><i><b>p</b></i></sub>
+is the number of poles used to represent the spectrum. The confidence
+interval is determined from <i><b>n</b></i><sub><i><b>f</b></i></sub>
+as for the other cases. This estimate of the uncertainty depends on
+the structure of the variance spectrum and is not characterized well
+here, so this needs more work.<!--l. 800--> 
+</p>
+<h4 class="western"><a name="x1-130003.3"></a>Bin averaging</h4>
+<p class="noindent"><!--l. 802-->Bin averaging can be applied to any
+of the preceding estimates to reduce the variance of the estimates
+still further. There are two ways this could be calculated: (i) The
+standard uncertainty as obtained above could be reduced by division
+by the square root of the number of estimates in each bin; or (ii)
+The standard deviation can be calculated from the estimates that are
+averaged together in the bin. For a smooth spectrum, these should
+produce equivalent estimates, but if there are significant spectral
+features in the bin then the second method would produce a larger
+estimate because there will be extra variance in the estimates within
+the bin. The ribbons plotted in the preceding plots of the variance
+spectra and in the associated Shiny app are therefore calculated
+using the second method.</p>
+</body>
+</html>

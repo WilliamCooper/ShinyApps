@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title>Spectral Analysis Notes</title>
+	<meta name="generator" content="LibreOffice 5.4.3.2 (Linux)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changedby" content="Al Cooper"/>
+	<meta name="changed" content="2017-11-27T07:40:48.099778367"/>
+	<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"/>
+	<meta name="src" content="SpecAnalysis.tex"/>
+	<style type="text/css">
+		h3.cjk { font-family: "Source Han Sans CN Regular" }
+		h3.ctl { font-family: "Lohit Devanagari" }
+	</style>
+</head>
+<body lang="en-US" dir="ltr">
+<p style="margin-bottom: 0in"><a name="x1-40093"></a><br/>
+
+</p>
+<br>
+<embed src="varspec-1.pdf" width="620" height="550">
+<br>
+<p>Figure&nbsp;3: Variance spectra corresponding to the three cases
+presented in the preceding two figures. The dotted-black vertical
+lines mark the frequency corresponding to a period of one year. The
+white line in all plot is the result of averaging in 50
+logarithmically spaced bins in frequency. In the middle plot for
+pressure, the red line shows the corresponding averaged spectrum
+constructed from the altimeter setting, with appropriate change of
+units.</p>
+<p><!--tex4ht:label?: x1-40093 --><!--l. 394--><!--l. 399-->The
+autocovariance function (the autocorrelation multiplied by the total
+variance) is related to the variance spectrum; they are Fourier
+transforms of each other. The variance spectra are shown in Fig.&nbsp;<a href="#x1-40093">3</a><!--tex4ht:ref: fig:varspec -->.
+The variance spectrum for white noise, shown in the top plot, is a
+constant function of frequency, but there is considerable variability
+in the estimated spectral variance because of uncertainty in the
+individual estimates. The white dashed line in that plot shows the
+result of averaging in bins to reduce that uncertainty, and where the
+uncertainty is small (for frequencies above about 0.1 day<sup>-1</sup>)
+the spectral variance has a value of about 0.083. The standard
+deviation of the values producing this spectrum is 1, so the expected
+value of the spectral variance is 1/12=0.08333. This relationship can
+sometimes be used to estimate the random error in a measurement,
+because a random error of σ will produce a constant contribution to
+the spectral variance of σ<sup>2</sup>∕12. In cases where the
+high-frequency portion of the spectral variance assumes a constant
+value, the random error can thus be determined from the spectral
+variance there.<!--l. 417--> 
+</p>
+<p><a name="x1-4010f3"></a><a name="x1-4011f4"></a>The middle plot
+shows the variance spectrum for hourly measurements of sea-level
+pressure and, as the red dashed line, the altimeter setting. There
+are prominent spikes in the unaveraged spectrum with frequencies
+corresponding to (1/24)&nbsp;h<sup>-1</sup> and multiples of this
+frequency extending to at least ten times this frequency. These arise
+from the atmospheric tides of the diurnal cycle, which instead of a
+simple sine wave must instead be represented by many “harmonics”
+of the basic frequency.<a href="SpecAnalysis4.html#fn3x0">3</a> The
+annual cycle also makes a prominent contribution to the spectral
+variance. Unlike the sea-level pressure, the altimeter setting is not
+adjusted by averaging the temperature from the previous 12 h to use
+for extrapolation to sea level. The higher variance in the sea-level
+pressure suggests that the altimeter setting is a better variable to
+use for spectral analysis, even though it is recorded with lower
+resolution (0.01&nbsp;inHg or 0.3&nbsp;hPa vs 0.1&nbsp;hPa for the
+sea-level pressure).<a href="SpecAnalysis5.html#fn4x0">4</a> In the
+case of the measurements of temperature, the diurnal cycle is very
+prominent (before averaging) and the contribution from the annual
+cycle is concentrated more on the period of 365.25 days. 
+</p>
+<h3 class="western"><br/>
+<br/>
+
+</h3>
+</body>
+</html>

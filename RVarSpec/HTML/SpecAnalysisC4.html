@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title>Spectral Analysis Notes</title>
+	<meta name="generator" content="LibreOffice 5.4.3.2 (Linux)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changedby" content="Al Cooper"/>
+	<meta name="changed" content="2017-11-26T12:38:12.237999761"/>
+	<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"/>
+	<meta name="src" content="SpecAnalysis.tex"/>
+</head>
+<body lang="en-US" dir="ltr">
+<p><br/>
+<br/>
+
+</p>
+<p><!--l. 591-->An alternative to the traditional FFT approach is
+provided by the algorithm developed by Burg and sometimes called the
+maximum entropy method (MEM). A numerical approach, described in
+detail in “Numerical Recipes in C”, won’t be discussed here. An
+R routine that calculates the spectral variance is contained in the
+“Ranadu” package in the file “mem.R”. That file contains two
+functions, one for generating the coefficients that represent the
+spectrum and the other for evaluating the spectrum at a specific
+frequency using those coefficients. The following section of R code
+illustrates how these functions are used, and Fig.&nbsp;<a href="#x1-90016">6</a><!--tex4ht:ref: fig:mem -->
+shows an example. 
+</p>
+<p style="margin-bottom: 0in"><a name="colorbox186"></a><a name="colorbox188"></a><a name="textcolor7"></a><a name="textcolor8"></a><a name="textcolor9"></a><a name="textcolor10"></a><a name="textcolor11"></a><a name="textcolor12"></a><a name="textcolor13"></a><a name="textcolor14"></a><a name="textcolor15"></a><a name="textcolor16"></a><a name="textcolor17"></a><a name="textcolor18"></a><a name="textcolor19"></a><a name="textcolor20"></a><a name="textcolor21"></a><a name="textcolor22"></a><a name="textcolor23"></a><a name="textcolor24"></a><a name="textcolor25"></a><a name="textcolor26"></a><a name="textcolor27"></a><a name="textcolor28"></a><a name="textcolor29"></a><a name="textcolor30"></a><a name="textcolor31"></a><a name="textcolor32"></a><a name="textcolor33"></a><a name="textcolor34"></a><a name="textcolor35"></a><a name="textcolor36"></a><a name="textcolor37"></a><a name="textcolor38"></a><a name="textcolor39"></a><a name="textcolor40"></a><a name="textcolor41"></a><a name="textcolor42"></a><a name="textcolor43"></a><a name="textcolor44"></a><a name="textcolor45"></a><a name="textcolor46"></a><a name="textcolor47"></a><a name="textcolor48"></a><a name="textcolor49"></a><a name="textcolor50"></a><a name="textcolor51"></a><a name="textcolor52"></a><a name="textcolor53"></a><a name="textcolor54"></a><a name="textcolor55"></a><a name="textcolor56"></a><a name="textcolor57"></a><a name="textcolor58"></a><a name="textcolor59"></a><a name="textcolor60"></a><a name="textcolor61"></a><a name="textcolor62"></a><a name="textcolor63"></a><a name="textcolor64"></a><a name="textcolor65"></a><a name="textcolor66"></a><a name="textcolor67"></a><a name="textcolor68"></a><a name="textcolor69"></a><a name="textcolor70"></a><a name="textcolor71"></a><a name="textcolor72"></a><a name="textcolor73"></a><a name="textcolor74"></a><a name="textcolor75"></a><a name="textcolor76"></a><a name="textcolor77"></a><a name="textcolor78"></a><a name="textcolor79"></a><a name="textcolor80"></a><a name="textcolor81"></a><a name="textcolor82"></a><a name="textcolor83"></a><a name="textcolor84"></a><a name="textcolor85"></a><a name="textcolor86"></a><a name="textcolor87"></a><a name="textcolor88"></a><a name="textcolor89"></a><a name="textcolor90"></a><a name="textcolor91"></a><a name="textcolor92"></a><a name="textcolor93"></a><a name="textcolor94"></a><a name="textcolor95"></a><a name="textcolor96"></a><a name="textcolor97"></a><a name="textcolor98"></a><a name="textcolor99"></a><a name="textcolor100"></a><a name="textcolor101"></a><a name="textcolor102"></a><a name="textcolor103"></a><a name="textcolor104"></a><a name="textcolor105"></a><a name="textcolor106"></a><a name="textcolor107"></a><a name="textcolor108"></a><a name="textcolor109"></a><a name="textcolor110"></a><a name="textcolor111"></a><a name="textcolor112"></a><a name="textcolor113"></a><a name="textcolor114"></a><a name="textcolor115"></a><a name="textcolor116"></a><a name="textcolor117"></a><a name="textcolor118"></a><a name="textcolor119"></a><a name="textcolor120"></a><a name="textcolor121"></a><a name="textcolor122"></a><a name="textcolor123"></a><a name="textcolor124"></a><a name="textcolor125"></a><a name="textcolor126"></a><a name="textcolor127"></a><a name="textcolor128"></a><a name="textcolor129"></a><a name="textcolor130"></a><a name="textcolor131"></a><a name="textcolor132"></a><a name="textcolor133"></a><a name="textcolor134"></a><a name="textcolor135"></a><a name="textcolor136"></a><a name="textcolor137"></a><a name="textcolor138"></a><a name="textcolor139"></a><a name="textcolor140"></a><a name="textcolor141"></a><a name="textcolor142"></a><a name="textcolor143"></a><a name="textcolor144"></a><a name="textcolor145"></a><a name="textcolor146"></a><a name="textcolor147"></a><a name="textcolor148"></a><a name="textcolor149"></a><a name="textcolor150"></a><a name="textcolor151"></a><a name="textcolor152"></a><a name="textcolor153"></a><a name="textcolor154"></a><a name="textcolor155"></a><a name="textcolor156"></a><a name="textcolor157"></a><a name="textcolor158"></a><a name="textcolor159"></a><a name="textcolor160"></a><a name="textcolor161"></a><a name="textcolor162"></a><a name="textcolor163"></a><a name="textcolor164"></a><a name="textcolor165"></a><a name="textcolor166"></a><a name="textcolor167"></a><a name="textcolor168"></a><a name="textcolor169"></a><a name="textcolor170"></a><a name="textcolor171"></a><a name="textcolor172"></a><a name="textcolor173"></a><a name="textcolor174"></a><a name="textcolor175"></a><a name="textcolor176"></a><a name="textcolor177"></a><a name="textcolor178"></a><a name="textcolor179"></a><a name="textcolor180"></a><a name="textcolor181"></a><a name="textcolor182"></a><a name="textcolor183"></a>
+<!--l. 604-->##&nbsp;This&nbsp;needs&nbsp;lib(Ranadu),&nbsp;loaded&nbsp;earlier
+<br/>
+##&nbsp;The&nbsp;data.frame&nbsp;DIA&nbsp;was&nbsp;generated&nbsp;previously&nbsp;from&nbsp;the&nbsp;hourly&nbsp;observations.
+<br/>
+##&nbsp;The&nbsp;sea-level&nbsp;pressure&nbsp;is&nbsp;saved&nbsp;in&nbsp;the&nbsp;variable&nbsp;SLVP.
+<br/>
+##&nbsp;Replace&nbsp;missing&nbsp;values&nbsp;by&nbsp;interpolation:
+<br/>
+SLVP&nbsp;&lt;-&nbsp;SmoothInterp&nbsp;(DIA$SLVP,&nbsp;.Length=0)&nbsp;&nbsp;##&nbsp;.Length=0&nbsp;suppresses&nbsp;smoothing
+<br/>
+SLVP[83304]&nbsp;&lt;-&nbsp;SLVP[83303]&nbsp;&nbsp;##&nbsp;the&nbsp;last&nbsp;value&nbsp;has&nbsp;a&nbsp;false&nbsp;0,&nbsp;so&nbsp;replace&nbsp;it
+<br/>
+MEMc50&nbsp;&lt;-&nbsp;memCoef&nbsp;(SLVP,&nbsp;.poles=50)
+<br/>
+MEMc300&nbsp;&lt;-&nbsp;memCoef&nbsp;(SLVP,&nbsp;.poles=300)
+<br/>
+lf&nbsp;&lt;-&nbsp;seq(-2,&nbsp;1,&nbsp;by=0.00001)
+<br/>
+freq&nbsp;&lt;-&nbsp;10^lf <br/>
+Rate&nbsp;&lt;-&nbsp;24
+<br/>
+Pmem&nbsp;&lt;-&nbsp;memEstimate&nbsp;(freq/Rate,&nbsp;MEMc300)&nbsp;/&nbsp;Rate
+<br/>
+Pmem50&nbsp;&lt;-&nbsp;memEstimate&nbsp;(freq/Rate,&nbsp;MEMc50)&nbsp;/&nbsp;Rate
+<br/>
+Pmem&nbsp;&lt;-&nbsp;2&nbsp;*&nbsp;Rate&nbsp;*&nbsp;Mod(Pmem)^2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;##&nbsp;The&nbsp;returned&nbsp;spectrum&nbsp;is&nbsp;complex
+<br/>
+Pmem50&nbsp;&lt;-&nbsp;2&nbsp;*&nbsp;Rate&nbsp;*&nbsp;Mod(Pmem50)^2
+<br/>
+plot(freq,&nbsp;Pmem,&nbsp;type='l',&nbsp;log='xy',&nbsp;col='blue',&nbsp;lwd=2,
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ylim=c(1.e-2,&nbsp;1.e3),&nbsp;xlim=c(1.e-2,10),&nbsp;xlab='frequency&nbsp;[/day]',
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ylab='fP(f)')
+<br/>
+lines(freq,&nbsp;Pmem50,&nbsp;col='forestgreen',&nbsp;lwd=2)
+<br/>
+legend('topright',&nbsp;legend=c('50&nbsp;poles',&nbsp;'300&nbsp;poles'),
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;col=c('forestgreen',&nbsp;'blue'),&nbsp;lwd=c(2,2))
+</p>
+<p>-<!--l. 627--> 
+</p>
+<hr/>
+
+<p style="margin-bottom: 0in"><a name="x1-90016"></a><br/>
+
+</p>
+<br>
+<embed src="mem-1.pdf" width="620" height="550">
+<br>
+<p>Figure&nbsp;6: Variance spectrum generated by the maximum-entropy
+algorithm, for the same time series shown in the previous three
+plots. The blue-line spectrum is that obtained using 300 poles, while
+the green-line spectrum was obtained using 50 poles. Both were
+evaluated at 300,000 frequencies from 0.01 to 10 day<sup>-1</sup>.</p>
+<p style="border-top: none; border-bottom: 1.10pt double #808080; border-left: none; border-right: none; padding: 0in">
+<!--tex4ht:label?: x1-90016 --><!--l. 634--></p>
+<p><!--l. 641-->No smoothing has been applied to this variance
+spectrum, but it still appears smooth. Smoothing is accomplished by
+using a smaller number of poles. Sometimes spectral features, like
+those of the diurnal cycle, can be very sharp, so it is necessary to
+use high resolution and a modest number of poles (&gt;100) in
+searches for such features. In this case, using 50 poles for example
+produces the smoothed spectrum shown as the dashed green line that
+misses the diurnal-cycle peak entirely, even with fine-resolution
+evaluation. Evaluation with large numbers of poles (e.g., &gt;400)
+can require an impractically long processing time. 
+</p>
+<p><br/>
+<br/>
+
+</p>
+</body>
+</html>

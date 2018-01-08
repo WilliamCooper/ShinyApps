@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title>Spectral Analysis Notes</title>
+	<meta name="generator" content="LibreOffice 5.4.3.2 (Linux)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changedby" content="Al Cooper"/>
+	<meta name="changed" content="2017-12-05T10:54:37.790035967"/>
+	<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"/>
+	<meta name="src" content="SpecAnalysis.tex"/>
+	<style type="text/css">
+		h3.cjk { font-family: "Source Han Sans CN Regular" }
+		h3.ctl { font-family: "Lohit Devanagari" }
+		h5.cjk { font-family: "Source Han Sans CN Regular" }
+		h5.ctl { font-family: "Lohit Devanagari" }
+	</style>
+</head>
+<body lang="en-US" dir="ltr">
+<h5 class="western"><a name="x1-150003.4"></a>Additional Information
+and Credits</h5>
+<p class="noindent"><!--l. 887-->The associated shiny app is
+available here: <a href="https://williamcooper.shinyapps.io/VarSpec">https://williamcooper.shinyapps.io/VarSpec</a>.
+By default, that application displays the code used, either at the
+right side of the display or below it, and the location can be
+changed by an action button with that display. The shiny app and the
+LyX code for this memo are available at
+<a href="https://github.com/WilliamCooper/ShinyApps/VarSpec">https://github.com/WilliamCooper/ShinyApps/VarSpec</a>.<!--l. 893-->
+</p>
+<p class="noindent"><a name="Q1-1-23"></a>The calculation reported
+here used R (<a href="#XRlanguage">R Core Team</a>&nbsp;[<a href="#XRlanguage">2016</a>]),
+with RStudio (<a href="#XRStudio2012">RStudio</a>&nbsp;[<a href="#XRStudio2012">2009</a>]),
+the knitr (<a href="#XXie2014a">Xie</a>&nbsp;[<a href="#XXie2014a">2013</a>,&nbsp;<a href="#XXie2014b">2014</a>])
+package, and the shiny application package (<a href="#XShiny2017">Chang
+et&nbsp;al.</a>&nbsp;[<a href="#XShiny2017">2017</a>]). The Welch
+method of segmentation used the bspec package (<a href="#Xbspec2011">Roever
+et&nbsp;al.</a>&nbsp;[<a href="#Xbspec2011">2011</a>]). The
+spectrum()” function is part of core R as cited above and was used
+to generate many of the variance spectra. Data files in netCDF format
+have been read and written using the R package “ncdf4”;
+cf.&nbsp;<a href="#Xncdf4">Pierce</a>&nbsp;[<a href="#Xncdf4">2015</a>].
+Substantial use also was made of the ggplot2 package (<a href="#Xwickham2009">Wickham</a>&nbsp;[<a href="#Xwickham2009">2009</a>])
+for R. The R package “Ranadu”
+[http://github.com/WilliamCooper/Ranadu] was used extensively. The
+hourly surface observations are from this source: National Climatic
+Data Center/NESDIS/NOAA/U.S. Department of Commerce. 1983. NCDC TD14
+and TD3280 U.S. Surface Airway Hourly Observations, 1938(1948)-2005.
+Research Data Archive at the National Center for Atmospheric
+Research, Computational and Information Systems Laboratory.
+http://rda.ucar.edu/datasets/ds470.0/. Accessed 17 Nov 2017.
+Additional information regarding the generation of variance spectra
+and especially the associated uncertainties was obtained from
+<a href="#Xchilders1978modern">Childers</a>&nbsp;[<a href="#Xchilders1978modern">1978</a>].<!--l. 1-->
+</p>
+<h3 class="western"><a name="x1-160003.4"></a>References</h3>
+<p class="bibitem" style="margin-bottom: 0in"><a name="XShiny2017"></a>
+<!--l. 1-->&nbsp;&nbsp;&nbsp;Winston Chang, Joe Cheng, JJ&nbsp;Allaire,
+Yihui Xie, and Jonathan McPherson. <i>shiny: Web</i> <i>Application
+Framework for R</i>, 2017. URL
+<a href="https://CRAN.R-project.org/package=shiny"><font face="monospace">https://CRAN.R-project.org/package=shiny</font></a>.
+R package version 1.0.3. 
+</p>
+<p class="bibitem" style="margin-bottom: 0in"><a name="Xchilders1978modern"></a>
+&nbsp;&nbsp;&nbsp;D.G. Childers. <i>Modern spectrum analysis</i>.
+IEEE Press selected reprint series. IEEE Press : sole worldwide
+distributor (exclusive of IEEE), Wiley, 1978. URL
+<a href="https://books.google.com/books?id=bZFRAAAAMAAJ"><font face="monospace">https://books.google.com/books?id=bZFRAAAAMAAJ</font></a>.
+</p>
+<p class="bibitem" style="margin-bottom: 0in"><a name="Xncdf4"></a>&nbsp;&nbsp;&nbsp;David
+Pierce. <i>ncdf4: Interface to Unidata netCDF (Version 4 or Earlier)
+Format Data Files</i>, 2015. URL
+<a href="https://CRAN.R-project.org/package=ncdf4"><font face="monospace">https://CRAN.R-project.org/package=ncdf4</font></a>.
+R package version 1.15. 
+</p>
+<p class="bibitem" style="margin-bottom: 0in"><a name="XRlanguage"></a>
+&nbsp;&nbsp;&nbsp;R Core Team. <i>R: A language and environment for
+statistical computing</i>. R Foundation for Statistical Computing,
+Vienna, Austria, 2016. URL <a href="http://www.R-project.org/"><font face="monospace">http://www.R-project.org</font></a>.
+</p>
+<p class="bibitem" style="margin-bottom: 0in"><a name="Xbspec2011"></a>
+&nbsp;&nbsp;&nbsp;Christian Roever, Renate Meyer, and Nelson
+Christensen. Modelling coloured residual noise in gravitational-wave
+signal processing. <i>Classical and Quantum Gravity</i>,
+28(1):015010, 2011. See also arXiv preprint 0804.3853, URL
+http://arxiv.org/abs/0804.3853. 
+</p>
+<p class="bibitem" style="margin-bottom: 0in"><a name="XRStudio2012"></a>
+&nbsp;&nbsp;&nbsp;RStudio. <i>RStudio: Integrated development
+environment for R (Version 0.98.879)</i>, 2009. URL
+<a href="http://www.rstudio.org/"><font face="monospace">http://www.rstudio.org</font></a>.
+</p>
+<p class="bibitem" style="margin-bottom: 0in"><a name="Xwickham2009"></a>
+&nbsp;&nbsp;&nbsp;H.&nbsp;Wickham. <i>ggplot2: elegant graphics for
+data analysis</i>. Springer New York, 2009. ISBN 978-0-387-98140-6.
+URL <a href="http://had.co.nz/ggplot2/book"><font face="monospace">http://had.co.nz/ggplot2/book</font></a>.
+</p>
+<p class="bibitem" style="margin-bottom: 0in"><a name="XXie2014a"></a>
+&nbsp;&nbsp;&nbsp;Y.&nbsp;Xie. <i>Dynamic Documents with R and knitr</i>.
+Chapman and Hall/CRC, Boca Raton, Florida, 2013. URL
+<a href="http://yihui.name/knitr/"><font face="monospace">http://yihui.name/knitr/</font></a>.
+ISBN 978-1482203530. 
+</p>
+<p class="bibitem" style="margin-bottom: 0in"><a name="XXie2014b"></a>
+&nbsp;&nbsp;&nbsp;Y.&nbsp;Xie. <i>knitr: A general-purpose package
+for dynamic report generation in R</i>, 2014. URL
+<a href="http://yihui.name/knitr/"><font face="monospace">http://yihui.name/knitr/</font></a>.
+R package version 1.6. 
+</p>
+</body>
+</html>

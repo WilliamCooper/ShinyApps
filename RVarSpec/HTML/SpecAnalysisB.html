@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title>Spectral Analysis Notes</title>
+	<meta name="generator" content="LibreOffice 5.4.3.2 (Linux)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changedby" content="Al Cooper"/>
+	<meta name="changed" content="2017-11-26T09:29:46.239324327"/>
+	<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"/>
+	<meta name="src" content="SpecAnalysis.tex"/>
+</head>
+<body lang="en-US" dir="ltr">
+<p class="noindent" style="margin-bottom: 0in">The variance spectrum
+can be regarded as the derivative of the cumulative variance function
+(CV). To simplify the discussion, consider a special case of a time
+series, maybe the measurements at discrete times of a component of
+the wind at a fixed location. The natural decomposition is then in
+terms of frequency <i><b>ν</b></i>, and the cumulative variance
+function can be defined as the contributions to the total variance in
+the measurements from contributions from frequencies smaller than <i><b>ν</b></i>:
+</p>
+<center>
+	<table width="188" cellpadding="2" cellspacing="0">
+		<col width="156">
+		<col width="24">
+		<tr>
+			<td width="156" style="border: none; padding: 0in">
+				<p align="left"><a name="x1-1001r1"></a><img src="SpecAnalysis0x.png" name="Image1" alt="         ∫ νCV (ν ) =    P(ν′)dν′          0" align="bottom" width="154" height="37" border="0"/>
+</p>
+			</td>
+			<td width="24" style="border: none; padding: 0in">
+				<p align="left">(1)</p>
+			</td>
+		</tr>
+	</table>
+</center>
+<p class="noindent"><!--l. 218--><!--l. 220-->Here <i><b>P(ν) </b></i>is
+the derivative of CV and is the variance spectrum. In some specified
+interval <i><b>δν </b></i>about <i><b>ν</b></i>, the contribution
+to the variance is <i><b>P(ν)δν</b></i>. It is usually the case
+that observations can only provide estimates of <i><b>P(ν) </b></i>for
+discrete frequencies, but generalization to infinitesimally spaced
+frequencies allows us in concept to regard <i><b>P(ν) </b></i>as a
+continuous function. When extended to infinitely large frequency, (1)
+shows that the integral of the variance spectrum will give the total
+variance, which is the limit of CV<i><b>(ν) </b></i>as <i><b>ν</b></i>
+tends to infinity.<!--l. 230--> 
+</p>
+<p class="noindent" style="margin-bottom: 0in">Representing the
+variance spectrum as the derivative of (1) has the additional benefit
+that transformation to representations in terms of other variables is
+straightforward. For example, if the time series arises from repeated
+measurements from a moving platform like an aircraft, and if the air
+is at rest, the wavelength <i><b>λ</b></i> of a fluctuation is
+related to the frequency of that fluctuation by <i><b>λν = V </b></i>where
+V is the speed of the moving platform. Then another variance
+“spectrum” (in quotes because this is no longer the
+representation of the variance in terms of frequency, as implied by
+“spectrum”) can be defined as <i><b>P</b></i><sub><i><b>λ</b></i></sub><i><b>(λ)
+</b></i>such that 
+</p>
+<center>
+	<table width="206" cellpadding="2" cellspacing="0">
+		<col width="174">
+		<col width="24">
+		<tr>
+			<td width="174" style="border: none; padding: 0in">
+				<p align="center"><a name="x1-1002r2"></a><img src="SpecAnalysis1x.png" name="Image2" alt="            ∞∫CV (V∕λ ) =   Pλ(λ ′)dλ ′            λ" align="bottom" width="172" height="53" border="0"/>
+</p>
+			</td>
+			<td width="24" style="border: none; padding: 0in">
+				<p>(2)</p>
+			</td>
+		</tr>
+	</table>
+</center>
+<p class="noindent" style="margin-bottom: 0in"><!--l. 243--><!--l. 245-->Differentiating
+(1) and (2) at corresponding values of <i><b>λ </b></i>and <i><b>ν
+= V∕λ </b></i>leads to the relationship between the spectral
+densities in terms of frequency and of wavelength:</p>
+<center>
+	<table width="287" cellpadding="2" cellspacing="0">
+		<col width="255">
+		<col width="24">
+		<tr>
+			<td width="255" style="border: none; padding: 0in">
+				<p align="center"><a name="x1-1003r3"></a><img src="SpecAnalysis2x.png" name="Image3" alt="        dCV     dCV  dν          VPλ(λ) = -----=  --------= - P(ν )-2-         dλ      dν  dλ          λ" align="bottom" width="252" height="35" border="0"/>
+</p>
+			</td>
+			<td width="24" style="border: none; padding: 0in">
+				<p>(3)</p>
+			</td>
+		</tr>
+	</table>
+</center>
+<p class="noindent" style="margin-bottom: 0in"><!--l. 250--><!--l. 252-->Another
+useful relationship can be obtained by expressing the cumulative
+variance function in terms of the logarithm of the frequency. Then,
+to avoid the infinity that arises at zero frequency, express the
+cumulative variance from some minimum frequency <i><b>ν</b></i><sub><i><b>min</b></i></sub>
+to <i><b>ν</b></i>:</p>
+<center>
+	<table width="280" cellpadding="2" cellspacing="0">
+		<col width="248">
+		<col width="24">
+		<tr>
+			<td width="248" style="border: none; padding: 0in">
+				<p align="center"><a name="x1-1004r4"></a><img src="SpecAnalysis3x.png" name="Image4" alt="              log∫(ν)CV (logν ) =       P *(log ν′d logν ′)            log(νmin)" align="bottom" width="245" height="63" border="0"/>
+</p>
+			</td>
+			<td width="24" style="border: none; padding: 0in">
+				<p>(4)</p>
+			</td>
+		</tr>
+	</table>
+</center>
+<p class="noindent" style="margin-bottom: 0in"><!--l. 258--><!--l. 260-->Differentiating
+gives 
+</p>
+<center>
+	<table width="321" cellpadding="2" cellspacing="0">
+		<col width="289">
+		<col width="24">
+		<tr>
+			<td width="289" style="border: none; padding: 0in">
+				<p align="center"><a name="x1-1005r5"></a><img src="SpecAnalysis4x.png" name="Image5" alt="-dCV---= P *(log ν) = dCV----dν---= νP (ν)d logν                dν  dlog ν" align="bottom" width="286" height="38" border="0"/>
+</p>
+			</td>
+			<td width="24" style="border: none; padding: 0in">
+				<p>(5)</p>
+			</td>
+		</tr>
+	</table>
+</center>
+<p class="noindent"><!--l. 263--><!--l. 265-->This shows that <i><b>νP(ν)
+</b></i>is a spectral density function for variance in terms of the
+logarithm of frequency. That makes this density function particularly
+suited to plots that use logarithmic abcissa coordinates because then
+equal areas represent equal contributions to the variance from those
+intervals. Note also that <i><b>νP(ν) = -λP</b></i><sub><i><b>λ</b></i></sub><i><b>(λ)
+</b></i>so a secondary axis can represent <i><b>λP</b></i><sub><i><b>λ</b></i></sub><i><b>(λ)</b></i>
+on a plot of <i><b>νP(ν)</b></i>. For these reasons, and also
+because it tends to compress plots vertically that cover large ranges
+in frequency, <i><b>νP(ν) </b></i>will be used in most of the
+examples in these notes.<!--l. 275--> 
+</p>
+</body>
+</html>
