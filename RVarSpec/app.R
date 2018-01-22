@@ -171,7 +171,7 @@ ui <- fluidPage(theme='www/bootstrap.css',
             column(4, numericInput ('poles', 'poles', min=10, max=200, value=50)),
             column(4, numericInput ('sbins3', 'smooth bins', min=0, max=200, value=0))),
           fluidRow(
-            column(8, sliderInput('xrange', 'log x-range', min=-4, max=log10(12), value=c(-3, log10(12)))),
+            column(8, sliderInput('xrange', 'log x-range', min=-4, max=log10(25), value=c(-3, 0))),
             column(4, numericInput ('resl', 'MEM resolution', min=-6, max=-1, value=-3))
           ),
           numericInput ('Gaussian', 'Gaussian noise (+ or -)', min=-10, max=10, value=0)
@@ -251,7 +251,11 @@ server <- function(input, output, session) {
     print (sprintf ('data: fname=%s', fname))
     if (file.exists(fname)) {
       FI <<- DataFileInfo (fname, LLrange=FALSE)
-      VarList <- c('TASX', input$variable)
+      ## reset xrange to remain below the Nyquist frequency
+      if (FI$Rate/2 < isolate(10^input$xrange[2])) {
+        updateSliderInput(session, 'xrange', value=c(-3,log10(FI$Rate/2)))
+      }
+      VarList <<- c('TASX', input$variable)
       if ((fname != fname.last) || (VarList != VarLast)) {
         if (Trace) {print (sprintf ('reading data from %s; VarList is %s', fname, VarList))}
         D <- getNetCDF (fname, VarList)
@@ -284,6 +288,7 @@ server <- function(input, output, session) {
           if (Trace) {print (sprintf ('data: setting plotSpec$Times to %s %s', 
             formatTime (minT), formatTime (maxT)))}
           updateSliderInput (session, 'times', value=Times, min=minT, max=maxT)
+          updateSelectInput (session, 'variable', choices=sort(FI$Variables), selected='WIC')
         }
         if (Trace) {print (sprintf ('data: loaded data.frame from %s', fname))}
         Data <<- D
@@ -375,7 +380,27 @@ server <- function(input, output, session) {
       AC0 <- data.frame(x=0, y=ac0)
       g <- g + geom_point(data=AC0, aes(x=x, y=y), colour='red', na.rm=TRUE)
       plots <- 1
-    } else {
+    } else {FI <- DataFileInfo (fname)
+
+    if (!('GGVSPD' %in% FI$Variables)) {
+      if ('GGVSPDB' %in% FI$Variables) {
+        VarList [which (VarList == 'GGVSPD')] <- 'GGVSPDB'
+      } else if ('VSPD_A' %in% FI$Variables) {
+        VarList [which (VarList == 'GGVSPD')] <- 'VSPD_A'
+      } else if ('VSPD_G' %in% FI$Variables) {
+        VarList [which (VarList == 'GGVSPD')] <- 'VSPD_G'
+      } else {
+        print ('ERROR: no VSPD variable found')
+        exit()
+      }
+    }
+    for (Var in VarList) {
+      if (!(Var %in% FI$Variables)) {
+        print (sprintf (' required variable %s not found in file %s; skipping...', Var, fname))
+        exit()
+      }
+    }
+    
       if (length(input$method)) {
         plot(c(0,1),c(0,1), axes=FALSE, col='white', xlab='', ylab='')
         text(0.5,0.5,'select a method')
@@ -386,7 +411,7 @@ server <- function(input, output, session) {
       if (input$pvar == 'P(f)') {ylim <- c(1.e-4,1.e4)}
       # xlim=c(0.001,log10(25))
       xlim <- 10^input$xrange
-      if (abs(xlim[2]-12) < 0.01) {xlim[2] <- 16}
+      if (abs(xlim[2]-12.5) < 0.01) {xlim[2] <- 16}
       # v <- DIA[, input$variable]
       # sink("/dev/null");v <- detrend(Data[, c('Time', input$variable)]);sink()
       print (input$variable)
@@ -448,13 +473,22 @@ server <- function(input, output, session) {
         laby <- sprintf('%s for %s', input$pvar, input$variable)
         g <- ggplot(data=data.frame(freq, fpf))
         g <- g + geom_path (aes(x=freq, y=fpf, colour='spectrum'), na.rm=TRUE) + 
-          xlab(labx) + ylab (laby)  
+          xlab(labx) + ylab (laby) 
+        tasAverage <- mean(Data$TASX, na.rm=TRUE)
+        ae <- ifelse (input$variable %in% c('TASX', 'UXC', 'UXG'), 0.15, 0.2)
+        for (i in (-8:0)) {
+          a = ae * 10.^(i*(2/3)) * tasAverage^(2/3)
+          lw = ifelse(i == -4, 1.2, 0.5)
+          DFL <- data.frame(x=xlim, y=c(a/xlim[1]^(2/3), a/xlim[2]^(2/3)))
+          print(DFL)
+          g <- g + geom_path (data=DFL, aes(x=x, y=y), colour='darkorange', lwd=lw, lty=3)
+        }
         if (input$pvar == 'fP(f)') {
           line53 <- data.frame(x=c(1.e-3, 1), y=c(1, 1.e-2))  
         } else {
           line53 <- data.frame(x=c(1.e-3, 1), y=c(1, 1.e-5))
         }
-        g <- g + geom_path (data=line53, aes(x=x, y=y), colour='darkorange')
+        # g <- g + geom_path (data=line53, aes(x=x, y=y), colour='darkorange')
         if (input$errors) {
           g <- g + geom_errorbar(aes(x=x4, ymin=y4min, ymax=y4max), data=DL, width=0.05, 
             size=1, colour='blue', inherit.aes=FALSE, na.rm=TRUE) +
@@ -464,10 +498,11 @@ server <- function(input, output, session) {
         # lines(c(12.7,13.3), c((ci[1])*fpf[lfpf], (ci[1])*fpf[lfpf]), lwd=2)
         # lines(c(12.7,13.3), c((ci[2])*fpf[lfpf], (ci[2])*fpf[lfpf]), lwd=2)
         g <- g + (scale_colour_manual (name='', values=cLines)) +
-          scale_x_log10(breaks = trans_breaks("log10", function(x) 10^x, n=4), limits = xlim,
+          scale_x_log10(breaks = trans_breaks("log10", function(x) 10^x, n=4), #limits = xlim,
             labels = trans_format("log10", math_format(10^.x))) +
-          scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x, n=5), limits = ylim,
+          scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x, n=5), #limits = ylim,
             labels = trans_format("log10", math_format(10^.x))) +
+          coord_cartesian(xlim=xlim, ylim=ylim) +
           theme_WAC()
         if (input$sbins1 > 10 && input$errors) {
           g <- g + geom_ribbon(data=bs1, aes(x=exp(xc), ymin=ybar-sigma, ymax=ybar+sigma), 
@@ -595,7 +630,7 @@ server <- function(input, output, session) {
         MEMc <- memCoef (v, .poles=input$poles)
         lf <- seq(input$xrange[1], input$xrange[2], by=10^input$resl)
         freq <- 10^lf
-        Rate <- 24
+        Rate <- 1
         Pmem <- memEstimate (freq/Rate, MEMc) / Rate
         Pmem <- 2 * Rate * Mod(Pmem)^2         ## The returned spectrum is complex
         fpf <- Pmem
