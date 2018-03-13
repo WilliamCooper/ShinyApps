@@ -630,7 +630,7 @@ server <- function(input, output, session) {
         MEMc <- memCoef (v, .poles=input$poles)
         lf <- seq(input$xrange[1], input$xrange[2], by=10^input$resl)
         freq <- 10^lf
-        Rate <- 1
+        Rate <- FI$Rate
         Pmem <- memEstimate (freq/Rate, MEMc) / Rate
         Pmem <- 2 * Rate * Mod(Pmem)^2         ## The returned spectrum is complex
         fpf <- Pmem

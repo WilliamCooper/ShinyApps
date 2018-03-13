@@ -77,7 +77,7 @@ server <- function(input, output, session) {
     } else {
       dp <- nleqslv::nleqslv(10, function(x) MurphyKoop (x)-e)$x
     }
-    sprintf ('<br><br>DP is %.3f C ', dp)
+    sprintf ('<br><br>dew point is %.3f C ', dp)
   })
   
   output$q <- renderText ({
