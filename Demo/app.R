@@ -16,7 +16,14 @@ ui <- fluidPage(
   tabsetPanel (id='whichTab', type='pills',
                tabPanel ('Guide',
                          includeHTML ('HTML/Information.html')),
-               tabPanel ('Background'),
+               tabPanel ('Background',
+                       fluidRow (
+                         column (3, numericInput ('I1frame', label='frame #',1,
+                           min=1, max=7, step=1)),
+                         column (4, helpText ('Suggestion: Click cursor in "frame #" entry box, then',
+                           'use the up/down arrow keys to step through the frames.'))),
+                       imageOutput('IS1png')
+                 ),
                tabPanel ('Instructional and Tutorial Examples',
                          tabsetPanel (id='whichBg', type='pills',
                                       tabPanel ('SEGUE Examples',
@@ -78,7 +85,7 @@ ui <- fluidPage(
                                                                       )
                                                              ),
                                                              tabPanel ('Ideal-Gas Law',
-                                                                       includeHTML('HTML/SuggestionPQ.html')
+                                                                       includeHTML('HTML/IdealGas.html')
                                                              ),
                                                              tabPanel ('Resolution',
                                                                        tabsetPanel (id='whichRes', type='pills',
@@ -139,19 +146,19 @@ ui <- fluidPage(
                                                                        
                                                              ),
                                                              tabPanel ('Transfer Functions',
-                                                                       includeHTML('HTML/SuggestionHumidity.html')
+                                                                       includeHTML('HTML/TransferFunction.html')
                                                              ),
                                                              tabPanel ('Geopotential Height',
-                                                                       includeHTML('HTML/SuggestionINS.html')
+                                                                       includeHTML('HTML/GeopotentialHeight.html')
                                                              ),
                                                              tabPanel ('Water Vapor Pressure',
-                                                                       includeHTML('HTML/SuggestionWIC.html')
+                                                                       includeHTML('HTML/VaporPressure.html')
                                                              ),
                                                              tabPanel ('Sensor Diaphragm',
-                                                                       includeHTML('HTML/SuggestionWDWS.html')
+                                                                       includeHTML('HTML/SensorDiaphragm.html')
                                                              ),
                                                              tabPanel ('Gust Probe',
-                                                                       includeHTML('HTML/SuggestionLWC.html')
+                                                                       includeHTML('HTML/GustProbe.html')
                                                              ),
                                                              tabPanel ('...')
                                                 )
@@ -655,6 +662,14 @@ server <- function(input, output) {
          height = 600,
          alt = "RSessions image goes here")
   }, deleteFile = FALSE)
+  output$IS1png <- renderImage ({
+    list(src = sprintf('www/S%02d.png', input$I1frame),
+      contentType = 'image/png',
+      width = 800,
+      height = 600,
+      alt = "RSessions image goes here")
+  }, deleteFile = FALSE)
+
   
 }
 
