@@ -29,61 +29,62 @@ ui <- fluidPage(
                                       tabPanel ('SEGUE Examples',
                                                 tabsetPanel (id='whichsugg', type='pills',
                                                              tabPanel("Calibration Exercise",
-                                                                      tabsetPanel (id='whichCE', type='pills',
-                                                                                   tabPanel ('the exercise',
-                                                                                             includeHTML('CalibrationExercise/CalibrationExerciseA.html')
-                                                                                   ),
-                                                                                   tabPanel ('your answer',
-                                                                                             includeHTML('CalibrationExercise/CalibrationExerciseB.html'),
-                                                                                             fluidRow (
-                                                                                               column (4, numericInput ('m55', label='x for M=55:', value=0)),
-                                                                                               column (8, textOutput ('m55a', container=pre))
-                                                                                             ),
-                                                                                             fluidRow (
-                                                                                               column (8, textInput ('fformula', label='formula: x = ', value='0.9+0.2*M+0.0001*M^2',
-                                                                                                                     placeholder=' (0.9+0.2*M+0.0001*M**2     '))
-                                                                                               # column (4, actionButton (inputId='checkIt', label='Check It:'))
-                                                                                             ),
-                                                                                             fluidRow (
-                                                                                               column (4, textOutput ('chksum', container=pre)),
-                                                                                               column (8, plotOutput ('showfit'))
-                                                                                             )
-                                                                                   ),
-                                                                                   tabPanel ('help with fitting',
-                                                                                             sidebarLayout(
-                                                                                               sidebarPanel(
-                                                                                                 fluidRow (
-                                                                                                   column (6, actionButton (inputId='manual', label = 'More Info',
-                                                                                                                            onclick ="window.open('https://drive.google.com/open?id=0B1kIUH45ca5AZWI5QllIdFpFR0U', '_blank')")),
-                                                                                                   column (6, checkboxInput('reverse', label='M=f(x)', value=FALSE))),
-                                                                                                 numericInput ('fitOrder', label='Order of Polynomial',
-                                                                                                               min=1, max=5, step=1, value=1),
-                                                                                                 includeHTML ('CalibrationExercise/CalibrationExerciseInfo.html'),
-                                                                                                 
-                                                                                                 width=4
-                                                                                               ),
-                                                                                               
-                                                                                               # Show a plot of the generated distribution
-                                                                                               mainPanel(
-                                                                                                 plotOutput("calibrationPlot"),
-                                                                                                 htmlOutput ('fitSummary', container=pre)
-                                                                                                 # includeHTML ("TransferFunctionInfo.html"), width=6
-                                                                                               )
-                                                                                             )
-                                                                                   ),
-                                                                                   tabPanel ('our solution',
-                                                                                             includeHTML ('CalibrationExercise/CalibrationExerciseC.html')
-                                                                                   ),
-                                                                                   tabPanel ('more',
-                                                                                             includeHTML ('CalibrationExercise/CalibrationExerciseD.html'),
-                                                                                             column(6, plotOutput('hrplot'))
-                                                                                   ),
-                                                                                   tabPanel ('notes',
-                                                                                             includeHTML ('CalibrationExercise/CalibrationExerciseE.html')
-                                                                                   )
-                                                                                   
-                                                                      )
-                                                             ),
+                                                               includeHTML('HTML/Calibration.html')),
+                                                             #          tabsetPanel (id='whichCE', type='pills',
+                                                             #                       tabPanel ('the exercise',
+                                                             #                                 includeHTML('CalibrationExercise/CalibrationExerciseA.html')
+                                                             #                       ),
+                                                             #                       tabPanel ('your answer',
+                                                             #                                 includeHTML('CalibrationExercise/CalibrationExerciseB.html'),
+                                                             #                                 fluidRow (
+                                                             #                                   column (4, numericInput ('m55', label='x for M=55:', value=0)),
+                                                             #                                   column (8, textOutput ('m55a', container=pre))
+                                                             #                                 ),
+                                                             #                                 fluidRow (
+                                                             #                                   column (8, textInput ('fformula', label='formula: x = ', value='0.9+0.2*M+0.0001*M^2',
+                                                             #                                                         placeholder=' (0.9+0.2*M+0.0001*M**2     '))
+                                                             #                                   # column (4, actionButton (inputId='checkIt', label='Check It:'))
+                                                             #                                 ),
+                                                             #                                 fluidRow (
+                                                             #                                   column (4, textOutput ('chksum', container=pre)),
+                                                             #                                   column (8, plotOutput ('showfit'))
+                                                             #                                 )
+                                                             #                       ),
+                                                             #                       tabPanel ('help with fitting',
+                                                             #                                 sidebarLayout(
+                                                             #                                   sidebarPanel(
+                                                             #                                     fluidRow (
+                                                             #                                       column (6, actionButton (inputId='manual', label = 'More Info',
+                                                             #                                                                onclick ="window.open('https://drive.google.com/open?id=0B1kIUH45ca5AZWI5QllIdFpFR0U', '_blank')")),
+                                                             #                                       column (6, checkboxInput('reverse', label='M=f(x)', value=FALSE))),
+                                                             #                                     numericInput ('fitOrder', label='Order of Polynomial',
+                                                             #                                                   min=1, max=5, step=1, value=1),
+                                                             #                                     includeHTML ('CalibrationExercise/CalibrationExerciseInfo.html'),
+                                                             #                                     
+                                                             #                                     width=4
+                                                             #                                   ),
+                                                             #                                   
+                                                             #                                   # Show a plot of the generated distribution
+                                                             #                                   mainPanel(
+                                                             #                                     plotOutput("calibrationPlot"),
+                                                             #                                     htmlOutput ('fitSummary', container=pre)
+                                                             #                                     # includeHTML ("TransferFunctionInfo.html"), width=6
+                                                             #                                   )
+                                                             #                                 )
+                                                             #                       ),
+                                                             #                       tabPanel ('our solution',
+                                                             #                                 includeHTML ('CalibrationExercise/CalibrationExerciseC.html')
+                                                             #                       ),
+                                                             #                       tabPanel ('more',
+                                                             #                                 includeHTML ('CalibrationExercise/CalibrationExerciseD.html'),
+                                                             #                                 column(6, plotOutput('hrplot'))
+                                                             #                       ),
+                                                             #                       tabPanel ('notes',
+                                                             #                                 includeHTML ('CalibrationExercise/CalibrationExerciseE.html')
+                                                             #                       )
+                                                             #                       
+                                                             #          )
+                                                             # ),
                                                              tabPanel ('Ideal-Gas Law',
                                                                        includeHTML('HTML/IdealGas.html')
                                                              ),

@@ -107,14 +107,14 @@ server <- function(input, output, session) {
     reac$chkm55
     pcterror=abs(input$m55-11.96)/11.96 * 100
     if (pcterror < 0.3) {
-      e <- paste(sprintf ('That\'s within 0.3%% - excellent!'),
+      e <- paste(sprintf ('That\'s within %.1f%% - excellent!', 0.3),
       'That\'s about the best expected with this calibration.',
-      'My answer is 11.96', sep='<br>')
+      sprintf('My answer is %.2f', 11.96), sep='<br>')
     } else if (pcterror < 1) {e <- paste(' ', sprintf ('That\'s within 1%% - not bad, but you can do better!'), ' ', sep='<br>')}
     else if (pcterror < 2) {e <- paste(' ', sprintf ('That\'s within 2%% - try again'), ' ', sep='<br>')}
     else if (pcterror < 5) {e <- paste(' ', sprintf ('That\'s within 5%% - but not very good!'), ' ', sep='<br>')}
     else {e <- paste(' ', sprintf ('That\'s more than 5%% in error - way off!'), ' ', sep='<br>')}
-    e <- gsub('[.]', '', e)
+    # e <- gsub('[.]', '', e)
     e
   })
   
