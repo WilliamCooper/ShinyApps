@@ -8,6 +8,21 @@
 #
 
 library(shiny)
+xp <- (-600:600)/100
+xpp <- (0:1000)
+ypp <- pnorm(xpp/500-1, sd=.3)
+
+n <- 50000
+X1R <- rnorm(n); X2R <- rnorm(n)
+DX <- X2R - X1R
+ddd <- (-600:600)/100
+firstQ1 <- TRUE
+firstQ2 <- TRUE
+firstQ3 <- TRUE
+firstQ4 <- TRUE
+firstQ5 <- TRUE
+firstQ6 <- TRUE
+library(shinythemes)
 
 ui <- fluidPage(
   
@@ -142,7 +157,22 @@ ui <- fluidPage(
                                                                                     ),
                                                                                     tabPanel ('summary',
                                                                                               includeHTML('Resolution/ResolutionF.html')
-                                                                                    )
+                                                                                    ),
+                                                                         tabPanel ('Short Quiz',
+                                                                           includeHTML('Resolution/ResolutionExerciseA.html'),
+                                                                           fluidRow(column(10,numericInput('Q1', 'answer (within 0.1 sigma)', value=-1, width='250px'), offset=2)),
+                                                                           includeHTML('Resolution/ResolutionExerciseB.html'),
+                                                                           fluidRow(column(10,numericInput('Q2', 'answer (within 0.1 sigma)', value=-1, width='250px'), offset=2)),
+                                                                           includeHTML('Resolution/ResolutionExerciseC.html'),
+                                                                           fluidRow(column(10,numericInput('Q3', 'answer (within 5%)', value=-1,width='200px'), offset=2)),
+                                                                           includeHTML('Resolution/ResolutionExerciseD.html'),
+                                                                           fluidRow(column(10, radioButtons('Q4', 'answer', choices=c('8','256','1024','no answer'), selected='no answer', inline=TRUE), offset=2)),
+                                                                           includeHTML ('Resolution/ResolutionExerciseE.html'),
+                                                                           fluidRow(column(10,radioButtons('Q5', 'answer', choices=c('5.8 mV', '9.77 mV', '12.5 mV', 'no answer'), selected='no answer', inline=TRUE), offset=2)),
+                                                                           includeHTML ('Resolution/ResolutionExerciseF.html'),
+                                                                           fluidRow(column(10,radioButtons('Q6', 'answer', choices=c('2.82 mV', '3.09 mV', '9.77 mV', '12.5 mV', 'no answer'), selected='no answer', inline=TRUE), offset=2))
+                                                                           
+                                                                         )
                                                                        )
                                                                        
                                                              ),
@@ -670,6 +700,149 @@ server <- function(input, output) {
       height = 600,
       alt = "RSessions image goes here")
   }, deleteFile = FALSE)
+  
+  observeEvent(input$Q1, {
+    if (!firstQ1) {
+      # print (sprintf ('%f', input$Q1))
+      if (abs(input$Q1-2.6) < 0.1) {
+        showModal(modalDialog(title='Right!', 'The answer is 2.6', easyClose=TRUE))
+      } else {
+        showModal(modalDialog(
+          title = "--try again--",
+          span('The correct answer can be found by checking 68.3%, then moving the slider until P2=0.80.',
+            '  [Hint: left-right arrows can move the slider a small amount.]'),
+          easyClose = TRUE))
+      }
+    }
+    firstQ1 <<- FALSE
+  })
+  observeEvent(input$Q2, {
+    if (!firstQ2) {
+      # print (sprintf ('%f', input$Q2))
+      if (abs(input$Q2-5.2) < 0.1) {
+        showModal(modalDialog(title='Right!', 'The answer is 5.2',easyClose=TRUE))
+      } else {
+        showModal(modalDialog(
+          title = "--try again--",
+          span('The correct answer can be found by checking 95.4%, then moving the slider until P2=0.95.'),
+          easyClose = TRUE))
+      }
+    }
+    firstQ2 <<- FALSE
+  })
+  observeEvent(input$Q3, {
+    if (!firstQ3) {
+      # print (sprintf ('%f', input$Q3))
+      if (abs(input$Q3-42) < 5) {
+        showModal(modalDialog(title='Right!', 'The answer is 42%',easyClose=TRUE))
+      } else {
+        showModal(modalDialog(
+          title = "--try again--",
+          span('The answer can be found by checking 50% and using d=1. Notice that the red vertical lines',
+            ' are very close to the +/-d limits from the center of x1. The integration of',
+            ' the regions *outside* +/-d then give about 0.60, so the fraction *inside* is 0.4.',
+            ' This is only approximate because the limits are not exactly +/-d, but this will',
+            ' give an answer within a few percent of the right answer.'),
+          easyClose = TRUE))
+      }
+    }
+    firstQ3 <<- FALSE
+  })
+  observeEvent(input$Q4, {
+    if (!firstQ4) {
+      # print (sprintf ('%s', input$Q4))
+      if (input$Q4 == '1024') {
+        showModal(modalDialog(title='Right!', 'The answer is 1024.',easyClose=TRUE))
+      } else {
+        showModal(modalDialog(
+          title = "--try again--",
+          span('Hint: what is 2**10? 0 is a possible result, as is 2**10-1.'),
+          easyClose = TRUE))
+      }
+    }
+    firstQ4 <<- FALSE
+  })
+  observeEvent(input$Q5, {
+    if (!firstQ5) {
+      # print (sprintf ('%s', input$Q5))
+      if (input$Q5 == '5.8 mV') {
+        showModal(modalDialog(title='Right!', 'The answer is about 5.8 mV',easyClose=TRUE))
+      } else {
+        showModal(modalDialog(
+          title = "--try again--",
+          span('Hint: The resolution is about twice the precision. See the next question.'),
+          easyClose = TRUE))
+      }
+    }
+    firstQ5 <<- FALSE
+  })
+  observeEvent(input$Q6, {
+    if (!firstQ6) {
+      # print (sprintf ('%s', input$Q6))
+      if (input$Q6 == '2.82 mV') {
+        showModal(modalDialog(title='Right!', 'The answer is 2.82 mV',easyClose=TRUE))
+      } else {
+        showModal(modalDialog(
+          title = "--try again--",
+          span('Hint: See the bottom of the "Illustration of Meaning #2" tab.'),
+          easyClose = TRUE))
+      }
+    }
+    firstQ6 <<- FALSE
+  })
+  
+  output$resolutionPlot <- renderPlot({
+    # generate bins based on input$bins from ui.R
+    # x    <- faithful[, 2] 
+    # bins <- seq(min(x), max(x), length.out = input$bins + 1)
+    # 
+    
+    D <- input$separation
+    CL <- as.numeric (input$conf)
+    x1<-dnorm(xp+D/2); x2 <- dnorm(xp-D/2)
+    y <- dnorm(xp+D/2, sd=sqrt(2))
+    plotWAC(data.frame(xp, x1, x2, y), xlim=c(-5, 5), xlab=expression(paste('x [units ', sigma[x], ']')), 
+      ylab='Gaussian probability distributions', legend.position='topleft', cex.lab=2)
+    x2t <- x2
+    x2t[(xp > -D/2-sqrt(2)*CL) & (xp < sqrt(2)*CL-D/2)] <- NA
+    lineWAC(xp, x2t, col='darkgreen', lwd=2.5)
+    text (4, 0.35, labels=sprintf('d=%.2f', D), cex=1.5)
+    text (4, 0.30, labels=sprintf('P=%.3f', 1-pnorm(-D+CL*sqrt(2))+pnorm(-D-CL*sqrt(2))), cex=1.5)
+    text (4, 0.25, labels=sprintf('P2=%.3f',1-pnorm(CL*sqrt(2), D, sqrt(2))+pnorm(-sqrt(2)*CL,D,sqrt(2))), cex=1.5)
+    points (c(-D/2+sqrt(2)*CL, -D/2, -D/2-sqrt(2)*CL), rep(dnorm(sqrt(2)*CL, sd=sqrt(2)), 3), pch=20, col='red')
+    # points (-D/2-sqrt(2), dnorm(-sqrt(2), sd=sqrt(2)), pch=20, col='red')
+    
+    arrows (c(-D/2-sqrt(2), -D/2), dnorm(-sqrt(2), sd=sqrt(2)), c(-D/2, -D/2+sqrt(2)), dnorm(-sqrt(2), sd=sqrt(2)), 
+      length=.2, code=3, col='red', lty=4)
+    lines(c(-D/2+sqrt(2)*CL, -D/2+sqrt(2)*CL), c(-1,1), col='red', lty=2)
+    lines(c(-D/2-sqrt(2)*CL, -D/2-sqrt(2)*CL), c(-1,1), col='red', lty=2)
+    points(-D/2+sqrt(2)*CL, dnorm(sqrt(2)*CL-D), pch=20, col='darkgreen')
+    points(-D/2-sqrt(2)*CL, dnorm(-D-sqrt(2)*CL), pch=20, col='darkgreen')
+    if (D > 0) {
+      arrows(-D/2, 0.04, D/2, 0.04, length=min(D/2, 0.2), code=3, col='black', lty=4)
+      text(0, 0.055, labels='d', cex=1.5)
+    }
+    
+    y <- DX + D
+    E <- (ecdf(y)(ddd))
+    j <- which (ddd > 1.41)[1]
+    P <- 1 - E[j]
+    text (6, 0.75, labels=sprintf('D=%.1f', D), cex=1.5)
+    text (6, 0.70, labels=sprintf('P=%.3f', P), cex=1.5)
+    text (-0.7-D/2, 0.19, labels=expression(sqrt(2)), col='red', cex=1.5)
+    abline(v=-D/2, col='blue', lty=2)
+    abline (v=D/2, col='darkgreen', lty=2)
+  })
+  
+  output$distBins <- renderPlot({
+    plotWAC(xpp, ypp, xlab='Time', ylab='y', lwd=3, cex.lab=2)
+    n <- input$bits
+    m <- 2^n-1
+    ypn <- round(ypp*m)/m
+    lines(xpp, ypn, col='red', lwd=1.5)
+    legend('topleft', legend=c('measurand', sprintf('%d-bit digitized', n)),
+      lwd=c(3,1.5), col=c('blue', 'red'))
+  })
 
   
 }
