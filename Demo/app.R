@@ -23,6 +23,7 @@ firstQ4 <- TRUE
 firstQ5 <- TRUE
 firstQ6 <- TRUE
 library(shinythemes)
+source('../Resolution/PlotWAC.R')
 
 ui <- fluidPage(
   
