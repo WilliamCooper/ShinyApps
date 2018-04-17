@@ -199,18 +199,18 @@ ui <- fluidPage(
                                       tabPanel ('R sessions (tutorial)',
                                                 tabsetPanel (id='whichTab', type='pills',
                                                              tabPanel ('TOC',
-                                                                       includeHTML('~/RStudio/RSessions/RSessions/TOC/TOC.html')),
+                                                                       includeHTML('~cooperw/RStudio/RSessions/RSessions/TOC/TOC.html')),
                                                              tabPanel ('Getting Started',
                                                                        tabsetPanel (id='S1tab', type='pills',
                                                                                     tabPanel ('Getting Started',
-                                                                                              includeHTML('~/RStudio/RSessions/RSessions/Session1/Session1a.html')),
+                                                                                              includeHTML('~cooperw/RStudio/RSessions/RSessions/Session1/Session1a.html')),
                                                                                     tabPanel ('RStudio Tour',
-                                                                                              includeHTML('~/RStudio/RSessions/RSessions/Session1/Session1b.html')),
+                                                                                              includeHTML('~cooperw/RStudio/RSessions/RSessions/Session1/Session1b.html')),
                                                                                     tabPanel ('Some Examples',
-                                                                                              includeHTML('~/RStudio/RSessions/RSessions/Session1/Session1c.html'),
+                                                                                              includeHTML('~cooperw/RStudio/RSessions/RSessions/Session1/Session1c.html'),
                                                                                               tabsetPanel (id='S1ex', type='pills',
                                                                                                            tabPanel ('simple plot',
-                                                                                                                     includeHTML ('~/RStudio/RSessions/RSessions/Session1/E1Code.html'),
+                                                                                                                     includeHTML ('~cooperw/RStudio/RSessions/RSessions/Session1/E1Code.html'),
                                                                                                                      sidebarLayout(
                                                                                                                        sidebarPanel(
                                                                                                                          selectInput (inputId='S1Var', label='variable to plot', 
@@ -223,23 +223,23 @@ ui <- fluidPage(
                                                                                                                        )
                                                                                                                      )),
                                                                                                            tabPanel ('sounding',
-                                                                                                                     includeHTML ('~/RStudio/RSessions/RSessions/Session1/E2Code.html'),
+                                                                                                                     includeHTML ('~cooperw/RStudio/RSessions/RSessions/Session1/E2Code.html'),
                                                                                                                      plotOutput ('S1E2Plot', width="50%")),
                                                                                                            tabPanel ('stats',
-                                                                                                                     includeHTML ('~/RStudio/RSessions/RSessions/Session1/E3Code.html'),
+                                                                                                                     includeHTML ('~cooperw/RStudio/RSessions/RSessions/Session1/E3Code.html'),
                                                                                                                      dataTableOutput ('S1Stats')),
                                                                                                            tabPanel ('recovery factor',
-                                                                                                                     includeHTML ('~/RStudio/RSessions/RSessions/Session1/E4Code.html'))
+                                                                                                                     includeHTML ('~cooperw/RStudio/RSessions/RSessions/Session1/E4Code.html'))
                                                                                               )
                                                                                     ),
                                                                                     tabPanel ('Text-with-Code',
-                                                                                              includeHTML ('~/RStudio/RSessions/RSessions/Session1/Session1d.html')),
+                                                                                              includeHTML ('~cooperw/RStudio/RSessions/RSessions/Session1/Session1d.html')),
                                                                                     tabPanel ('Getting Ranadu',
-                                                                                              includeHTML ('~/RStudio/RSessions/RSessions/Session1/Session1e.html')))),
+                                                                                              includeHTML ('~cooperw/RStudio/RSessions/RSessions/Session1/Session1e.html')))),
                                                              tabPanel ('Objects and the data.frame',
                                                                        tabsetPanel (id='S2tab', type='pills',
                                                                                     tabPanel ('Vectors and Matrices',
-                                                                                              includeHTML('~/RStudio/RSessions/RSessions/Session2/Session2a.html'),
+                                                                                              includeHTML('~cooperw/RStudio/RSessions/RSessions/Session2/Session2a.html'),
                                                                                               htmlOutput('txtS2a'),
                                                                                               radioButtons ('selS2a', label=NULL, choices=c(
                                                                                                 'select a button below'=1,
@@ -249,9 +249,9 @@ ui <- fluidPage(
                                                                                               ), width='400px')
                                                                                     ),
                                                                                     tabPanel ('The data.frame',
-                                                                                              includeHTML('~/RStudio/RSessions/RSessions/Session2/Session2b.html')),
+                                                                                              includeHTML('~cooperw/RStudio/RSessions/RSessions/Session2/Session2b.html')),
                                                                                     tabPanel ('Addressing and Subsetting data.frames',
-                                                                                              includeHTML('~/RStudio/RSessions/RSessions/Session2/Session2c1.html'),
+                                                                                              includeHTML('~cooperw/RStudio/RSessions/RSessions/Session2/Session2c1.html'),
                                                                                               radioButtons ('selS2c1', label=NULL, choices=c(
                                                                                                 'select a button below'=1,
                                                                                                 'Data$ATX[5]'=2, 
@@ -263,11 +263,11 @@ ui <- fluidPage(
                                                                                                 'with(Data, print(ATX[5])'=8
                                                                                               ), width='800px'),
                                                                                               htmlOutput ('txtS2c1'),
-                                                                                              includeHTML('~/RStudio/RSessions/RSessions/Session2/Session2c2.html'),
+                                                                                              includeHTML('~cooperw/RStudio/RSessions/RSessions/Session2/Session2c2.html'),
                                                                                               actionButton ('XS2a', label='See an answer')
                                                                                     ),
                                                                                     tabPanel ('Some Basic Operations',
-                                                                                              includeHTML ('~/RStudio/RSessions/RSessions/Session2/Session2d.html')))),
+                                                                                              includeHTML ('~cooperw/RStudio/RSessions/RSessions/Session2/Session2d.html')))),
                                                              tabPanel ('Basics',
                                                                        tabsetPanel (id='S3tab', type='pills',
                                                                                     tabPanel ('R as a Calculator',
@@ -435,7 +435,7 @@ server <- function(input, output) {
     nm <- c('Temperature [deg. C]', 'Wind Speed [m/s]', 'Pressure [hPa]')
     names (nm) <- c('ATX', 'WSC', 'PSXC')    ## these are the actual variables in the data file
     # Data <- getNetCDF('/Data/DEEPWAVE/DEEPWAVErf20.nc', c('ATX', 'WSC', 'PSXC'))
-    load ('~/RStudio/RSessions/RSessions/Session1/Data.Rdata')
+    load ('~cooperw/RStudio/RSessions/RSessions/Session1/Data.Rdata')
     plot (Data$Time, Data[, V], type='l', col='blue', lwd=2, xlab='Time [UTC]', ylab=nm[V])
     title ("DEEPWAVE flight 20")
     # with (Data, plotWAC (data.frame (Time, Data[, V]), ylab=nm[V]))
@@ -449,7 +449,7 @@ server <- function(input, output) {
     # # XXX set variables needed, here a standard list including DPX and EWX
     # # preliminary look shows that final descent was from 84400 to 91100
     # Data <- getNetCDF (fname, c("Time", "DPXC", "ATX", "PALT"), 84400, 91100)
-    saveDataFile <- '~/RStudio/RSessions/RSessions/Session1/Data2.RData'
+    saveDataFile <- '~cooperw/RStudio/RSessions/RSessions/Session1/Data2.RData'
     # save (Data, file = saveDataFile) 
     # for future runs, it will be much faster to use:
     load(saveDataFile)
@@ -467,8 +467,8 @@ server <- function(input, output) {
     Ds <- getNetCDF ('/Data/DEEPWAVE/DEEPWAVErf20.nc', VarList)
     ## FL400 means pressure altitude of 40000 ft
     Ds <- Ds[Ds$PALT/0.3048 > 40000, ]  ## select only points above 40000 ft
-    save (Ds, file='~/RStudio/RSessions/RSessions/Session1/Data3.Rdata')
-    load ('~/RStudio/RSessions/RSessions/Session1/Data3.Rdata')
+    save (Ds, file='~cooperw/RStudio/RSessions/RSessions/Session1/Data3.Rdata')
+    load ('~cooperw/RStudio/RSessions/RSessions/Session1/Data3.Rdata')
     Dstats['Time', 1] <- 'Time'
     Dstats['Time', 2] <- NA
     Dstats['Time', 3] <- NA
@@ -542,8 +542,8 @@ server <- function(input, output) {
                   ' ', ' ', ' ', ' ', ' ', ' ', sep='<br/>')
     }
     ## retrieve data.frame Data:
-    load('~/RStudio/RSessions/RSessions/Session2/DataS2b.Rdata')
-    load('~/RStudio/RSessions/RSessions/Session2/txw.Rdata')
+    load('~cooperw/RStudio/RSessions/RSessions/Session2/DataS2b.Rdata')
+    load('~cooperw/RStudio/RSessions/RSessions/Session2/txw.Rdata')
     blkline <- '                           '
     
     # Data$ATX[5]
@@ -600,7 +600,7 @@ server <- function(input, output) {
   })
   
   output$RS3apng <- renderImage ({
-    list(src = sprintf('~/RStudio/RSessions/RSessions/Session3/S%02d.png', input$S3aframe),
+    list(src = sprintf('~cooperw/RStudio/RSessions/RSessions/Session3/S%02d.png', input$S3aframe),
          contentType = 'image/png',
          width = 800,
          height = 600,
@@ -608,7 +608,7 @@ server <- function(input, output) {
   }, deleteFile = FALSE)
   
   output$RS3bpng <- renderImage ({
-    list(src = sprintf('~/RStudio/RSessions/RSessions/Session3/S%02d.png', input$S3bframe),
+    list(src = sprintf('~cooperw/RStudio/RSessions/RSessions/Session3/S%02d.png', input$S3bframe),
          contentType = 'image/png',
          width = 800,
          height = 600,
@@ -616,7 +616,7 @@ server <- function(input, output) {
   }, deleteFile = FALSE)
   
   output$RS3cpng <- renderImage ({
-    list(src = sprintf('~/RStudio/RSessions/RSessions/Session3/S%02d.png', input$S3cframe),
+    list(src = sprintf('~cooperw/RStudio/RSessions/RSessions/Session3/S%02d.png', input$S3cframe),
          contentType = 'image/png',
          width = 800,
          height = 600,
@@ -624,7 +624,7 @@ server <- function(input, output) {
   }, deleteFile = FALSE)
   
   output$RS3dpng <- renderImage ({
-    list(src = sprintf('~/RStudio/RSessions/RSessions/Session3/S%02d.png', input$S3dframe),
+    list(src = sprintf('~cooperw/RStudio/RSessions/RSessions/Session3/S%02d.png', input$S3dframe),
          contentType = 'image/png',
          width = 800,
          height = 600,
@@ -632,63 +632,63 @@ server <- function(input, output) {
   }, deleteFile = FALSE)
   
   output$RS4png <- renderImage ({
-    list(src = sprintf('~/RStudio/RSessions/RSessions/Session4/S%02d.png', input$S4frame),
+    list(src = sprintf('~cooperw/RStudio/RSessions/RSessions/Session4/S%02d.png', input$S4frame),
          contentType = 'image/png',
          width = 800,
          height = 600,
          alt = "RSessions image goes here")
   }, deleteFile = FALSE)
   output$RS5png <- renderImage ({
-    list(src = sprintf('~/RStudio/RSessions/RSessions/Session5/S%02d.png', input$S5frame),
+    list(src = sprintf('~cooperw/RStudio/RSessions/RSessions/Session5/S%02d.png', input$S5frame),
          contentType = 'image/png',
          width = 800,
          height = 600,
          alt = "RSessions image goes here")
   }, deleteFile = FALSE)
   output$RS5apng <- renderImage ({
-    list(src = sprintf('~/RStudio/RSessions/RSessions/Session5/S%02d.png', input$S5aframe),
+    list(src = sprintf('~cooperw/RStudio/RSessions/RSessions/Session5/S%02d.png', input$S5aframe),
          contentType = 'image/png',
          width = 800,
          height = 600,
          alt = "RSessions image goes here")
   }, deleteFile = FALSE)
   output$RS5bpng <- renderImage ({
-    list(src = sprintf('~/RStudio/RSessions/RSessions/Session5/S%02d.png', input$S5bframe),
+    list(src = sprintf('~cooperw/RStudio/RSessions/RSessions/Session5/S%02d.png', input$S5bframe),
          contentType = 'image/png',
          width = 800,
          height = 600,
          alt = "RSessions image goes here")
   }, deleteFile = FALSE)
   output$RS5cpng <- renderImage ({
-    list(src = sprintf('~/RStudio/RSessions/RSessions/Session5/S%02d.png', input$S5cframe),
+    list(src = sprintf('~cooperw/RStudio/RSessions/RSessions/Session5/S%02d.png', input$S5cframe),
          contentType = 'image/png',
          width = 800,
          height = 600,
          alt = "RSessions image goes here")
   }, deleteFile = FALSE)
   output$RS6png <- renderImage ({
-    list(src = sprintf('~/RStudio/RSessions/RSessions/Session6/S%02d.png', input$S6frame),
+    list(src = sprintf('~cooperw/RStudio/RSessions/RSessions/Session6/S%02d.png', input$S6frame),
          contentType = 'image/png',
          width = 800,
          height = 600,
          alt = "RSessions image goes here")
   }, deleteFile = FALSE)
   output$RS7png <- renderImage ({
-    list(src = sprintf('~/RStudio/RSessions/RSessions/Session7/S%02d.png', input$S7frame),
+    list(src = sprintf('~cooperw/RStudio/RSessions/RSessions/Session7/S%02d.png', input$S7frame),
          contentType = 'image/png',
          width = 800,
          height = 600,
          alt = "RSessions image goes here")
   }, deleteFile = FALSE)
   output$RS8png <- renderImage ({
-    list(src = sprintf('~/RStudio/RSessions/RSessions/Session8/S%02d.png', input$S8frame),
+    list(src = sprintf('~cooperw/RStudio/RSessions/RSessions/Session8/S%02d.png', input$S8frame),
          contentType = 'image/png',
          width = 800,
          height = 600,
          alt = "RSessions image goes here")
   }, deleteFile = FALSE)
   output$RS9png <- renderImage ({
-    list(src = sprintf('~/RStudio/RSessions/RSessions/Session9/S%02d.png', input$S9frame),
+    list(src = sprintf('~cooperw/RStudio/RSessions/RSessions/Session9/S%02d.png', input$S9frame),
          contentType = 'image/png',
          width = 800,
          height = 600,
